@@ -4,17 +4,18 @@
 <meta charset="utf-8">
 <title>Mansi Patil</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Portfolio of Mansi Patil — Cloud &amp; AI Engineer, Software Developer.">
+<meta name="description" content="Portfolio of Mansi Patil — Cloud &amp; AI/ML Engineer, Software Developer.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0A0B10; --bg-elevated:#121319; --surface:#1A1B22; --surface-2:#22232C;
+    --bg:#090A0F; --bg-elevated:#121319; --surface:#1A1B22; --surface-2:#22232C;
     --border:#2C2D38; --text:#EDEDF2; --text-muted:#9C9DAB; --text-faint:#6E6F7D;
-    --accent:#C77DA8; --accent-2:#8A5A9A; --accent-deep:#4A2E52; --accent-ink:#1A0E1F;
-    --glow: rgba(199,125,168,.45);
-    --nav-bg: rgba(10,11,16,.72);
+    --accent:#D98BB9; --accent-2:#8A5A9A; --accent-deep:#4A2E52; --accent-ink:#1A0E1F;
+    --glow: rgba(217,139,185,.5);
+    --nav-bg: rgba(9,10,15,.85);
+    --graph-0:#1A1B22; --graph-1:#4A2E52; --graph-2:#8A5A9A; --graph-3:#B96FA0; --graph-4:#D98BB9;
   }
   *{ box-sizing:border-box; }
   html,body{ margin:0; padding:0; }
@@ -22,85 +23,58 @@
     background:var(--bg); color:var(--text);
     font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
     -webkit-font-smoothing:antialiased;
+    padding-bottom:76px; /* room for the sticky action bar */
   }
   a{ color:inherit; text-decoration:none; }
   .mono{ font-family:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace; }
   ::selection{ background:var(--accent); color:var(--accent-ink); }
-  a:focus-visible, button:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; border-radius:3px; }
+  a:focus-visible, button:focus-visible, input:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; border-radius:3px; }
   @media (prefers-reduced-motion: reduce){ *{ animation-duration:.001ms !important; transition-duration:.001ms !important; } }
   img{ max-width:100%; }
 
-  .wrap{ max-width:1400px; margin-inline:auto; padding-inline:clamp(16px,4vw,56px); }
+  .wrap{ max-width:1500px; margin-inline:auto; padding-inline:clamp(16px,4vw,56px); }
 
   /* ---------------- nav ---------------- */
   .nav{
     position:fixed; top:0; left:0; right:0; z-index:100;
-    padding-block:16px; background:linear-gradient(to bottom, rgba(0,0,0,.75), transparent);
+    padding-block:16px; background:linear-gradient(to bottom, rgba(0,0,0,.85), transparent);
     transition: background .3s ease;
   }
   .nav.solid{ background:var(--nav-bg); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); }
   .nav .wrap{ display:flex; align-items:center; gap:28px; }
-  .logo{ font-weight:800; font-size:1.3rem; letter-spacing:-.01em; background:linear-gradient(90deg,var(--accent),var(--accent-2)); -webkit-background-clip:text; background-clip:text; color:transparent; }
-  .nav-links{ display:flex; gap:20px; list-style:none; margin:0; padding:0; flex:1; }
-  .nav-links a{ font-size:.86rem; color:var(--text-muted); font-weight:500; }
+  .logo{ display:flex; align-items:center; gap:8px; font-weight:800; font-size:1.15rem; letter-spacing:-.01em; flex-shrink:0; }
+  .logo .mark{
+    width:26px; height:26px; border-radius:6px; display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:var(--accent-ink); font-weight:800; font-size:.85rem;
+  }
+  .nav-links{ display:flex; gap:20px; list-style:none; margin:0; padding:0; flex:1; overflow-x:auto; scrollbar-width:none; }
+  .nav-links::-webkit-scrollbar{ display:none; }
+  .nav-links a{ font-size:.84rem; color:var(--text-muted); font-weight:500; white-space:nowrap; }
   .nav-links a:hover{ color:var(--text); }
-  @media (max-width:760px){ .nav-links{ display:none; } }
-  .nav-avatar{ width:32px; height:32px; border-radius:6px; overflow:hidden; border:1px solid var(--border); flex-shrink:0; }
-  .nav-avatar img{ width:100%; height:100%; object-fit:cover; display:block; }
-
-  /* ---------------- hero ---------------- */
-  .hero{
-    position:relative; min-height:min(88vh, 780px); display:flex; align-items:flex-end;
-    padding-block: 120px 64px;
-    background:
-      radial-gradient(ellipse 90% 70% at 75% 0%, var(--accent-deep) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 50% at 15% 10%, rgba(138,90,154,.35) 0%, transparent 60%),
-      var(--bg);
-    overflow:hidden;
+  .nav-links a.active{ color:var(--accent); font-weight:600; }
+  @media (max-width:900px){ .nav-links{ display:none; } }
+  .nav-search{
+    display:flex; align-items:center; gap:8px; background:rgba(255,255,255,.06); border:1px solid var(--border);
+    border-radius:6px; padding:7px 12px; flex-shrink:0;
   }
-  .hero::after{
-    content:""; position:absolute; inset:0;
-    background:linear-gradient(to top, var(--bg) 0%, transparent 35%);
-    pointer-events:none;
+  .nav-search svg{ width:15px; height:15px; fill:var(--text-faint); flex-shrink:0; }
+  .nav-search input{
+    background:none; border:none; color:var(--text); font-size:.82rem; font-family:inherit; width:120px; outline:none;
   }
-  .hero-inner{ position:relative; z-index:2; max-width:760px; }
-  .hero-eyebrow{
-    display:inline-flex; align-items:center; gap:8px; font-family:"IBM Plex Mono",monospace;
-    font-size:.78rem; letter-spacing:.08em; text-transform:uppercase; color:var(--accent);
-    border:1px solid var(--accent-deep); background:rgba(199,125,168,.08); padding:5px 12px; border-radius:999px;
-  }
-  .hero h1{
-    font-size:clamp(2.6rem,7vw,4.6rem); font-weight:800; line-height:1.02; margin:18px 0 0; letter-spacing:-.02em;
-  }
-  .hero .role{ font-size:clamp(1.05rem,2.2vw,1.3rem); color:var(--text-muted); margin-top:14px; font-weight:500; }
-  .hero .role b{ color:var(--text); font-weight:600; }
-  .hero p.lede{ margin-top:16px; color:var(--text-muted); font-size:1.02rem; line-height:1.65; max-width:52ch; }
-  .hero-tags{ display:flex; flex-wrap:wrap; gap:8px; margin-top:20px; }
-  .hero-tag{
-    font-family:"IBM Plex Mono",monospace; font-size:.72rem; letter-spacing:.03em; color:var(--text);
-    background:var(--surface); border:1px solid var(--border); padding:5px 12px; border-radius:999px;
-  }
-  .hero-actions{ display:flex; flex-wrap:wrap; gap:12px; margin-top:30px; }
-  .btn{
-    display:inline-flex; align-items:center; gap:8px; font-weight:600; font-size:.92rem;
-    padding:13px 24px; border-radius:6px; border:none; cursor:pointer;
-  }
-  .btn.primary{ background:var(--text); color:#0A0B10; }
-  .btn.primary:hover{ background:#fff; }
-  .btn.ghost{ background:rgba(140,140,150,.22); color:var(--text); backdrop-filter:blur(6px); }
-  .btn.ghost:hover{ background:rgba(140,140,150,.32); }
+  .nav-search input::placeholder{ color:var(--text-faint); }
+  @media (max-width:620px){ .nav-search input{ width:70px; } }
 
   /* ---------------- rows ---------------- */
-  .rows{ position:relative; z-index:2; padding-block:8px 60px; }
-  .row{ margin-block:34px; }
+  main{ padding-top:96px; }
+  .row{ margin-block:38px; position:relative; }
   .row-head{ display:flex; align-items:baseline; justify-content:space-between; padding-inline:clamp(16px,4vw,56px); margin-bottom:10px; }
-  .row-head h2{ font-size:clamp(1.1rem,2vw,1.4rem); font-weight:700; margin:0; }
-  .row-head .hint{ font-size:.78rem; color:var(--text-faint); font-family:"IBM Plex Mono",monospace; }
+  .row-head h2{ font-size:clamp(1.05rem,1.8vw,1.3rem); font-weight:700; margin:0; }
+  .row-head .hint{ font-size:.76rem; color:var(--text-faint); font-family:"IBM Plex Mono",monospace; }
 
   .row-container{ position:relative; }
   .row-track{
     display:flex; gap:12px; overflow-x:auto; scroll-behavior:smooth;
-    padding: 18px clamp(16px,4vw,56px) 30px;
+    padding: 18px clamp(16px,4vw,56px) 26px;
     scrollbar-width:none;
   }
   .row-track::-webkit-scrollbar{ display:none; }
@@ -112,20 +86,55 @@
     opacity:0; transition:opacity .2s ease;
   }
   .row-container:hover .row-arrow{ opacity:1; }
-  .row-arrow.left{ left:0; background:linear-gradient(to right, var(--bg) 20%, transparent); justify-content:flex-start; padding-left:8px; }
-  .row-arrow.right{ right:0; background:linear-gradient(to left, var(--bg) 20%, transparent); justify-content:flex-end; padding-right:8px; }
-  .row-arrow svg{ width:28px; height:28px; fill:var(--text); }
+  .row-arrow.left{ left:0; background:linear-gradient(to right, var(--bg) 25%, transparent); justify-content:flex-start; padding-left:8px; }
+  .row-arrow.right{ right:0; background:linear-gradient(to left, var(--bg) 25%, transparent); justify-content:flex-end; padding-right:8px; }
+  .row-arrow svg{ width:26px; height:26px; fill:var(--text); }
   @media (hover:none){ .row-arrow{ display:none; } }
 
-  /* project poster card */
+  /* ---------------- featured spotlight over the trending row ---------------- */
+  .spotlight-row .row-track{ position:relative; }
+  .spotlight{
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:15;
+    width:min(88vw, 780px); border-radius:12px; overflow:hidden;
+    background:
+      linear-gradient(115deg, rgba(9,10,15,.65) 0%, rgba(74,46,82,.82) 55%, rgba(9,10,15,.9) 100%),
+      var(--surface);
+    border:1px solid var(--accent-deep); box-shadow:0 30px 70px -20px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.03);
+    display:grid; grid-template-columns:1.3fr 1fr; gap:0;
+    backdrop-filter: blur(2px);
+  }
+  @media (max-width:820px){ .spotlight{ grid-template-columns:1fr; width:92vw; } }
+  .spotlight-copy{ padding:clamp(20px,3vw,34px); }
+  .spotlight-kicker{ font-family:"IBM Plex Mono",monospace; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); }
+  .spotlight h3{ font-size:clamp(1.5rem,3vw,2.1rem); font-weight:800; margin:10px 0 0; line-height:1.08; }
+  .spotlight p{ margin-top:12px; font-size:.9rem; color:var(--text-muted); line-height:1.6; max-width:46ch; }
+  .spotlight-actions{ display:flex; gap:10px; margin-top:18px; }
+  .spot-btn{ display:inline-flex; align-items:center; gap:7px; font-weight:700; font-size:.85rem; padding:10px 18px; border-radius:5px; border:none; cursor:pointer; }
+  .spot-btn.play{ background:var(--text); color:#0A0B10; }
+  .spot-btn.play:hover{ background:#fff; }
+  .spot-btn.info{ background:rgba(140,140,150,.28); color:var(--text); }
+  .spot-btn.info:hover{ background:rgba(140,140,150,.4); }
+  .spotlight-diagram{
+    background:rgba(0,0,0,.35); border-left:1px solid rgba(255,255,255,.08);
+    padding:clamp(16px,2.5vw,26px); display:flex; flex-direction:column; justify-content:center; gap:10px;
+  }
+  .spotlight-diagram .cap{ font-family:"IBM Plex Mono",monospace; font-size:.68rem; color:var(--text-faint); text-transform:uppercase; letter-spacing:.06em; margin-bottom:4px; }
+  .diagram-node{
+    font-family:"IBM Plex Mono",monospace; font-size:.74rem; background:var(--surface-2); border:1px solid var(--border);
+    border-radius:5px; padding:8px 12px; text-align:center; color:var(--text);
+  }
+  .diagram-arrow{ text-align:center; color:var(--accent); font-size:.9rem; line-height:1; }
+  @media (max-width:820px){ .spotlight-diagram{ border-left:none; border-top:1px solid rgba(255,255,255,.08); } }
+
+  /* poster cards, so the trending row still shows edges of real cards behind the spotlight */
   .card{
-    flex:0 0 auto; width:min(74vw, 300px); border-radius:6px; overflow:hidden; position:relative;
+    flex:0 0 auto; width:min(60vw, 250px); border-radius:6px; overflow:hidden; position:relative;
     background:var(--surface); border:1px solid var(--border); cursor:pointer;
     display:flex; flex-direction:column;
     transition: transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s ease, border-color .3s ease;
   }
   @media (prefers-reduced-motion: no-preference){
-    .card:hover{ transform:scale(1.09) translateY(-6px); z-index:10; box-shadow:0 24px 48px -12px var(--glow), 0 0 0 1px var(--accent-deep); border-color:var(--accent-deep); }
+    .card:hover{ transform:scale(1.08) translateY(-4px); z-index:10; box-shadow:0 22px 44px -12px var(--glow), 0 0 0 1px var(--accent-deep); border-color:var(--accent-deep); }
   }
   .card .poster{ aspect-ratio:16/9; position:relative; overflow:hidden; background:var(--surface-2); flex-shrink:0; }
   .card .poster img{ width:100%; height:100%; object-fit:cover; object-position:top; display:block; }
@@ -133,111 +142,129 @@
     display:flex; align-items:center; justify-content:center; flex-direction:column; gap:6px;
     background: linear-gradient(135deg, var(--accent-deep) 0%, var(--bg-elevated) 65%);
   }
-  .card .poster.tile .mono-letter{ font-size:2.4rem; font-weight:800; color:var(--accent); font-family:"IBM Plex Mono",monospace; }
-  .card .poster.tile .tile-name{ font-size:.78rem; color:var(--text-muted); font-family:"IBM Plex Mono",monospace; padding-inline:14px; text-align:center; }
+  .card .poster.tile .mono-letter{ font-size:2.1rem; font-weight:800; color:var(--accent); font-family:"IBM Plex Mono",monospace; }
+  .card .poster.tile .tile-name{ font-size:.72rem; color:var(--text-muted); font-family:"IBM Plex Mono",monospace; padding-inline:12px; text-align:center; }
+  .card .poster-btns{
+    position:absolute; left:8px; bottom:8px; display:flex; gap:6px; opacity:0; transition:opacity .25s ease;
+  }
+  .card:hover .poster-btns{ opacity:1; }
+  .poster-btn{
+    display:inline-flex; align-items:center; gap:5px; font-size:.68rem; font-weight:700; padding:5px 10px; border-radius:4px;
+    background:rgba(0,0,0,.7); color:var(--text); border:1px solid rgba(255,255,255,.2); backdrop-filter:blur(4px);
+  }
+  .poster-btn.play{ background:rgba(255,255,255,.92); color:#0A0B10; border-color:transparent; }
   .card .badge{
-    position:absolute; top:8px; right:8px; font-size:.65rem; font-family:"IBM Plex Mono",monospace;
+    position:absolute; top:8px; right:8px; font-size:.62rem; font-family:"IBM Plex Mono",monospace;
     background:rgba(0,0,0,.55); border:1px solid rgba(255,255,255,.15); color:var(--text);
-    padding:2px 8px; border-radius:999px; backdrop-filter:blur(4px);
+    padding:2px 7px; border-radius:999px; backdrop-filter:blur(4px);
   }
-  .card .body{ padding:12px 14px 14px; display:flex; flex-direction:column; flex-grow:1; }
-  .card .title{ font-weight:700; font-size:.92rem; }
+  .card .body{ padding:10px 12px 12px; display:flex; flex-direction:column; flex-grow:1; }
+  .card .title{ font-weight:700; font-size:.86rem; }
   .card .desc{
-    font-size:.78rem; color:var(--text-muted); margin-top:6px; line-height:1.5;
-    display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;
+    font-size:.74rem; color:var(--text-muted); margin-top:5px; line-height:1.45;
+    display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
   }
-  .card .stack{ display:flex; flex-wrap:wrap; gap:5px; margin-top:10px; }
-  .card .stack span{
-    font-size:.66rem; font-family:"IBM Plex Mono",monospace; color:var(--text-faint);
-    border:1px solid var(--border); padding:1px 7px; border-radius:999px;
-  }
-  .card .links{ display:flex; gap:14px; margin-top:auto; padding-top:10px; }
-  .card .links a{ font-size:.72rem; font-weight:600; color:var(--accent); }
-  .card .links a:hover{ text-decoration:underline; }
 
-  /* skill tile (genre-style) */
-  .skill-tile{
-    flex:0 0 auto; width:210px; height:120px; border-radius:6px; padding:16px;
-    display:flex; flex-direction:column; justify-content:space-between;
-    background:linear-gradient(150deg, var(--surface) 0%, var(--surface-2) 100%);
-    border:1px solid var(--border); transition:transform .3s ease, border-color .3s ease;
+  /* continue watching: tech pills */
+  .pill-row{ display:flex; flex-wrap:wrap; gap:9px; padding-inline:clamp(16px,4vw,56px); }
+  .pill{
+    font-family:"IBM Plex Mono",monospace; font-size:.74rem; font-weight:600; letter-spacing:.02em;
+    background:linear-gradient(120deg,var(--accent-deep),var(--accent-2)); color:#fff;
+    padding:7px 15px; border-radius:999px; border:1px solid rgba(255,255,255,.12);
   }
-  @media (prefers-reduced-motion:no-preference){ .skill-tile:hover{ transform:translateY(-6px); border-color:var(--accent-deep); } }
-  .skill-tile h3{ margin:0; font-size:.95rem; font-weight:700; }
-  .skill-tile p{ margin:0; font-size:.72rem; color:var(--text-muted); line-height:1.5; }
 
-  /* wide experience card */
-  .wide-card{
-    flex:0 0 auto; width:min(88vw, 640px); border-radius:8px; background:var(--surface);
-    border:1px solid var(--border); padding:22px 26px; display:flex; flex-direction:column; gap:10px;
+  /* split: publications / about / skills-heatmap */
+  .split{
+    display:grid; grid-template-columns: 1fr 1.1fr 1fr; gap:clamp(20px,3vw,36px);
+    padding-inline:clamp(16px,4vw,56px); align-items:start;
   }
-  .wide-card .role{ font-size:1.1rem; font-weight:700; }
-  .wide-card .org{ color:var(--accent); font-size:.85rem; font-family:"IBM Plex Mono",monospace; }
-  .wide-card ul{ margin:8px 0 0; padding-left:1.1em; color:var(--text-muted); font-size:.85rem; line-height:1.65; }
-  .wide-card li b{ color:var(--text); font-weight:600; }
+  @media (max-width:1100px){ .split{ grid-template-columns:1fr; } }
 
-  /* publication card */
+  .pub-grid{ display:flex; flex-direction:column; gap:12px; }
   .pub-card{
-    flex:0 0 auto; width:280px; border-radius:6px; background:var(--surface); border:1px solid var(--border);
-    padding:18px; display:flex; flex-direction:column; gap:8px;
+    border-radius:6px; background:var(--surface); border:1px solid var(--border);
+    padding:16px; display:flex; align-items:center; gap:12px;
+    transition:border-color .25s ease, transform .25s ease;
   }
-  .pub-card .kicker{ font-size:.7rem; font-family:"IBM Plex Mono",monospace; color:var(--accent); text-transform:uppercase; letter-spacing:.05em; }
-  .pub-card .t{ font-weight:600; font-size:.9rem; line-height:1.4; }
+  .pub-card:hover{ border-color:var(--accent-deep); transform:translateY(-2px); }
+  .pub-card .icon{
+    width:38px; height:38px; border-radius:6px; flex-shrink:0; display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:.8rem; font-family:"IBM Plex Mono",monospace;
+  }
+  .pub-card .t{ font-weight:600; font-size:.88rem; line-height:1.35; }
   .pub-card .t a:hover{ color:var(--accent); }
-  .pub-card .w{ font-size:.78rem; color:var(--text-muted); }
+  .pub-card .w{ font-size:.74rem; color:var(--text-muted); margin-top:2px; }
 
-  footer{ border-top:1px solid var(--border); padding-block:32px; position:relative; z-index:2; }
-  .foot-row{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; font-size:.8rem; color:var(--text-faint); }
+  .about-block{ text-align:center; }
+  .avatar-ring{
+    width:150px; height:150px; border-radius:50%; margin-inline:auto; overflow:hidden;
+    border:3px solid var(--accent-deep); box-shadow:0 0 0 6px rgba(217,139,185,.08);
+  }
+  .avatar-ring img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .about-block h3{ margin:16px 0 0; font-size:1.3rem; font-weight:800; }
+  .about-block .sub{ font-size:.8rem; color:var(--accent); font-family:"IBM Plex Mono",monospace; margin-top:2px; }
+  .about-block p{ margin-top:14px; font-size:.86rem; color:var(--text-muted); line-height:1.65; text-align:left; }
+  .about-block ul{ text-align:left; margin:12px 0 0; padding-left:1.2em; font-size:.84rem; color:var(--text-muted); line-height:1.75; }
+  .about-block li b{ color:var(--text); font-weight:600; }
+
+  .graph-wrap{ overflow-x:auto; padding-bottom:4px; }
+  .graph-months{ display:flex; justify-content:space-between; font-size:.66rem; color:var(--text-faint); font-family:"IBM Plex Mono",monospace; margin-bottom:4px; padding-inline:2px; min-width:280px; }
+  .graph{ display:grid; grid-auto-flow:column; grid-template-rows:repeat(7,10px); gap:3px; width:max-content; min-width:280px; }
+  .graph .cell{ width:10px; height:10px; border-radius:2px; background:var(--graph-0); }
+  .graph-legend{ display:flex; align-items:center; gap:6px; font-size:.7rem; color:var(--text-muted); margin-top:8px; justify-content:flex-end; }
+  .graph-legend .cell{ width:9px; height:9px; border-radius:2px; }
+  .graph-caption{ font-size:.76rem; color:var(--text-muted); margin-bottom:8px; }
+  .skills-title{ font-size:1rem; font-weight:700; margin-bottom:4px; }
+
+  /* sticky action bar */
+  .action-bar{
+    position:fixed; bottom:0; left:0; right:0; z-index:90;
+    background:var(--nav-bg); backdrop-filter:blur(10px); border-top:1px solid var(--border);
+    padding-block:14px;
+  }
+  .action-bar .wrap{ display:flex; justify-content:center; gap:12px; }
+  .abtn{ font-weight:700; font-size:.88rem; padding:11px 26px; border-radius:6px; border:none; cursor:pointer; }
+  .abtn.resume{ background:var(--text); color:#0A0B10; }
+  .abtn.resume:hover{ background:#fff; }
+  .abtn.email{ background:linear-gradient(120deg,var(--accent-deep),var(--accent-2)); color:#fff; }
+  .abtn.email:hover{ filter:brightness(1.1); }
+
+  footer{ padding-block:24px 8px; }
+  .foot-row{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; font-size:.78rem; color:var(--text-faint); padding-inline:clamp(16px,4vw,56px); }
   .foot-row a{ color:var(--text-faint); }
   .foot-row a:hover{ color:var(--accent); }
+
+  .hidden{ display:none !important; }
 </style>
 </head>
 <body>
 
 <nav class="nav" id="nav">
   <div class="wrap">
-    <a class="logo" href="#top">MANSI PATIL</a>
+    <a class="logo" href="#top"><span class="mark">MP</span> Mansi Patil</a>
     <ul class="nav-links">
-      <li><a href="#pinned">Projects</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#publications">Publications</a></li>
+      <li><a href="#top" class="active">Home</a></li>
+      <li><a href="#trending">Projects</a></li>
+      <li><a href="#mylist">Case Studies</a></li>
+      <li><a href="#trending">AI/ML Engineering</a></li>
+      <li><a href="#mylist">Cloud</a></li>
+      <li><a href="#stack">Skills</a></li>
+      <li><a href="#credits">Publications &amp; Certifications</a></li>
     </ul>
-    <a class="nav-avatar" href="https://github.com/MansiPatil21" target="_blank" rel="noopener" title="MansiPatil21 on GitHub">
-      <img src="assets/avatar.jpg" alt="Mansi Patil">
-    </a>
+    <div class="nav-search">
+      <svg viewBox="0 0 16 16"><path d="M11.5 7a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm-.82 4.74a6 6 0 1 1 1.06-1.06l3.04 3.04a.75.75 0 1 1-1.06 1.06Z"/></svg>
+      <input type="text" id="searchBox" placeholder="Search projects...">
+    </div>
   </div>
 </nav>
 
 <div id="top"></div>
 
-<header class="hero">
-  <div class="wrap hero-inner">
-    <span class="hero-eyebrow">● Available January 2027</span>
-    <h1>Mansi Patil</h1>
-    <p class="role"><b>Cloud &amp; AI Engineer</b> · Software Developer · MACS candidate, Dalhousie University</p>
-    <p class="lede">
-      I work at the layer between "a model works" and "a system runs reliably in production" —
-      serverless pipelines, deployment automation, and infrastructure that keeps holding up after
-      the demo ends. Cybersecurity background, still shapes how I think about failure modes.
-    </p>
-    <div class="hero-tags">
-      <span class="hero-tag">AWS</span><span class="hero-tag">Azure</span><span class="hero-tag">Serverless</span>
-      <span class="hero-tag">MLOps</span><span class="hero-tag">Python</span><span class="hero-tag">Kubernetes</span>
-    </div>
-    <div class="hero-actions">
-      <a class="btn primary" href="mailto:mansican908@gmail.com">✉ Email me</a>
-      <a class="btn ghost" href="#pinned">▾ View projects</a>
-      <a class="btn ghost" href="https://www.linkedin.com/in/mansipatil-cs/" target="_blank" rel="noopener">LinkedIn</a>
-    </div>
-  </div>
-</header>
+<main>
 
-<main class="rows">
-
-  <section class="row" id="pinned">
+  <section class="row spotlight-row" id="trending">
     <div class="row-head">
-      <h2>Pinned Projects</h2>
+      <h2>Trending Now: Key Projects</h2>
       <span class="hint">6 repositories</span>
     </div>
     <div class="row-container">
@@ -245,203 +272,217 @@
 
       <div class="row-track">
 
-        <div class="card">
-          <div class="poster"><img src="screenshots/corebank.png" alt="CoreBank engineer view showing the live saga feed and concurrency proof"><span class="badge">Live ↗</span></div>
-          <div class="body">
-            <div class="title">corebank</div>
-            <p class="desc">Event-sourced payment engine. A 5-step saga reverses every completed step on failure; a database trigger makes the ledger append-only.</p>
-            <div class="stack"><span>Java</span><span>Spring Boot</span><span>PostgreSQL</span></div>
-            <div class="links"><a href="https://corebank-mu.vercel.app" target="_blank" rel="noopener">Live demo</a><a href="https://github.com/MansiPatil21/corebank" target="_blank" rel="noopener">Source</a></div>
+        <div class="card" data-name="corebank java spring boot postgresql websocket">
+          <div class="poster"><img src="screenshots/corebank.png" alt="CoreBank engineer view"><span class="badge">Live ↗</span>
+            <div class="poster-btns"><a class="poster-btn play" href="https://corebank-mu.vercel.app" target="_blank" rel="noopener">▶ Play</a><a class="poster-btn" href="https://github.com/MansiPatil21/corebank" target="_blank" rel="noopener">More Info</a></div>
           </div>
+          <div class="body"><div class="title">corebank</div><p class="desc">Event-sourced payment engine. A 5-step saga reverses every step on failure.</p></div>
         </div>
 
-        <div class="card">
-          <div class="poster"><img src="screenshots/funded.png" alt="FundEd landing dashboard showing permit hours and money sent home"><span class="badge">Live ↗</span></div>
-          <div class="body">
-            <div class="title">FundEd</div>
-            <p class="desc">Financial companion for international students. Daily Airflow + dbt pipeline feeding Power BI, Tableau, and Excel from one set of SQL views.</p>
-            <div class="stack"><span>Next.js</span><span>GraphQL</span><span>Kubernetes</span></div>
-            <div class="links"><a href="https://fund-ed-sigma.vercel.app" target="_blank" rel="noopener">Live demo</a><a href="https://github.com/MansiPatil21/FundEd" target="_blank" rel="noopener">Source</a></div>
+        <div class="card" data-name="spindle java c++ tcp distributed systems">
+          <div class="poster tile"><span class="mono-letter">SP</span><span class="tile-name">spindle</span>
+            <div class="poster-btns"><span class="poster-btn play" style="opacity:.5; cursor:default;">▶ No demo</span><a class="poster-btn" href="https://github.com/MansiPatil21/spindle" target="_blank" rel="noopener">More Info</a></div>
           </div>
+          <div class="body"><div class="title">spindle</div><p class="desc">Hadoop-style distributed file system over raw TCP sockets.</p></div>
         </div>
 
-        <div class="card">
-          <div class="poster tile"><span class="mono-letter">SP</span><span class="tile-name">spindle</span></div>
-          <div class="body">
-            <div class="title">spindle</div>
-            <p class="desc">Hadoop-style distributed file system over raw TCP sockets. Hand-built wire protocol, reimplemented again in C++.</p>
-            <div class="stack"><span>Java</span><span>C++</span><span>TCP</span></div>
-            <div class="links"><a href="https://github.com/MansiPatil21/spindle" target="_blank" rel="noopener">Source</a></div>
+        <!-- Spotlight sits centered over this row -->
+
+        <div class="card" data-name="smartcare saws aws gcp agile technical director">
+          <div class="poster tile"><span class="mono-letter">SC</span><span class="tile-name">SmartCare</span>
+            <div class="poster-btns"><span class="poster-btn play" style="opacity:.5; cursor:default;">▶ No demo</span><a class="poster-btn" href="https://github.com/MansiPatil21/smartcare-appointment-wellness-system" target="_blank" rel="noopener">More Info</a></div>
           </div>
+          <div class="body"><div class="title">SmartCare (SAWS)</div><p class="desc">Multi-cloud platform across AWS and GCP, directed as Technical Director.</p></div>
         </div>
 
-        <div class="card">
-          <div class="poster tile"><span class="mono-letter">SC</span><span class="tile-name">smartcare-appointment-wellness-system</span></div>
-          <div class="body">
-            <div class="title">SmartCare (SAWS)</div>
-            <p class="desc">Multi-cloud appointment platform across AWS and GCP. Directed as Technical Director across six modules, team of seven.</p>
-            <div class="stack"><span>AWS</span><span>GCP</span><span>Agile</span></div>
-            <div class="links"><a href="https://github.com/MansiPatil21/smartcare-appointment-wellness-system" target="_blank" rel="noopener">Source</a></div>
+        <div class="card" data-name="fundEd nextjs graphql kubernetes azure tableau power bi">
+          <div class="poster"><img src="screenshots/funded.png" alt="FundEd landing dashboard"><span class="badge">Live ↗</span>
+            <div class="poster-btns"><a class="poster-btn play" href="https://fund-ed-sigma.vercel.app" target="_blank" rel="noopener">▶ Play</a><a class="poster-btn" href="https://github.com/MansiPatil21/FundEd" target="_blank" rel="noopener">More Info</a></div>
           </div>
+          <div class="body"><div class="title">FundEd</div><p class="desc">Financial companion for international students, with a daily Airflow + dbt pipeline.</p></div>
         </div>
 
-        <div class="card">
-          <div class="poster tile"><span class="mono-letter">DW</span><span class="tile-name">driftwatch-ml-cloud</span></div>
-          <div class="body">
-            <div class="title">DriftWatch</div>
-            <p class="desc">Serverless pipeline watching a live prediction stream for drift, decoupled through Kinesis, alerting through SNS.</p>
-            <div class="stack"><span>Lambda</span><span>Kinesis</span><span>Python</span></div>
-            <div class="links"><a href="https://github.com/MansiPatil21/driftwatch-ml-cloud" target="_blank" rel="noopener">Source</a></div>
+        <div class="card" data-name="driftwatch aws lambda kinesis python">
+          <div class="poster tile"><span class="mono-letter">DW</span><span class="tile-name">DriftWatch</span>
+            <div class="poster-btns"><span class="poster-btn play" style="opacity:.5; cursor:default;">▶ No demo</span><a class="poster-btn" href="https://github.com/MansiPatil21/driftwatch-ml-cloud" target="_blank" rel="noopener">More Info</a></div>
           </div>
+          <div class="body"><div class="title">DriftWatch</div><p class="desc">Serverless pipeline watching a live prediction stream for drift.</p></div>
         </div>
 
-        <div class="card">
-          <div class="poster tile"><span class="mono-letter">CO</span><span class="tile-name">Collabry-influencer-platform</span></div>
-          <div class="body">
-            <div class="title">Collabry</div>
-            <p class="desc">Platform matching brands and influencers, designed in Figma first. AI matchmaker falls back to deterministic scoring on failure.</p>
-            <div class="stack"><span>React 19</span><span>TypeScript</span><span>Figma</span></div>
-            <div class="links"><a href="https://github.com/MansiPatil21/Collabry-influencer-platform" target="_blank" rel="noopener">Source</a></div>
+        <div class="card" data-name="collabry react typescript spring boot figma">
+          <div class="poster tile"><span class="mono-letter">CO</span><span class="tile-name">Collabry</span>
+            <div class="poster-btns"><span class="poster-btn play" style="opacity:.5; cursor:default;">▶ No demo</span><a class="poster-btn" href="https://github.com/MansiPatil21/Collabry-influencer-platform" target="_blank" rel="noopener">More Info</a></div>
           </div>
+          <div class="body"><div class="title">Collabry</div><p class="desc">Brand–influencer matchmaking with an AI scorer and a deterministic fallback.</p></div>
         </div>
 
       </div>
+
+      <div class="spotlight" role="group" aria-label="Featured project: Gen AI Chatbot">
+        <div class="spotlight-copy">
+          <span class="spotlight-kicker">Mansi Patil · Cloud &amp; AI/ML Engineer</span>
+          <h3>Featured: Gen AI Chatbot</h3>
+          <p>Shipped a customer-facing AI chatbot to 100+ active users at Unimind Cognition, grounding
+             every reply in company content through a RAG pipeline over pgvector semantic search.
+             Resolved a production incident that left 1 in 4 queries unanswered.</p>
+          <div class="spotlight-actions">
+            <a class="spot-btn play" href="https://github.com/MansiPatil21/Gen-AI-UNIMIND-chatbot" target="_blank" rel="noopener">▶ View writeup</a>
+            <a class="spot-btn info" href="mailto:mansican908@gmail.com">More Info</a>
+          </div>
+        </div>
+        <div class="spotlight-diagram">
+          <span class="cap">RAG Pipeline</span>
+          <div class="diagram-node">User query</div>
+          <div class="diagram-arrow">↓</div>
+          <div class="diagram-node">FastAPI service</div>
+          <div class="diagram-arrow">↓</div>
+          <div class="diagram-node">pgvector semantic search</div>
+          <div class="diagram-arrow">↓</div>
+          <div class="diagram-node">Grounded response</div>
+        </div>
+      </div>
+
       <button class="row-arrow right" data-dir="1" aria-label="Scroll right"><svg viewBox="0 0 24 24"><path d="M8.6 16.6 10 18l6-6-6-6-1.4 1.4L13.2 12z"/></svg></button>
     </div>
   </section>
 
-  <section class="row" id="all-repos">
+  <section class="row" id="mylist">
     <div class="row-head">
-      <h2>All Repositories</h2>
-      <span class="hint">11 public</span>
+      <h2>My List: Case Studies</h2>
+      <span class="hint">5 more repositories</span>
     </div>
     <div class="row-container">
       <button class="row-arrow left" data-dir="-1" aria-label="Scroll left"><svg viewBox="0 0 24 24"><path d="M15.4 7.4 14 6l-6 6 6 6 1.4-1.4L10.8 12z"/></svg></button>
       <div class="row-track">
 
-        <div class="card">
-          <div class="poster tile"><span class="mono-letter">DM</span><span class="tile-name">Documantic</span></div>
-          <div class="body"><div class="title">Documantic</div>
-            <p class="desc">Upload a codebase, get a README, API docs, a quality report, and commented source, generated by an async Lambda pipeline in ~2 minutes.</p>
-            <div class="stack"><span>React</span><span>Lambda</span><span>Terraform</span></div>
-            <div class="links"><a href="https://github.com/MansiPatil21/Documantic" target="_blank" rel="noopener">Source</a></div>
+        <div class="card" data-name="documantic react typescript lambda terraform">
+          <div class="poster tile"><span class="mono-letter">DM</span><span class="tile-name">Documantic</span>
+            <div class="poster-btns"><span class="poster-btn play" style="opacity:.5; cursor:default;">▶ No demo</span><a class="poster-btn" href="https://github.com/MansiPatil21/Documantic" target="_blank" rel="noopener">More Info</a></div>
           </div>
+          <div class="body"><div class="title">Documantic</div><p class="desc">Upload a codebase, get docs, a quality report, and commented source back.</p></div>
         </div>
 
-        <div class="card">
-          <div class="poster tile"><span class="mono-letter">SY</span><span class="tile-name">Syllabify</span></div>
-          <div class="body"><div class="title">Syllabify</div>
-            <p class="desc">OCR reads a syllabus PDF, an LLM turns it into a study roadmap. Bare network to running app with one Terraform + Bash command.</p>
-            <div class="stack"><span>React</span><span>Terraform</span><span>AWS</span></div>
-            <div class="links"><a href="https://github.com/MansiPatil21/Syllabify" target="_blank" rel="noopener">Source</a></div>
+        <div class="card" data-name="syllabify react terraform aws ocr">
+          <div class="poster tile"><span class="mono-letter">SY</span><span class="tile-name">Syllabify</span>
+            <div class="poster-btns"><span class="poster-btn play" style="opacity:.5; cursor:default;">▶ No demo</span><a class="poster-btn" href="https://github.com/MansiPatil21/Syllabify" target="_blank" rel="noopener">More Info</a></div>
           </div>
+          <div class="body"><div class="title">Syllabify</div><p class="desc">OCR reads a syllabus PDF, an LLM turns it into a study roadmap.</p></div>
         </div>
 
-        <div class="card">
-          <div class="poster"><img src="assets/fantasysailgp.jpg" alt="FantasySailGP demo video thumbnail"><span class="badge">Video ↗</span></div>
-          <div class="body"><div class="title">FantasySailGP</div>
-            <p class="desc">Hackathon fantasy-sailing predictor. Wrote the scoring engine, trained the model, shipped the original 5-screen frontend within the event window.</p>
-            <div class="stack"><span>Python</span><span>scikit-learn</span><span>FastAPI</span></div>
-            <div class="links"><a href="https://youtu.be/bazaQ3WcxNI" target="_blank" rel="noopener">Demo video</a><a href="https://github.com/MansiPatil21/FantasySailGP" target="_blank" rel="noopener">Source</a></div>
+        <div class="card" data-name="fantasysailgp python scikit-learn fastapi hackathon">
+          <div class="poster"><img src="assets/fantasysailgp.jpg" alt="FantasySailGP demo video thumbnail"><span class="badge">Video ↗</span>
+            <div class="poster-btns"><a class="poster-btn play" href="https://youtu.be/bazaQ3WcxNI" target="_blank" rel="noopener">▶ Play</a><a class="poster-btn" href="https://github.com/MansiPatil21/FantasySailGP" target="_blank" rel="noopener">More Info</a></div>
           </div>
+          <div class="body"><div class="title">FantasySailGP</div><p class="desc">Hackathon fantasy-sailing predictor, scoring engine and model.</p></div>
         </div>
 
-        <div class="card">
-          <div class="poster tile"><span class="mono-letter">BK</span><span class="tile-name">mental-health-nlp</span></div>
-          <div class="body"><div class="title">Beyond Keywords</div>
-            <p class="desc">Fine-tuned BERT and DistilBERT on mental-health signal in text, then used SHAP to check whether the model learned real signal or a shortcut.</p>
-            <div class="stack"><span>PyTorch</span><span>Transformers</span><span>SHAP</span></div>
-            <div class="links"><a href="https://github.com/MansiPatil21/mental-health-nlp" target="_blank" rel="noopener">Source</a></div>
+        <div class="card" data-name="beyond keywords pytorch transformers shap nlp">
+          <div class="poster tile"><span class="mono-letter">BK</span><span class="tile-name">Beyond Keywords</span>
+            <div class="poster-btns"><span class="poster-btn play" style="opacity:.5; cursor:default;">▶ No demo</span><a class="poster-btn" href="https://github.com/MansiPatil21/mental-health-nlp" target="_blank" rel="noopener">More Info</a></div>
           </div>
+          <div class="body"><div class="title">Beyond Keywords</div><p class="desc">Fine-tuned BERT and DistilBERT, checked with SHAP for shortcut learning.</p></div>
         </div>
 
-        <div class="card">
-          <div class="poster tile"><span class="mono-letter">FN</span><span class="tile-name">Fake-News-Detection</span></div>
-          <div class="body"><div class="title">Fake News Detection</div>
-            <p class="desc">Compared SVM and Logistic Regression for fake-news classification. Extended into a paper presented at IDICAIEI, indexed in IEEE Xplore.</p>
-            <div class="stack"><span>Python</span><span>scikit-learn</span><span>NLP</span></div>
-            <div class="links"><a href="https://github.com/MansiPatil21/Fake-News-Detection" target="_blank" rel="noopener">Source</a></div>
+        <div class="card" data-name="fake news detection svm logistic regression ieee">
+          <div class="poster tile"><span class="mono-letter">FN</span><span class="tile-name">Fake News Detection</span>
+            <div class="poster-btns"><span class="poster-btn play" style="opacity:.5; cursor:default;">▶ No demo</span><a class="poster-btn" href="https://github.com/MansiPatil21/Fake-News-Detection" target="_blank" rel="noopener">More Info</a></div>
           </div>
+          <div class="body"><div class="title">Fake News Detection</div><p class="desc">SVM vs Logistic Regression, published in IEEE Xplore.</p></div>
         </div>
 
       </div>
       <button class="row-arrow right" data-dir="1" aria-label="Scroll right"><svg viewBox="0 0 24 24"><path d="M8.6 16.6 10 18l6-6-6-6-1.4 1.4L13.2 12z"/></svg></button>
     </div>
-    <p style="padding-inline:clamp(16px,4vw,56px); font-size:.76rem; color:var(--text-faint); margin-top:2px;">The 6 pinned repositories above are also part of these 11 — GitHub caps pinned repos at 6.</p>
+    <p id="noResults" class="hidden" style="padding-inline:clamp(16px,4vw,56px); font-size:.82rem; color:var(--text-faint);">No projects match that search.</p>
   </section>
 
-  <section class="row" id="skills">
-    <div class="row-head"><h2>Skills &amp; Tools</h2></div>
-    <div class="row-container">
-      <div class="row-track">
-        <div class="skill-tile"><h3>Languages</h3><p>Java · Python · TypeScript · C++ · SQL</p></div>
-        <div class="skill-tile"><h3>Backend</h3><p>Spring Boot · Node.js · FastAPI · GraphQL</p></div>
-        <div class="skill-tile"><h3>Frontend</h3><p>React · Next.js · Redux Toolkit</p></div>
-        <div class="skill-tile"><h3>Data</h3><p>PostgreSQL · MongoDB · Redis · Airflow · dbt</p></div>
-        <div class="skill-tile"><h3>Cloud &amp; DevOps</h3><p>Azure · AWS · GCP · Docker · Kubernetes · Terraform</p></div>
-        <div class="skill-tile"><h3>Analytics &amp; BI</h3><p>Power BI · Tableau · Excel · Looker Studio</p></div>
-        <div class="skill-tile"><h3>Machine Learning</h3><p>PyTorch · Transformers · scikit-learn · SHAP</p></div>
-        <div class="skill-tile"><h3>Testing</h3><p>JUnit · Selenium · pytest · Playwright</p></div>
-      </div>
+  <section class="row" id="stack">
+    <div class="row-head"><h2>Continue Watching: Tech Stack</h2></div>
+    <div class="pill-row">
+      <span class="pill">AWS</span><span class="pill">Azure</span><span class="pill">GCP</span>
+      <span class="pill">Python</span><span class="pill">Java</span><span class="pill">TypeScript</span><span class="pill">C++</span>
+      <span class="pill">Docker</span><span class="pill">Kubernetes</span><span class="pill">Terraform</span>
+      <span class="pill">Kinesis</span><span class="pill">Lambda</span><span class="pill">FastAPI</span>
+      <span class="pill">GraphQL</span><span class="pill">PostgreSQL</span><span class="pill">MongoDB</span><span class="pill">MySQL</span>
+      <span class="pill">PyTorch</span><span class="pill">React</span><span class="pill">Next.js</span>
+      <span class="pill">Power BI</span><span class="pill">Tableau</span>
     </div>
   </section>
 
-  <section class="row" id="experience">
-    <div class="row-head"><h2>Experience</h2></div>
-    <div class="row-container">
-      <div class="row-track">
-        <div class="wide-card">
-          <div class="role">Gen AI Intern</div>
-          <div class="org">UNIMIND COGNITION · JUL 2024 – JAN 2025</div>
-          <ul>
-            <li>Shipped a customer-facing AI chatbot to <b>100+ active users</b> within a team of 5, building a RAG pipeline in Python and FastAPI over pgvector semantic search.</li>
-            <li>Resolved a production incident that left <b>1 in 4</b> queries unanswered by tracing requests to unmatched prompts and shipping a generated fallback.</li>
-            <li>Validated the service at <b>85% line coverage</b> with pytest, and cut releases from 8 manual steps to a single push via GitHub Actions CI/CD.</li>
-          </ul>
+  <section class="row" id="credits">
+    <div class="split">
+
+      <div>
+        <h2 style="font-size:1.1rem; font-weight:700; margin:0 0 16px;">Critical Acclaim: Publications &amp; Certifications</h2>
+        <div class="pub-grid">
+          <div class="pub-card">
+            <div class="icon" style="background:#00629B22; color:#5FA8D3;">IEEE</div>
+            <div><div class="t"><a href="https://ieeexplore.ieee.org/document/10842732" target="_blank" rel="noopener">Advancing Fake News Detection</a></div><div class="w">IEEE Xplore · IJIRT · presented at IDICAIEI · 2025</div></div>
+          </div>
+          <div class="pub-card">
+            <div class="icon" style="background:#00684A22; color:#3FBF83;">DB</div>
+            <div><div class="t"><a href="https://www.credly.com/badges/d5fc2a6c-4055-45ac-816d-06fd10a184c6/public_url" target="_blank" rel="noopener">CRUD Operations in MongoDB</a></div><div class="w">MongoDB University · Credly verified</div></div>
+          </div>
+          <div class="pub-card">
+            <div class="icon" style="background:#FF6A0022; color:#FF9A4D;">FG</div>
+            <div><div class="t"><a href="https://drive.google.com/file/d/1tDFLIos6cuRaxC12YktMvf_XPpEkx26-/view?usp=sharing" target="_blank" rel="noopener">HPE Software Engineering Simulation</a></div><div class="w">Forage · Java, Spring Boot, REST</div></div>
+          </div>
+          <div class="pub-card">
+            <div class="icon" style="background:var(--accent-deep); color:var(--accent);">UD</div>
+            <div><div class="t"><a href="https://www.udemy.com/certificate/UC-71511225-0338-41c3-894f-747fd294bd5d/" target="_blank" rel="noopener">Python &amp; Ethical Hacking</a></div><div class="w">Udemy · publicly verifiable</div></div>
+          </div>
         </div>
       </div>
+
+      <div class="about-block">
+        <div class="avatar-ring"><img src="assets/avatar.jpg" alt="Mansi Patil"></div>
+        <h3>About Me</h3>
+        <div class="sub">Cloud &amp; AI/ML Engineer</div>
+        <p>Hi, I'm Mansi — a Master of Applied Computer Science student at Dalhousie, Halifax, working
+           at the intersection of cloud infrastructure, AI/ML, and full-stack development. I like the
+           layer of engineering between "a model works" and "a system runs reliably in production."</p>
+        <ul>
+          <li><b>MACS student</b> at Dalhousie University, Halifax, NS</li>
+          <li><b>International student</b>, open to co-op opportunities across Canada</li>
+          <li>Came to ML/AI by way of a <b>cybersecurity &amp; forensics</b> background — still shapes how I think about failure modes</li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="skills-title">Watch Next: Skills</h2>
+        <p class="graph-caption">Hands-on time by area, roughly.</p>
+        <div class="graph-wrap">
+          <div class="graph-months mono">
+            <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span>
+            <span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span>
+          </div>
+          <div class="graph" id="skillGraph"></div>
+        </div>
+        <div class="graph-legend">
+          Less <span class="cell" style="background:var(--graph-0)"></span><span class="cell" style="background:var(--graph-1)"></span><span class="cell" style="background:var(--graph-2)"></span><span class="cell" style="background:var(--graph-3)"></span><span class="cell" style="background:var(--graph-4)"></span> More
+        </div>
+      </div>
+
     </div>
   </section>
 
-  <section class="row" id="publications">
-    <div class="row-head"><h2>Publications &amp; Certifications</h2></div>
-    <div class="row-container">
-      <div class="row-track">
-        <div class="pub-card">
-          <span class="kicker">IEEE Xplore · IJIRT · 2025</span>
-          <span class="t"><a href="https://ieeexplore.ieee.org/document/10842732" target="_blank" rel="noopener">Advancing Fake News Detection: SVM and LR Comparative Analysis</a></span>
-          <span class="w">Presented at IDICAIEI</span>
-        </div>
-        <div class="pub-card">
-          <span class="kicker">Credly verified · 2026</span>
-          <span class="t"><a href="https://www.credly.com/badges/d5fc2a6c-4055-45ac-816d-06fd10a184c6/public_url" target="_blank" rel="noopener">CRUD Operations in MongoDB</a></span>
-          <span class="w">MongoDB University</span>
-        </div>
-        <div class="pub-card">
-          <span class="kicker">Forage · 2026</span>
-          <span class="t"><a href="https://drive.google.com/file/d/1tDFLIos6cuRaxC12YktMvf_XPpEkx26-/view?usp=sharing" target="_blank" rel="noopener">HPE Software Engineering Job Simulation</a></span>
-          <span class="w">Java, Spring Boot, REST</span>
-        </div>
-        <div class="pub-card">
-          <span class="kicker">Udemy · 2026</span>
-          <span class="t"><a href="https://www.udemy.com/certificate/UC-71511225-0338-41c3-894f-747fd294bd5d/" target="_blank" rel="noopener">Learn Python and Ethical Hacking from Scratch</a></span>
-          <span class="w">Publicly verifiable</span>
-        </div>
-      </div>
+  <footer>
+    <div class="foot-row">
+      <span>© 2026 Mansi Patil — Halifax, NS</span>
+      <span><a href="https://github.com/MansiPatil21" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.linkedin.com/in/mansipatil-cs/" target="_blank" rel="noopener">LinkedIn</a></span>
     </div>
-  </section>
+  </footer>
 
 </main>
 
-<footer>
-  <div class="wrap foot-row">
-    <span>© 2026 Mansi Patil — Halifax, NS</span>
-    <span><a href="https://github.com/MansiPatil21" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.linkedin.com/in/mansipatil-cs/" target="_blank" rel="noopener">LinkedIn</a> · <a href="mailto:mansican908@gmail.com">Email</a></span>
+<div class="action-bar">
+  <div class="wrap">
+    <a class="abtn resume" href="https://www.linkedin.com/in/mansipatil-cs/" target="_blank" rel="noopener">Resume</a>
+    <a class="abtn email" href="mailto:mansican908@gmail.com">Email</a>
   </div>
-</footer>
+</div>
 
 <script>
-  // solid nav on scroll
   (function(){
     var nav = document.getElementById('nav');
     window.addEventListener('scroll', function(){
@@ -449,7 +490,6 @@
     }, { passive:true });
   })();
 
-  // row arrow scrolling
   document.querySelectorAll('.row-container').forEach(function(container){
     var track = container.querySelector('.row-track');
     container.querySelectorAll('.row-arrow').forEach(function(btn){
@@ -459,6 +499,43 @@
       });
     });
   });
+
+  // live search across all project cards
+  (function(){
+    var box = document.getElementById('searchBox');
+    var cards = document.querySelectorAll('.card[data-name]');
+    var noResults = document.getElementById('noResults');
+    if(!box) return;
+    box.addEventListener('input', function(){
+      var q = box.value.trim().toLowerCase();
+      var visible = 0;
+      cards.forEach(function(card){
+        var match = !q || card.dataset.name.includes(q);
+        card.style.display = match ? '' : 'none';
+        if (match) visible++;
+      });
+      if (noResults) noResults.classList.toggle('hidden', !(q && visible === 0));
+    });
+  })();
+
+  // contribution-graph style skills grid, 12 months x 7 days
+  (function(){
+    var graph = document.getElementById('skillGraph');
+    if(!graph) return;
+    var weeks = 52, days = 7;
+    var frag = document.createDocumentFragment();
+    for (var w = 0; w < weeks; w++){
+      for (var d = 0; d < days; d++){
+        var cell = document.createElement('div');
+        cell.className = 'cell';
+        var v = Math.abs(Math.sin(w * 0.55 + d * 1.1)) * 0.6 + Math.abs(Math.cos(w * 0.22)) * 0.4;
+        var level = v > 0.85 ? 4 : v > 0.65 ? 3 : v > 0.45 ? 2 : v > 0.25 ? 1 : 0;
+        cell.style.background = 'var(--graph-' + level + ')';
+        frag.appendChild(cell);
+      }
+    }
+    graph.appendChild(frag);
+  })();
 </script>
 </body>
 </html>
