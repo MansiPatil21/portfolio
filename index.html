@@ -209,6 +209,16 @@
   .foot-grid{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; font-size:.8rem; color:var(--fg-muted); }
   .foot-grid a{ color:var(--fg-muted); }
   .foot-grid a:hover{ color:var(--accent-fg); }
+
+  .repo-list{ border:1px solid var(--border-default); border-radius:6px; overflow:hidden; background:var(--canvas-default); margin-top:20px; }
+  .repo-row{ padding:16px; }
+  .repo-row + .repo-row{ border-top:1px solid var(--border-default); }
+  .repo-row-top{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  .repo-row-top a{ font-weight:600; font-size:.95rem; }
+  .repo-row-desc{ color:var(--fg-muted); font-size:.86rem; margin-top:6px; line-height:1.55; max-width:56rem; }
+  .repo-row-foot{ display:flex; align-items:center; gap:16px; margin-top:10px; font-size:.78rem; color:var(--fg-muted); flex-wrap:wrap; }
+  .repo-row-foot span{ display:flex; align-items:center; gap:5px; }
+  .repo-row-foot svg{ width:14px; height:14px; fill:var(--fg-muted); }
 </style>
 </head>
 <body>
@@ -220,7 +230,7 @@
       <span>MansiPatil21</span>
     </div>
     <ul class="top-links">
-      <li><a href="#pinned">Repositories</a></li>
+      <li><a href="#all-repos">Repositories</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#activity">Experience</a></li>
       <li><a href="#releases">Publications</a></li>
@@ -263,14 +273,14 @@
         </ul>
 
         <div class="pill-nav" style="flex-direction:column; border-bottom:none; margin-top:24px; gap:0;">
-          <a href="#pinned" style="border-bottom:1px solid var(--border-muted); width:100%;">📌 Pinned <span class="count">7</span></a>
+          <a href="#pinned" style="border-bottom:1px solid var(--border-muted); width:100%;">📌 Pinned <span class="count">6</span></a>
         </div>
       </div>
 
       <div>
         <nav class="pill-nav">
           <a href="#readme"><svg viewBox="0 0 16 16"><path d="M0 1.75A.75.75 0 0 1 .75 1h4.253c1.227 0 2.317.59 3 1.501A3.744 3.744 0 0 1 11.006 1h4.245a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75h-4.507a2.25 2.25 0 0 0-1.591.659l-.622.621a.75.75 0 0 1-1.06 0l-.622-.621A2.25 2.25 0 0 0 5.258 13H.75a.75.75 0 0 1-.75-.75Z"></path></svg> README</a>
-          <a href="#pinned" id="pinned"><svg viewBox="0 0 16 16"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8Z"></path></svg> Repositories <span class="count">7</span></a>
+          <a href="#all-repos" id="pinned"><svg viewBox="0 0 16 16"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8Z"></path></svg> Repositories <span class="count">11</span></a>
           <a href="#skills"><svg viewBox="0 0 16 16"><path d="M8 0a8.2 8.2 0 0 1 .701.031C9.444.095 9.99.645 10.16 1.29l.288 1.107c.018.066.079.158.212.224.231.114.454.243.668.386.123.082.233.09.299.071l1.103-.303c.644-.176 1.392.021 1.82.63.27.385.506.792.704 1.218.315.675.111 1.422-.364 1.891l-.814.806c-.049.048-.098.147-.088.294.016.257.016.515 0 .772-.01.147.039.246.088.294l.814.806c.475.469.679 1.216.364 1.891a7.977 7.977 0 0 1-.704 1.217c-.428.61-1.176.807-1.82.63l-1.102-.302c-.067-.019-.177-.011-.3.071a5.909 5.909 0 0 1-.668.386c-.133.066-.194.158-.211.224l-.29 1.106c-.168.646-.715 1.196-1.458 1.26a8.006 8.006 0 0 1-1.402 0c-.743-.064-1.29-.614-1.458-1.26l-.289-1.106c-.018-.066-.079-.158-.212-.224a5.738 5.738 0 0 1-.668-.386c-.123-.082-.233-.09-.299-.071l-1.103.303c-.644.176-1.392-.021-1.82-.63a8.12 8.12 0 0 1-.704-1.218c-.315-.675-.111-1.422.364-1.891l.814-.806c.049-.048.098-.147.088-.294a6.214 6.214 0 0 1 0-.772c.01-.147-.039-.246-.088-.294l-.814-.806C.635 6.045.431 5.298.746 4.623a7.92 7.92 0 0 1 .704-1.217c.428-.61 1.176-.807 1.82-.63l1.102.302c.067.019.177.011.3-.071.214-.143.437-.272.668-.386.133-.066.194-.158.211-.224l.29-1.106C6.009.645 6.556.095 7.299.03 7.53.01 7.764 0 8 0Zm-.571 1.525c-.036.003-.108.036-.137.146l-.289 1.105c-.147.561-.549.967-1.008 1.189-.176.086-.347.183-.51.29-.428.282-.972.406-1.53.256l-1.103-.303c-.109-.03-.175.016-.195.045-.22.312-.412.644-.573.99-.014.031-.021.11.059.19l.815.806c.411.406.562.957.53 1.456a4.709 4.709 0 0 0 0 .582c.032.499-.119 1.05-.53 1.456l-.815.806c-.081.08-.073.159-.059.19.161.346.353.678.573.989.02.03.085.076.195.045l1.102-.303c.559-.15 1.103-.026 1.53.256.164.107.335.204.512.29.459.222.86.628 1.007 1.189l.289 1.105c.029.109.101.143.137.146a6.6 6.6 0 0 0 1.142 0c.036-.003.108-.036.137-.146l.289-1.105c.147-.561.549-.967 1.008-1.189.176-.086.347-.183.51-.29.428-.282.972-.406 1.53-.256l1.103.303c.109.029.175-.016.195-.045.22-.313.412-.644.573-.99.014-.031.021-.11-.059-.19l-.815-.806c-.411-.406-.562-.957-.53-1.456a4.709 4.709 0 0 0 0-.582c-.032-.499.119-1.05.53-1.456l.815-.806c.081-.08.073-.159.059-.19-.161-.346-.353-.677-.573-.99-.02-.029-.085-.075-.195-.045l-1.102.303c-.559.15-1.103.026-1.53-.256a4.44 4.44 0 0 0-.512-.29c-.459-.222-.86-.628-1.007-1.189l-.289-1.105c-.029-.11-.101-.143-.137-.146a6.6 6.6 0 0 0-1.142 0ZM11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-1.5 0a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0Z"></path></svg> Skills</a>
           <a href="#activity"><svg viewBox="0 0 16 16"><path d="M1.643 3.143 3.5 5H2.75a.75.75 0 0 0 0 1.5h3.5A.75.75 0 0 0 7 5.75v-3.5a.75.75 0 0 0-1.5 0v.94L3.612 1.16a6.5 6.5 0 1 0 1.048 7.24.75.75 0 1 0-1.36-.628A5 5 0 1 1 1.643 3.143Z"></path></svg> Experience</a>
           <a href="#releases"><svg viewBox="0 0 16 16"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Z"></path></svg> Publications</a>
@@ -430,6 +440,116 @@
                 <span><span class="lang-dot" style="background:#3178c6"></span>TypeScript</span>
                 <span><svg viewBox="0 0 16 16"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"></path></svg> 3 role-based dashboards</span>
               </div>
+            </div>
+
+          </div>
+          <p style="font-size:.78rem; color:var(--fg-muted); margin-top:12px;">GitHub caps pinned repositories at 6 — the rest are below.</p>
+        </section>
+
+        <section id="all-repos">
+          <h2 class="sec-title">
+            <svg viewBox="0 0 16 16"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8Z"></path></svg>
+            All repositories <span class="count">11</span>
+          </h2>
+          <div class="repo-list">
+
+            <div class="repo-row">
+              <div class="repo-row-top">
+                <a href="https://github.com/MansiPatil21/corebank" target="_blank" rel="noopener">corebank</a>
+                <span class="visibility">Public</span>
+              </div>
+              <p class="repo-row-desc">Event-sourced payment engine with a five-step compensating saga and an append-only ledger enforced at the database level.</p>
+              <div class="repo-row-foot"><span><span class="lang-dot" style="background:#b07219"></span>Java</span><span>Pinned ↑</span></div>
+            </div>
+
+            <div class="repo-row">
+              <div class="repo-row-top">
+                <a href="https://github.com/MansiPatil21/FundEd" target="_blank" rel="noopener">FundEd</a>
+                <span class="visibility">Public</span>
+              </div>
+              <p class="repo-row-desc">Financial companion for international students: permit-hour tracking, a transfer optimizer, and an Airflow + dbt analytics pipeline.</p>
+              <div class="repo-row-foot"><span><span class="lang-dot" style="background:#3178c6"></span>TypeScript</span><span>Pinned ↑</span></div>
+            </div>
+
+            <div class="repo-row">
+              <div class="repo-row-top">
+                <a href="https://github.com/MansiPatil21/spindle" target="_blank" rel="noopener">spindle</a>
+                <span class="visibility">Public</span>
+              </div>
+              <p class="repo-row-desc">Hadoop-style distributed file system over raw TCP sockets, with a hand-built wire protocol reimplemented again in C++.</p>
+              <div class="repo-row-foot"><span><span class="lang-dot" style="background:#b07219"></span>Java</span><span>Pinned ↑</span></div>
+            </div>
+
+            <div class="repo-row">
+              <div class="repo-row-top">
+                <a href="https://github.com/MansiPatil21/smartcare-appointment-wellness-system" target="_blank" rel="noopener">smartcare-appointment-wellness-system</a>
+                <span class="visibility">Public</span>
+              </div>
+              <p class="repo-row-desc">Multi-cloud appointment platform across AWS and GCP, directed as Technical Director across six modules and a team of seven.</p>
+              <div class="repo-row-foot"><span><span class="lang-dot" style="background:#f1e05a"></span>JavaScript</span><span>Pinned ↑</span></div>
+            </div>
+
+            <div class="repo-row">
+              <div class="repo-row-top">
+                <a href="https://github.com/MansiPatil21/driftwatch-ml-cloud" target="_blank" rel="noopener">driftwatch-ml-cloud</a>
+                <span class="visibility">Public</span>
+              </div>
+              <p class="repo-row-desc">Serverless pipeline watching a live prediction stream for drift, decoupled through Kinesis and alerting through SNS.</p>
+              <div class="repo-row-foot"><span><span class="lang-dot" style="background:#3572A5"></span>Python</span><span>Pinned ↑</span></div>
+            </div>
+
+            <div class="repo-row">
+              <div class="repo-row-top">
+                <a href="https://github.com/MansiPatil21/Collabry-influencer-platform" target="_blank" rel="noopener">Collabry-influencer-platform</a>
+                <span class="visibility">Public</span>
+              </div>
+              <p class="repo-row-desc">Platform matching brands and influencers, designed in Figma first, with an AI matchmaker that falls back to deterministic scoring.</p>
+              <div class="repo-row-foot"><span><span class="lang-dot" style="background:#3178c6"></span>TypeScript</span><span>Pinned ↑</span></div>
+            </div>
+
+            <div class="repo-row">
+              <div class="repo-row-top">
+                <a href="https://github.com/MansiPatil21/Documantic" target="_blank" rel="noopener">Documantic</a>
+                <span class="visibility">Public</span>
+              </div>
+              <p class="repo-row-desc">Upload a codebase, get a README, API docs, a quality report, and commented source back, generated by an async Lambda pipeline in about two minutes.</p>
+              <div class="repo-row-foot"><span><span class="lang-dot" style="background:#3178c6"></span>TypeScript</span><span>AWS Lambda · Terraform</span></div>
+            </div>
+
+            <div class="repo-row">
+              <div class="repo-row-top">
+                <a href="https://github.com/MansiPatil21/Syllabify" target="_blank" rel="noopener">Syllabify</a>
+                <span class="visibility">Public</span>
+              </div>
+              <p class="repo-row-desc">OCR reads a syllabus PDF, an LLM turns it into a study roadmap. Deployed from bare network to running app with one Terraform and Bash command.</p>
+              <div class="repo-row-foot"><span><span class="lang-dot" style="background:#61dafb"></span>React</span><span>Terraform · AWS</span></div>
+            </div>
+
+            <div class="repo-row">
+              <div class="repo-row-top">
+                <a href="https://github.com/MansiPatil21/FantasySailGP" target="_blank" rel="noopener">FantasySailGP</a>
+                <span class="visibility">Public</span>
+              </div>
+              <p class="repo-row-desc">Hackathon fantasy-sailing predictor. Wrote the scoring engine, trained the recommendation model on real race telemetry, and shipped the original five-screen frontend within the event window.</p>
+              <div class="repo-row-foot"><span><span class="lang-dot" style="background:#3572A5"></span>Python</span><span><a href="https://youtu.be/bazaQ3WcxNI" target="_blank" rel="noopener">Video demo ↗</a></span></div>
+            </div>
+
+            <div class="repo-row">
+              <div class="repo-row-top">
+                <a href="https://github.com/MansiPatil21/mental-health-nlp" target="_blank" rel="noopener">mental-health-nlp</a>
+                <span class="visibility">Public</span>
+              </div>
+              <p class="repo-row-desc">Fine-tuned BERT and DistilBERT to classify mental-health signal in Reddit text, then used SHAP to check whether the model learned real signal or an easy shortcut.</p>
+              <div class="repo-row-foot"><span><span class="lang-dot" style="background:#3572A5"></span>Python</span><span>PyTorch · Transformers</span></div>
+            </div>
+
+            <div class="repo-row">
+              <div class="repo-row-top">
+                <a href="https://github.com/MansiPatil21/Fake-News-Detection" target="_blank" rel="noopener">Fake-News-Detection</a>
+                <span class="visibility">Public</span>
+              </div>
+              <p class="repo-row-desc">Compared SVM and Logistic Regression for fake-news classification across two datasets. Extended into a paper presented at IDICAIEI and indexed in IEEE Xplore.</p>
+              <div class="repo-row-foot"><span><span class="lang-dot" style="background:#3572A5"></span>Python</span><span>Group project</span></div>
             </div>
 
           </div>
