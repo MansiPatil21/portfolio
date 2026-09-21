@@ -1,0 +1,610 @@
+<title>Mansi Patil</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+  :root{
+    --bg:#EEF1F5; --surface:#FFFFFF; --surface-2:#E4E9F0;
+    --ink:#10172A; --ink-soft:#4A5568; --line:#C3CEDC;
+    --accent:#26399B; --accent-ink:#FFFFFF;
+    --signal:#B5651D; --signal-soft:#F3E3D4;
+    --mono-tag-bg:#FFFFFF;
+    --shadow: 0 1px 0 rgba(16,23,42,.04);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0C1120; --surface:#131A2E; --surface-2:#1B2440;
+      --ink:#E7ECF6; --ink-soft:#9AA7C2; --line:#2B3556;
+      --accent:#7B93F0; --accent-ink:#0C1120;
+      --signal:#E3A55E; --signal-soft:#2A2214;
+      --mono-tag-bg:#161E36;
+      --shadow: 0 1px 0 rgba(0,0,0,.3);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0C1120; --surface:#131A2E; --surface-2:#1B2440;
+    --ink:#E7ECF6; --ink-soft:#9AA7C2; --line:#2B3556;
+    --accent:#7B93F0; --accent-ink:#0C1120;
+    --signal:#E3A55E; --signal-soft:#2A2214;
+    --mono-tag-bg:#161E36;
+    --shadow: 0 1px 0 rgba(0,0,0,.3);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    padding-inline:0;
+  }
+  ::selection{ background:var(--signal); color:#fff; }
+  a{ color:inherit; }
+  h1,h2,h3{ font-family:"Fraunces","Iowan Old Style",Georgia,serif; text-wrap:balance; margin:0; }
+  .mono{ font-family:"IBM Plex Mono","SFMono-Regular",Menlo,Consolas,monospace; }
+  .num{ font-variant-numeric: tabular-nums; }
+
+  a:focus-visible, button:focus-visible{
+    outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:.001ms !important; transition-duration:.001ms !important; }
+  }
+
+  .wrap{ max-width: 74rem; margin-inline:auto; padding-inline: clamp(16px, 5vw, 56px); }
+
+  /* ---------- nav ---------- */
+  .nav{
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 40;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-row{ display:flex; align-items:center; justify-content:space-between; padding-block:14px; }
+  .brand{ font-family:"Fraunces",serif; font-weight:600; font-size:1.05rem; letter-spacing:.01em; text-decoration:none; }
+  .brand .dot{ color:var(--signal); }
+  .nav-links{ display:flex; gap: clamp(14px,3vw,28px); list-style:none; margin:0; padding:0; }
+  .nav-links a{
+    text-decoration:none; font-size:.85rem; letter-spacing:.04em; text-transform:uppercase;
+    color:var(--ink-soft); font-family:"IBM Plex Mono",monospace;
+  }
+  .nav-links a:hover{ color:var(--accent); }
+  .nav-cta{
+    font-family:"IBM Plex Mono",monospace; font-size:.78rem; letter-spacing:.03em;
+    text-transform:uppercase; text-decoration:none; color:var(--accent-ink);
+    background:var(--accent); padding:9px 16px; border:1px solid var(--accent);
+    white-space:nowrap;
+  }
+  .menu-btn{ display:none; background:none; border:1px solid var(--line); padding:8px 10px; color:var(--ink); font-family:"IBM Plex Mono",monospace; }
+  @media (max-width: 760px){
+    .nav-links{ display:none; }
+    .menu-btn{ display:inline-block; }
+    .nav-links.open{
+      display:flex; flex-direction:column; position:absolute; left:0; right:0; top:100%;
+      background:var(--surface); border-bottom:1px solid var(--line); padding: 18px clamp(16px,5vw,56px);
+      gap:16px;
+    }
+  }
+
+  /* ---------- ledger spine (decorative running rule) ---------- */
+  .spine{
+    position:relative;
+  }
+  .spine::before{
+    content:""; position:absolute; left:0; top:0; bottom:0; width:1px;
+    background: repeating-linear-gradient(to bottom, var(--line) 0 6px, transparent 6px 12px);
+  }
+  @media (max-width: 640px){ .spine::before{ display:none; } }
+
+  .eyebrow{
+    font-family:"IBM Plex Mono",monospace; font-size:.78rem; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--signal); display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{ content:""; width:22px; height:1px; background:var(--signal); display:inline-block; }
+
+  section{ padding-block: clamp(48px,8vw,88px); border-bottom:1px solid var(--line); }
+  section:last-of-type{ border-bottom:none; }
+
+  /* ---------- hero ---------- */
+  .hero{ padding-block: clamp(48px,9vw,96px) clamp(40px,7vw,72px); }
+  .hero-grid{
+    display:grid; grid-template-columns: 1.15fr .85fr; gap: clamp(24px,5vw,56px); align-items:center;
+  }
+  @media (max-width: 800px){ .hero-grid{ grid-template-columns: 1fr; } }
+  .hero h1{ font-size: clamp(2.4rem, 6vw, 4.2rem); line-height:1.02; font-weight:600; }
+  .hero .role{
+    font-family:"IBM Plex Mono",monospace; font-size: clamp(1rem,2vw,1.15rem);
+    color:var(--ink-soft); margin-top:14px; display:flex; flex-wrap:wrap; gap:8px 14px; align-items:baseline;
+  }
+  .hero .role b{ color:var(--ink); font-weight:600; }
+  .hero p.lede{ margin-top:20px; max-width:38rem; font-size:1.05rem; line-height:1.65; color:var(--ink-soft); }
+  .hero-actions{ display:flex; flex-wrap:wrap; gap:12px; margin-top:28px; }
+  .btn{
+    font-family:"IBM Plex Mono",monospace; font-size:.82rem; letter-spacing:.03em; text-transform:uppercase;
+    text-decoration:none; padding:12px 20px; border:1px solid var(--ink); color:var(--ink);
+  }
+  .btn.primary{ background:var(--accent); border-color:var(--accent); color:var(--accent-ink); }
+  .btn:hover{ background:var(--ink); border-color:var(--ink); color:var(--bg); }
+  .btn.primary:hover{ background:var(--signal); border-color:var(--signal); color:#fff; }
+
+  .schema{ width:100%; height:auto; }
+  .schema text{ font-family:"IBM Plex Mono",monospace; }
+
+  /* ---------- section headers ---------- */
+  .sec-head{ display:flex; align-items:baseline; justify-content:space-between; gap:16px; margin-bottom: clamp(24px,4vw,40px); flex-wrap:wrap; }
+  .sec-head h2{ font-size: clamp(1.6rem,3.2vw,2.3rem); font-weight:600; }
+  .sec-index{ font-family:"IBM Plex Mono",monospace; color:var(--ink-soft); font-size:.85rem; }
+
+  /* ---------- capabilities (skills) ---------- */
+  .cap-grid{
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:1px;
+    background:var(--line); border:1px solid var(--line);
+  }
+  .cap{
+    background:var(--surface); padding:20px 18px; display:flex; flex-direction:column; gap:10px; min-height:118px;
+  }
+  .cap .cap-id{ font-family:"IBM Plex Mono",monospace; font-size:.72rem; color:var(--signal); letter-spacing:.06em; }
+  .cap h3{ font-size:1rem; font-weight:600; font-family:"IBM Plex Sans",sans-serif; }
+  .cap .items{ font-family:"IBM Plex Mono",monospace; font-size:.78rem; color:var(--ink-soft); line-height:1.6; }
+
+  /* ---------- experience ledger ---------- */
+  .ledger-row{
+    display:grid; grid-template-columns: 9rem 1fr; gap: clamp(14px,3vw,32px); padding-block:22px;
+    border-top:1px solid var(--line);
+  }
+  .ledger-row:last-child{ border-bottom:1px solid var(--line); }
+  @media (max-width:640px){ .ledger-row{ grid-template-columns:1fr; gap:6px; } }
+  .ledger-date{ font-family:"IBM Plex Mono",monospace; font-size:.82rem; color:var(--ink-soft); padding-top:3px; }
+  .ledger-body h3{ font-size:1.15rem; font-weight:600; }
+  .ledger-body .org{ font-family:"IBM Plex Mono",monospace; font-size:.85rem; color:var(--signal); margin-top:2px; }
+  .ledger-body ul{ margin:14px 0 0; padding-left:1.1em; color:var(--ink-soft); line-height:1.65; }
+  .ledger-body li{ margin-bottom:6px; }
+  .ledger-body li b{ color:var(--ink); font-weight:600; }
+
+  /* ---------- projects ---------- */
+  .proj-list{ display:flex; flex-direction:column; gap:1px; background:var(--line); border:1px solid var(--line); }
+  .proj{ background:var(--surface); padding: clamp(20px,3vw,32px); display:grid; grid-template-columns: 1fr 15rem; gap:24px; }
+  @media (max-width:760px){ .proj{ grid-template-columns:1fr; } }
+  .proj-head{ display:flex; justify-content:space-between; align-items:flex-start; gap:12px; flex-wrap:wrap; }
+  .proj h3{ font-size:1.35rem; font-weight:600; }
+  .proj-links{ display:flex; gap:14px; font-family:"IBM Plex Mono",monospace; font-size:.78rem; }
+  .proj-links a{ text-decoration:none; border-bottom:1px solid var(--signal); color:var(--signal); padding-bottom:1px; }
+  .proj-links a:hover{ color:var(--ink); border-color:var(--ink); }
+  .proj p.desc{ margin-top:10px; color:var(--ink-soft); line-height:1.65; max-width:44rem; }
+  .tag-row{ display:flex; flex-wrap:wrap; gap:7px; margin-top:14px; }
+  .tag{
+    font-family:"IBM Plex Mono",monospace; font-size:.72rem; letter-spacing:.02em; color:var(--ink-soft);
+    background:var(--mono-tag-bg); border:1px solid var(--line); padding:4px 9px;
+  }
+  .readout{
+    border-left:2px solid var(--signal); padding-left:16px; display:flex; flex-direction:column; gap:12px; justify-content:center;
+  }
+  .readout .stat{ display:flex; flex-direction:column; }
+  .readout .stat .v{ font-family:"IBM Plex Mono",monospace; font-weight:600; font-size:1.15rem; color:var(--ink); }
+  .readout .stat .l{ font-family:"IBM Plex Mono",monospace; font-size:.7rem; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.05em; margin-top:2px; }
+
+  /* ---------- index (pubs/certs) ---------- */
+  .index-list{ display:flex; flex-direction:column; }
+  .index-row{
+    display:flex; justify-content:space-between; gap:16px; padding-block:16px; border-top:1px solid var(--line);
+    flex-wrap:wrap;
+  }
+  .index-row:last-child{ border-bottom:1px solid var(--line); }
+  .index-row .what a{ text-decoration:none; font-weight:600; }
+  .index-row .what a:hover{ color:var(--accent); }
+  .index-row .where{ font-family:"IBM Plex Mono",monospace; font-size:.82rem; color:var(--ink-soft); }
+  .index-row .when{ font-family:"IBM Plex Mono",monospace; font-size:.82rem; color:var(--signal); white-space:nowrap; }
+
+  /* ---------- contact / footer ---------- */
+  .contact-grid{ display:grid; grid-template-columns: 1.2fr .8fr; gap:clamp(24px,5vw,56px); }
+  @media (max-width:760px){ .contact-grid{ grid-template-columns:1fr; } }
+  .contact h2{ font-size:clamp(1.9rem,4vw,2.8rem); }
+  .contact p{ color:var(--ink-soft); margin-top:16px; max-width:34rem; line-height:1.65; }
+  .contact-list{ list-style:none; margin:28px 0 0; padding:0; display:flex; flex-direction:column; gap:14px; }
+  .contact-list a{
+    display:flex; align-items:center; gap:12px; text-decoration:none; font-family:"IBM Plex Mono",monospace;
+    font-size:.95rem; padding-block:6px; border-bottom:1px solid var(--line);
+  }
+  .contact-list a:hover{ color:var(--accent); border-color:var(--accent); }
+  .contact-list .k{ color:var(--signal); width:1.4em; }
+  footer{ padding-block:28px; }
+  .foot-row{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-family:"IBM Plex Mono",monospace; font-size:.75rem; color:var(--ink-soft); }
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<nav class="nav">
+  <div class="wrap nav-row">
+    <a class="brand" href="#top">Mansi Patil<span class="dot">.</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#capabilities">Capabilities</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Log</a></li>
+      <li><a href="#index">Index</a></li>
+    </ul>
+    <div style="display:flex; gap:10px; align-items:center;">
+      <a class="nav-cta" href="mailto:mansican908@gmail.com">Contact</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">Menu</button>
+    </div>
+  </div>
+</nav>
+
+<div id="top"></div>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">Systems &amp; Full-Stack Engineering</p>
+      <h1 style="margin-top:14px;">Mansi Patil</h1>
+      <p class="role">
+        <b>Master of Applied Computer Science</b> candidate <span class="mono">·</span> Dalhousie University
+        <span class="mono">·</span> based in Halifax, Canada
+      </p>
+      <p class="lede">
+        I build the parts of a system most people never see until they break: the row lock that stops
+        a race, the checksum that catches a corrupted block, the view that keeps three reports from
+        disagreeing. Recent work spans event-sourced ledgers, a Hadoop-style file system built from
+        raw sockets, and cloud data platforms on Azure and AWS.
+      </p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#projects">View the log</a>
+        <a class="btn" href="https://github.com/MansiPatil21" target="_blank" rel="noopener">GitHub ↗</a>
+        <a class="btn" href="https://www.linkedin.com/in/mansipatil-cs/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </div>
+    </div>
+    <div aria-hidden="true">
+      <svg class="schema" viewBox="0 0 320 300" role="img" aria-label="Diagram of a coordinator node replicating one data block across four nodes">
+        <rect x="0.5" y="0.5" width="319" height="299" fill="none" stroke="var(--line)"/>
+        <text x="16" y="26" fill="var(--ink-soft)" font-size="10" letter-spacing="1">FIG. 01 — 3× BLOCK REPLICATION</text>
+        <line x1="16" y1="36" x2="304" y2="36" stroke="var(--line)"/>
+
+        <rect x="128" y="60" width="64" height="40" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
+        <text x="160" y="84" fill="var(--ink)" font-size="11" text-anchor="middle">COORD</text>
+
+        <g stroke="var(--line)" stroke-width="1.2">
+          <line x1="160" y1="100" x2="60" y2="170"/>
+          <line x1="160" y1="100" x2="130" y2="170"/>
+          <line x1="160" y1="100" x2="200" y2="170"/>
+          <line x1="160" y1="100" x2="262" y2="170"/>
+        </g>
+
+        <g>
+          <rect x="30"  y="170" width="60" height="42" fill="none" stroke="var(--ink)" stroke-width="1.2"/>
+          <rect x="100" y="170" width="60" height="42" fill="var(--signal-soft)" stroke="var(--signal)" stroke-width="1.5"/>
+          <rect x="170" y="170" width="60" height="42" fill="var(--signal-soft)" stroke="var(--signal)" stroke-width="1.5"/>
+          <rect x="232" y="170" width="60" height="42" fill="none" stroke="var(--ink)" stroke-width="1.2"/>
+        </g>
+        <text x="60"  y="196" fill="var(--ink-soft)" font-size="10" text-anchor="middle">NODE 1</text>
+        <text x="130" y="196" fill="var(--ink)" font-size="10" text-anchor="middle">NODE 2</text>
+        <text x="200" y="196" fill="var(--ink)" font-size="10" text-anchor="middle">NODE 3</text>
+        <text x="262" y="196" fill="var(--ink-soft)" font-size="10" text-anchor="middle">NODE 4</text>
+
+        <line x1="16" y1="240" x2="304" y2="240" stroke="var(--line)"/>
+        <text x="16" y="258" fill="var(--ink-soft)" font-size="10">RECOVERY AFTER FAILURE</text>
+        <text x="304" y="258" fill="var(--signal)" font-size="13" text-anchor="end" font-weight="600">11s</text>
+        <text x="16" y="276" fill="var(--ink-soft)" font-size="10">MAPREDUCE OVER LOCAL BLOCKS</text>
+        <text x="304" y="276" fill="var(--signal)" font-size="13" text-anchor="end" font-weight="600">3.4×</text>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<section id="about" class="spine">
+  <div class="wrap" style="padding-left: clamp(16px, 5vw, 56px);">
+    <div class="sec-head">
+      <h2>About</h2>
+      <span class="sec-index mono">§ 01</span>
+    </div>
+    <div style="display:grid; grid-template-columns: 1.3fr .7fr; gap:clamp(24px,4vw,56px);" >
+      <p style="font-size:1.05rem; line-height:1.75; color:var(--ink-soft); max-width:42rem;">
+        My undergraduate specialization was cybersecurity and forensics, which is where I learned to
+        think about failure first: what happens when a request is malformed, when two writers race,
+        when a node stops answering. That habit is what carries into everything below. I would rather
+        prove a fix by reproducing the bug it prevents than assume a passing test means the system is
+        correct.
+      </p>
+      <div style="border-left:1px solid var(--line); padding-left:24px;">
+        <p class="eyebrow" style="margin-bottom:14px;">Education</p>
+        <p style="font-weight:600;">Master of Applied Computer Science</p>
+        <p class="mono" style="font-size:.85rem; color:var(--ink-soft);">Dalhousie University · GPA 3.99 · 2025–2027</p>
+        <p style="font-weight:600; margin-top:18px;">B.Tech, Computer Science &amp; Engineering</p>
+        <p class="mono" style="font-size:.85rem; color:var(--ink-soft);">MIT World Peace University · CGPA 8.18 · Cybersecurity &amp; Forensics</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="capabilities">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Capabilities</h2>
+      <span class="sec-index mono">§ 02</span>
+    </div>
+    <div class="cap-grid">
+      <div class="cap">
+        <span class="cap-id">01</span><h3>Languages</h3>
+        <p class="items">Java · Python · TypeScript · JavaScript · C++ · SQL · Bash</p>
+      </div>
+      <div class="cap">
+        <span class="cap-id">02</span><h3>Backend</h3>
+        <p class="items">Spring Boot · Node.js · Express · FastAPI · GraphQL · REST · WebSocket</p>
+      </div>
+      <div class="cap">
+        <span class="cap-id">03</span><h3>Frontend</h3>
+        <p class="items">React · Next.js · Redux Toolkit · Responsive UI · Cross-Browser Testing</p>
+      </div>
+      <div class="cap">
+        <span class="cap-id">04</span><h3>Data</h3>
+        <p class="items">PostgreSQL · MongoDB · MySQL · DynamoDB · Redis · Airflow · dbt</p>
+      </div>
+      <div class="cap">
+        <span class="cap-id">05</span><h3>Cloud &amp; DevOps</h3>
+        <p class="items">Azure · AWS · GCP · Docker · Kubernetes · Terraform · GitHub Actions · Jenkins</p>
+      </div>
+      <div class="cap">
+        <span class="cap-id">06</span><h3>Analytics &amp; BI</h3>
+        <p class="items">Power BI · Tableau · Excel (Pivot Tables, Power Query) · Looker Studio</p>
+      </div>
+      <div class="cap">
+        <span class="cap-id">07</span><h3>Machine Learning</h3>
+        <p class="items">PyTorch · Hugging Face Transformers · scikit-learn · SHAP · pandas</p>
+      </div>
+      <div class="cap">
+        <span class="cap-id">08</span><h3>Testing</h3>
+        <p class="items">JUnit · Selenium · pytest · Playwright · Jest · Vitest</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience" class="spine">
+  <div class="wrap" style="padding-left: clamp(16px, 5vw, 56px);">
+    <div class="sec-head">
+      <h2>Experience</h2>
+      <span class="sec-index mono">§ 03</span>
+    </div>
+    <div>
+      <div class="ledger-row">
+        <div class="ledger-date mono">JUL 2024<br>— JAN 2025</div>
+        <div class="ledger-body">
+          <h3>Gen AI Intern</h3>
+          <p class="org">Unimind Cognition</p>
+          <ul>
+            <li>Shipped a customer-facing AI chatbot to <b>100+ active users</b> within a team of 5, building a <b>RAG pipeline</b> in Python and FastAPI over <b>pgvector</b> semantic search.</li>
+            <li>Resolved a production incident that left <b>1 in 4</b> queries unanswered by tracing requests to unmatched prompts and shipping a generated fallback.</li>
+            <li>Validated the service at <b>85% line coverage</b> with automated pytest suites and cut releases from 8 manual steps to a single push through GitHub Actions CI/CD.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Project Log</h2>
+      <span class="sec-index mono">§ 04</span>
+    </div>
+    <div class="proj-list">
+
+      <article class="proj">
+        <div>
+          <div class="proj-head">
+            <h3>CoreBank</h3>
+            <div class="proj-links">
+              <a href="https://corebank-mu.vercel.app" target="_blank" rel="noopener">Live ↗</a>
+              <a href="https://github.com/MansiPatil21/corebank" target="_blank" rel="noopener">Source ↗</a>
+            </div>
+          </div>
+          <p class="desc">
+            An event-sourced payment engine where a five-step saga reverses every completed step
+            when a later one fails. Balances are folded from an append-only ledger a database
+            trigger refuses to let anyone edit or delete, streamed live over WebSocket.
+          </p>
+          <div class="tag-row">
+            <span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">PostgreSQL</span>
+            <span class="tag">Redis</span><span class="tag">WebSocket</span><span class="tag">React</span>
+          </div>
+        </div>
+        <div class="readout">
+          <div class="stat"><span class="v num">5.6ms → 0.5ms</span><span class="l">cached read, 100k entries</span></div>
+          <div class="stat"><span class="v num">11 / 10</span><span class="l">race reproduced before the fix</span></div>
+        </div>
+      </article>
+
+      <article class="proj">
+        <div>
+          <div class="proj-head">
+            <h3>FundEd</h3>
+            <div class="proj-links">
+              <a href="https://fund-ed-sigma.vercel.app" target="_blank" rel="noopener">Live ↗</a>
+              <a href="https://github.com/MansiPatil21/FundEd" target="_blank" rel="noopener">Source ↗</a>
+            </div>
+          </div>
+          <p class="desc">
+            A financial companion for international students: permit-hour tracking, a transfer
+            optimizer over Google OR-Tools, live exchange-rate alerts, and a daily Airflow and dbt
+            pipeline feeding Power BI, Tableau, and Excel from one shared set of SQL views.
+          </p>
+          <div class="tag-row">
+            <span class="tag">Next.js</span><span class="tag">Node.js</span><span class="tag">GraphQL</span>
+            <span class="tag">MongoDB</span><span class="tag">Kubernetes</span><span class="tag">Azure</span><span class="tag">dbt</span>
+          </div>
+        </div>
+        <div class="readout">
+          <div class="stat"><span class="v num">401</span><span class="l">automated tests on every push</span></div>
+          <div class="stat"><span class="v num">6</span><span class="l">services on Kubernetes</span></div>
+        </div>
+      </article>
+
+      <article class="proj">
+        <div>
+          <div class="proj-head">
+            <h3>Spindle</h3>
+            <div class="proj-links">
+              <a href="https://github.com/MansiPatil21/spindle" target="_blank" rel="noopener">Source ↗</a>
+            </div>
+          </div>
+          <p class="desc">
+            A Hadoop-style distributed file system built from raw TCP sockets: a hand-designed
+            binary wire protocol, CRC32C checksums, and heartbeat failure detection that re-replicates
+            a dead node's blocks automatically. The protocol and checksum are also reimplemented in C++.
+          </p>
+          <div class="tag-row">
+            <span class="tag">Java</span><span class="tag">C++</span><span class="tag">TCP Sockets</span>
+            <span class="tag">MapReduce</span><span class="tag">Docker</span>
+          </div>
+        </div>
+        <div class="readout">
+          <div class="stat"><span class="v num">2.5M</span><span class="l">log lines processed</span></div>
+          <div class="stat"><span class="v num">3.4×</span><span class="l">faster than a single-threaded scan</span></div>
+        </div>
+      </article>
+
+      <article class="proj">
+        <div>
+          <div class="proj-head">
+            <h3>SmartCare (SAWS)</h3>
+            <div class="proj-links">
+              <a href="https://github.com/MansiPatil21/smartcare-appointment-wellness-system" target="_blank" rel="noopener">Source ↗</a>
+            </div>
+          </div>
+          <p class="desc">
+            A multi-cloud appointment and wellness platform across AWS and GCP. As Technical
+            Director I authored the design documents six modules were estimated against and
+            architected two cross-cloud mirrors keeping records consistent on both clouds.
+          </p>
+          <div class="tag-row">
+            <span class="tag">AWS Lambda</span><span class="tag">GCP Pub/Sub</span><span class="tag">DynamoDB</span>
+            <span class="tag">Firestore</span><span class="tag">Agile</span>
+          </div>
+        </div>
+        <div class="readout">
+          <div class="stat"><span class="v num">6</span><span class="l">modules, team of 7</span></div>
+          <div class="stat"><span class="v num">2</span><span class="l">cross-cloud mirrors</span></div>
+        </div>
+      </article>
+
+      <article class="proj">
+        <div>
+          <div class="proj-head">
+            <h3>DriftWatch</h3>
+            <div class="proj-links">
+              <a href="https://github.com/MansiPatil21/driftwatch-ml-cloud" target="_blank" rel="noopener">Source ↗</a>
+            </div>
+          </div>
+          <p class="desc">
+            A serverless, event-driven pipeline that watches a live prediction stream for drift,
+            decoupling ingestion from processing through Kinesis and raising an alert through SNS
+            before degradation is visible anywhere else.
+          </p>
+          <div class="tag-row">
+            <span class="tag">AWS Lambda</span><span class="tag">Kinesis</span><span class="tag">CloudFormation</span>
+            <span class="tag">Streamlit</span><span class="tag">GitHub Actions</span>
+          </div>
+        </div>
+        <div class="readout">
+          <div class="stat"><span class="v num">9</span><span class="l">Lambda functions, deployed as code</span></div>
+          <div class="stat"><span class="v num">4</span><span class="l">scheduled checks, none run by hand</span></div>
+        </div>
+      </article>
+
+      <article class="proj">
+        <div>
+          <div class="proj-head">
+            <h3>Collabry</h3>
+            <div class="proj-links">
+              <a href="https://github.com/MansiPatil21/Collabry-influencer-platform" target="_blank" rel="noopener">Source ↗</a>
+            </div>
+          </div>
+          <p class="desc">
+            A platform matching brands and influencers. I designed the interface in Figma, built
+            three role-based dashboards, and wrote the matchmaking service so it falls back to
+            deterministic scoring the moment the LLM call it prefers is slow or unavailable.
+          </p>
+          <div class="tag-row">
+            <span class="tag">React 19</span><span class="tag">TypeScript</span><span class="tag">Spring Boot</span>
+            <span class="tag">Figma</span><span class="tag">Groq LLM</span>
+          </div>
+        </div>
+        <div class="readout">
+          <div class="stat"><span class="v num">3</span><span class="l">role-based dashboards</span></div>
+          <div class="stat"><span class="v num">60/40</span><span class="l">weighted match score</span></div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="index" class="spine">
+  <div class="wrap" style="padding-left: clamp(16px, 5vw, 56px);">
+    <div class="sec-head">
+      <h2>Index</h2>
+      <span class="sec-index mono">§ 05 — Publications &amp; Certifications</span>
+    </div>
+    <div class="index-list">
+      <div class="index-row">
+        <span class="what"><a href="https://ieeexplore.ieee.org/document/10842732" target="_blank" rel="noopener">Advancing Fake News Detection: SVM and LR Comparative Analysis</a></span>
+        <span class="where">IEEE Xplore · IJIRT · presented at IDICAIEI</span>
+        <span class="when">2025</span>
+      </div>
+      <div class="index-row">
+        <span class="what"><a href="https://www.credly.com/badges/d5fc2a6c-4055-45ac-816d-06fd10a184c6/public_url" target="_blank" rel="noopener">CRUD Operations in MongoDB</a></span>
+        <span class="where">MongoDB University · Credly verified</span>
+        <span class="when">2026</span>
+      </div>
+      <div class="index-row">
+        <span class="what"><a href="https://drive.google.com/file/d/1tDFLIos6cuRaxC12YktMvf_XPpEkx26-/view?usp=sharing" target="_blank" rel="noopener">HPE Software Engineering Job Simulation</a></span>
+        <span class="where">Forage · Java, Spring Boot, REST</span>
+        <span class="when">2026</span>
+      </div>
+      <div class="index-row">
+        <span class="what"><a href="https://www.udemy.com/certificate/UC-71511225-0338-41c3-894f-747fd294bd5d/" target="_blank" rel="noopener">Learn Python and Ethical Hacking from Scratch</a></span>
+        <span class="where">Udemy · publicly verifiable</span>
+        <span class="when">2026</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap contact-grid">
+    <div class="contact">
+      <p class="eyebrow" style="margin-bottom:16px;">§ 06 — Get in touch</p>
+      <h2>Let's build<br>something that holds.</h2>
+      <p>Open to co-op and internship roles starting January 2027. I reply fastest by email.</p>
+    </div>
+    <ul class="contact-list">
+      <li><a href="mailto:mansican908@gmail.com"><span class="k">→</span> mansican908@gmail.com</a></li>
+      <li><a href="tel:+17824096811"><span class="k">→</span> (782) 409-6811</a></li>
+      <li><a href="https://github.com/MansiPatil21" target="_blank" rel="noopener"><span class="k">→</span> github.com/MansiPatil21</a></li>
+      <li><a href="https://www.linkedin.com/in/mansipatil-cs/" target="_blank" rel="noopener"><span class="k">→</span> linkedin.com/in/mansipatil-cs</a></li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <span>© 2026 MANSI PATIL — HALIFAX, NS</span>
+    <span>BUILT WITH JAVA, PYTHON, TYPESCRIPT &amp; A ROW LOCK THAT ACTUALLY WORKS</span>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var btn = document.getElementById('menuBtn');
+    var links = document.getElementById('navLinks');
+    if(!btn || !links) return;
+    btn.addEventListener('click', function(){
+      var open = links.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    links.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){
+        links.classList.remove('open');
+        btn.setAttribute('aria-expanded','false');
+      });
+    });
+  })();
+</script>
