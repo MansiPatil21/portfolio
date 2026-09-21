@@ -598,6 +598,7 @@
     corebank: {
       title: "corebank", eyebrow: "SOLO PROJECT · 2026", meta: "Java 21 · Spring Boot · React 19",
       media: { type: "img", src: "screenshots/corebank.png" },
+      summary: "corebank is a digital banking system I built from scratch to answer one question: can I make one that stays correct even when a lot of things happen to the same account at once? Users can open accounts and send payments between them, and there's a built-in \"Engineer view\" that lets you watch the system's internals live, including deliberately firing 20 payments at an account at the exact same moment to see whether the balance still comes out right.",
       desc: "An event-sourced core banking system, built solo to prove correctness under concurrency rather than just to demo a CRUD app. A double-entry ledger enforces its own invariant, a payment saga runs compensating transactions instead of a two-phase commit, and an \"Engineer view\" streams live saga activity over a WebSocket so you can watch 20 simultaneous transfers race against an account funded to cover exactly 10. A Redis balance cache and 20 automated tests across 5 levels (unit, invariant, concurrency, cache, integration) were added afterward for real, not claimed.",
       stats: [ ["20", "Tests, 5 levels"], ["0.5ms", "Cached balance read"], ["Live", "Demo + API"] ],
       tech: ["Java 21", "Spring Boot", "Hibernate", "Flyway", "STOMP", "Redis", "React 19", "Vite"],
@@ -606,6 +607,7 @@
     funded: {
       title: "FundEd", eyebrow: "SOLO PROJECT · 2026", meta: "Node.js · GraphQL · React · MongoDB",
       media: { type: "img", src: "screenshots/funded.png" },
+      summary: "FundEd is a personal-finance web app aimed at international students, who usually have to juggle a legal cap on how many hours they can work, a study permit with its own deadlines, and money moving between currencies. It helps them see their finances clearly, track exchange rates, and get suggestions on how to structure paid work so they stay within their permitted hours. I built the entire product solo: the API, the frontend, and a separate service that does the actual optimization math, then kept going and added the kind of production-grade infrastructure (automated testing, deployment pipelines, monitoring, containers) that a real engineering team would normally build around it.",
       desc: "A full-stack financial companion for international students, built to close the Node.js/GraphQL gap that the Java-based corebank leaves open. A GraphQL API serves reads, REST handles writes, and a separate Python OR-Tools service optimizes work-hour and budget planning against study-permit caps. Layered on top is a full data and DevOps stack: a daily Airflow pipeline into a dbt-modeled Postgres warehouse, a Jenkins CI pipeline with a Docker smoke test, and a Kubernetes deployment verified on both local kind and Azure AKS.",
       stats: [ ["312", "Tests, 3 languages"], ["6", "Services on K8s"], ["36", "Cross-browser E2E runs"] ],
       tech: ["Node.js", "GraphQL", "React", "MongoDB", "Python OR-Tools", "Redis", "Kubernetes", "Terraform", "Airflow", "dbt"],
@@ -614,6 +616,7 @@
     spindle: {
       title: "spindle", eyebrow: "SOLO PROJECT · 2026", meta: "Java · C++ · TCP sockets",
       media: { type: "tile", letters: "SP" },
+      summary: "spindle is a small-scale version of the kind of system that powers Hadoop and other \"big data\" platforms: it spreads a large file across multiple machines and lets you run a computation over all of it in parallel, instead of needing one giant computer. I built it to genuinely understand how distributed systems work under the hood, so instead of using an existing framework, I wrote the network communication between machines myself, byte by byte, over raw TCP.",
       desc: "A Hadoop-style distributed file system and MapReduce engine, modelled on HDFS's shape but built from scratch over raw TCP sockets to demonstrate distributed-systems fundamentals directly rather than through a framework. Includes a from-scratch C++ reimplementation of the wire protocol and its CRC-32C checksum, verified against the published Castagnoli test vector, so a non-JVM client can talk to the cluster. There is no live demo because it is a cluster, not a web app; GitHub Actions runs both the Java and C++ test suites on every push.",
       stats: [ ["12", "C++ tests, no framework"], ["CI", "Java + C++, green"], ["TCP", "Custom binary protocol"] ],
       tech: ["Java", "C++17", "TCP Sockets", "CRC-32C", "Docker", "GitHub Actions"],
@@ -622,6 +625,7 @@
     smartcare: {
       title: "SmartCare (SAWS)", eyebrow: "TEAM OF 7 · TECHNICAL DIRECTOR · 2026", meta: "AWS · GCP · Serverless",
       media: { type: "tile", letters: "SC" },
+      summary: "SmartCare is an appointment-booking and wellness platform for a healthcare setting, letting patients find providers, book appointments, and manage their care online. What makes it technically interesting is that it was deliberately split across two different cloud providers, AWS and GCP, at once, which meant the team had to design how two normally-separate cloud ecosystems would talk to each other reliably. As Technical Director, I was responsible for that cross-cloud architecture across a 7-person team.",
       desc: "A multi-cloud serverless appointment and wellness platform, built across AWS and GCP by a seven-person team for a graduate serverless-computing course. I served as Technical Director, owning the cross-cloud architecture and the integration boundary between the two providers' serverless services.",
       stats: [ ["7", "Team size"], ["2", "Cross-cloud mirrors"], ["Director", "My role"] ],
       tech: ["AWS Lambda", "API Gateway", "GCP Cloud Functions", "Serverless", "Event-driven"],
@@ -630,6 +634,7 @@
     driftwatch: {
       title: "DriftWatch", eyebrow: "SOLO PROJECT · 2026", meta: "AWS Lambda · Kinesis · Step Functions",
       media: { type: "tile", letters: "DW" },
+      summary: "DriftWatch solves a problem that quietly breaks a lot of real-world machine learning: a model that performs well on launch day can slowly get worse as the real world changes around it (a bank starts seeing new spending patterns, a recommendation model starts seeing new kinds of users), and often nobody notices until it's already causing damage. DriftWatch continuously watches a deployed model's incoming data, statistically detects when it has drifted away from what the model was originally trained on, and automatically kicks off an alert and response, all without needing a server running around the clock.",
       desc: "A solo-built serverless pipeline that watches a deployed ML model for data drift in production instead of trusting it silently. Kinesis Data Streams carries inference logs to a PSI-based drift detector, Step Functions coordinates the response, and a Streamlit dashboard surfaces the result, all glued together by 9 Lambda functions and EventBridge schedules running every 5 minutes, every 15 minutes, and daily.",
       stats: [ ["9", "Lambda functions"], ["3", "EventBridge schedules"], ["PSI", "Drift detection method"] ],
       tech: ["AWS Lambda", "Kinesis", "Step Functions", "EventBridge", "DynamoDB", "S3", "Terraform", "Streamlit"],
@@ -638,6 +643,7 @@
     collabry: {
       title: "Collabry", eyebrow: "GROUP PROJECT · 2026", meta: "Spring Boot · React · GitLab CI/CD",
       media: { type: "img", src: "screenshots/collabry-landing.png" },
+      summary: "Collabry is a two-sided marketplace connecting brands with social media influencers for paid collaborations, similar in spirit to platforms like AspireIQ. Brands create campaigns and search for influencers by niche, follower count and engagement rate; influencers build a profile, browse and get invited to campaigns, and submit their content for approval; and the platform handles the search and matching, an AI-powered matchmaking score that explains why a given influencer fits a campaign, and the payment flow from invitation through to a paid invoice. I owned the AI matchmaker, the payments module, and most of the interface across both the brand and influencer sides.",
       desc: "A full-stack influencer and brand collaboration platform built by a four-person course group. I owned the AI-based matchmaking engine, the payments module, most of the UI, and part of the test suite, on top of a 6-stage GitLab CI/CD pipeline (build, test with JaCoCo coverage, a DesigniteJava code-smell scan, Docker image publish, and SSH deploy to separate dev and production environments).",
       stats: [ ["6", "GitLab CI/CD stages"], ["AI", "Matchmaking engine"], ["JaCoCo", "Coverage gate"] ],
       tech: ["Spring Boot", "React", "Recharts", "Figma", "JUnit 5", "Mockito", "GitLab CI/CD"],
@@ -655,6 +661,7 @@
     documantic: {
       title: "Documantic", eyebrow: "SOLO PROJECT · 2026", meta: "AWS Serverless · LLM",
       media: { type: "tile", letters: "DM" },
+      summary: "Documantic is a developer tool that reads through a codebase and automatically writes documentation for it using an AI model, so a developer does not have to manually write and maintain docs for code that already exists. It runs entirely on serverless AWS infrastructure, so there's no server to keep running or patch.",
       desc: "A serverless AI dev-tool that generates code documentation automatically, built solo on AWS with an LLM in the loop. Built as an independent, end-to-end delivery outside of a team setting.",
       stats: [ ["Solo", "End to end"], ["AWS", "Serverless"], ["LLM", "In the loop"] ],
       tech: ["AWS Lambda", "React", "LLM API", "Serverless"],
@@ -663,6 +670,7 @@
     syllabify: {
       title: "Syllabify", eyebrow: "SOLO PROJECT · 2026", meta: "OCR · LLM · Terraform",
       media: { type: "tile", letters: "SY" },
+      summary: "Syllabify takes a course syllabus PDF, which are usually dense and easy to lose track of, and turns it into an organized semester schedule automatically. It reads the PDF, including scanned or image-based ones using optical character recognition, pulls out assignment and exam dates with an AI model, and lays the whole term out on a calendar so a student can see everything at a glance instead of re-reading the syllabus every week.",
       desc: "An AI study-planner that OCRs an uploaded course syllabus PDF and turns it into a semester schedule. Built solo for a cloud-computing term project with a defense-in-depth security design and a one-command Terraform plus Bash deployment so the whole stack (DynamoDB, S3, EC2, all on one VPC) stands up from scratch on request.",
       stats: [ ["1", "Command to deploy"], ["OCR", "pytesseract + PyMuPDF"], ["Groq", "LLaMA-3 planning"] ],
       tech: ["Terraform", "Nginx", "PyMuPDF", "pytesseract", "Groq / LLaMA-3", "DynamoDB", "Docker Compose"],
@@ -671,6 +679,7 @@
     fantasysailgp: {
       title: "FantasySailGP", eyebrow: "HACKATHON · TEAM OF 3 · 2026", meta: "Python · scikit-learn · React",
       media: { type: "img", src: "assets/fantasysailgp.jpg" },
+      summary: "FantasySailGP is a fantasy-sports app for competitive sailing, built in a 24-hour hackathon sponsored by SailGP. The same idea as fantasy football: you draft a team of real sailing crews before a race weekend and score points based on how those crews actually perform. My part was the data and prediction layer, plus the original app: a scoring engine that turns real race results into fantasy points, and a machine learning model that predicts how a team is likely to place based on their past performance.",
       desc: "A fantasy-sailing predictor built at SailGP's \"Ocean of Data Challenge\" hackathon. I built the scoring engine, a Ridge Regression model trained on Halifax races and tested on Bermuda, and the original 5-screen React frontend (team builder, race selector, scoring, optimizer, leaderboard); teammates later migrated the UI to a different framework and added a live map. The dataset is small by design, honestly reflecting a hackathon's timeframe; the strength of the project is the complete pipeline, not the model's raw accuracy. Did not place.",
       stats: [ ["3", "Team size"], ["5", "React screens (original)"], ["14", "Races, train + test"] ],
       tech: ["Python", "pandas", "scikit-learn", "FastAPI", "React", "SQLite"],
@@ -679,6 +688,7 @@
     beyondkeywords: {
       title: "Beyond Keywords", eyebrow: "SOLO PROJECT · 2026", meta: "PyTorch · BERT · SHAP",
       media: { type: "tile", letters: "BK" },
+      summary: "This project asks a research question that matters a lot for trustworthy AI: when a language model correctly flags a Reddit post as showing signs of a mental-health condition, is it actually understanding the content, or is it just reacting to a handful of obvious trigger words? I trained transformer-based models (BERT and a smaller, faster DistilBERT) to do the classification, then used an interpretability technique called SHAP to check exactly which words each model was paying attention to, to see whether the accuracy was backed by genuine understanding or a shortcut.",
       desc: "A solo deep-learning project classifying mental-health conditions from Reddit posts using transformer models (BERT and DistilBERT), then using SHAP to probe whether the best model actually learned clinical signal or was leaning on surface-level lexical shortcuts.",
       stats: [ ["Solo", "Report + build"], ["SHAP", "Interpretability"], ["BERT", "+ DistilBERT"] ],
       tech: ["PyTorch", "Hugging Face Transformers", "BERT", "DistilBERT", "SHAP"],
@@ -687,6 +697,7 @@
     fakenews: {
       title: "Fake News Detection", eyebrow: "GROUP PROJECT · IEEE PUBLISHED · 2025", meta: "SVM · Logistic Regression",
       media: { type: "tile", letters: "FN" },
+      summary: "A machine learning system that reads a news article and predicts whether it is likely to be fake, built to compare two classic algorithms, Support Vector Machines and Logistic Regression, and see which one handled the problem better. This was my undergraduate capstone project, and it went on to be presented at an international conference (IDICAIEI 2024) and formally published in IEEE Xplore and IJIRT.",
       desc: "A classical machine-learning fake-news classifier comparing SVM and Logistic Regression, from an undergraduate capstone. Presented at the IDICAIEI 2024 conference and published in both IEEE Xplore and IJIRT under the title \"Advancing Fake News Detection: A Comparative Analysis of SVM and LR Models and Prospects for Dynamic Model Updating.\"",
       stats: [ ["IEEE", "Xplore + IJIRT"], ["2024", "Presented at IDICAIEI"], ["SVM", "vs. Logistic Regression"] ],
       tech: ["Python", "scikit-learn", "SVM", "Logistic Regression", "NLP"],
@@ -765,11 +776,17 @@
         heroHtml +
         '<div class="modal-body">' +
           '<div class="modal-main">' +
+            '<div class="modal-section-label">Overview</div>' +
+            '<p class="modal-desc">' + p.summary + '</p>' +
+            '<div class="modal-section-label">Under the Hood</div>' +
             '<p class="modal-desc">' + p.desc + '</p>' +
             galleryHtml +
           '</div>' +
           '<div class="modal-side">' +
-            '<div class="modal-stats">' + statsHtml + '</div>' +
+            '<div>' +
+              '<div class="modal-section-label">At a Glance</div>' +
+              '<div class="modal-stats">' + statsHtml + '</div>' +
+            '</div>' +
             '<div>' +
               '<div class="modal-section-label">Tech Stack</div>' +
               '<div class="modal-tech">' + techHtml + '</div>' +
