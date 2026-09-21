@@ -368,7 +368,7 @@
         </div>
 
         <div class="poster-card" data-id="smartcare" tabindex="0" role="button" aria-haspopup="dialog">
-          <div class="poster tile"><span class="letters">SC</span><span class="pname">SmartCare</span></div>
+          <div class="poster"><img src="screenshots/saws-landing.png" alt="SmartCare (SAWS)"></div>
           <div class="poster-title">SmartCare (SAWS)</div>
           <div class="poster-year">2026 · AWS/GCP</div>
           <div class="poster-stats">
@@ -624,12 +624,21 @@
     },
     smartcare: {
       title: "SmartCare (SAWS)", eyebrow: "TEAM OF 7 · TECHNICAL DIRECTOR · 2026", meta: "AWS · GCP · Serverless",
-      media: { type: "tile", letters: "SC" },
-      summary: "SmartCare is an appointment-booking and wellness platform for a healthcare setting, letting patients find providers, book appointments, and manage their care online. What makes it technically interesting is that it was deliberately split across two different cloud providers, AWS and GCP, at once, which meant the team had to design how two normally-separate cloud ecosystems would talk to each other reliably. As Technical Director, I was responsible for that cross-cloud architecture across a 7-person team.",
-      desc: "A multi-cloud serverless appointment and wellness platform, built across AWS and GCP by a seven-person team for a graduate serverless-computing course. I served as Technical Director, owning the cross-cloud architecture and the integration boundary between the two providers' serverless services.",
+      media: { type: "img", src: "screenshots/saws-landing.png" },
+      summary: "SmartCare is an appointment-booking and wellness platform for a healthcare setting: patients can register, book a consultation or wellness session, message a coordinator with a concern, and leave feedback after their visit, while a wellness coordinator approves or rejects incoming requests and triages patient messages from their own dashboard. What makes it technically interesting is that it was deliberately split across two different cloud providers, AWS and GCP, at once, which meant the team had to design how two normally-separate cloud ecosystems would talk to each other reliably (patient concerns are routed to coordinators over a Pub/Sub queue, and every booking action is written to an audit trail). As Technical Director, I was responsible for that cross-cloud architecture across a 7-person team.",
+      desc: "A multi-cloud serverless appointment and wellness platform, built across AWS and GCP by a seven-person team for a graduate serverless-computing course. Patient-facing features include 3-stage secure sign-in, appointment booking and cancellation, an AI virtual assistant for FAQs and appointment lookup by reference code, and free-text feedback that gets sentiment-analysed automatically; the coordinator side includes request approval/rejection, a per-appointment audit trail, and an analytics dashboard. I served as Technical Director, owning the cross-cloud architecture and the integration boundary between the two providers' serverless services.",
       stats: [ ["7", "Team size"], ["2", "Cross-cloud mirrors"], ["Director", "My role"] ],
-      tech: ["AWS Lambda", "API Gateway", "GCP Cloud Functions", "Serverless", "Event-driven"],
-      live: null, repo: "https://github.com/MansiPatil21/smartcare-appointment-wellness-system"
+      tech: ["AWS Lambda", "API Gateway", "GCP Cloud Functions", "Pub/Sub", "Serverless", "Event-driven"],
+      live: null, repo: "https://github.com/MansiPatil21/smartcare-appointment-wellness-system",
+      gallery: [
+        { src: "screenshots/saws-signin.png", label: "3-stage secure sign-in" },
+        { src: "screenshots/saws-patient-dashboard.png", label: "Patient dashboard" },
+        { src: "screenshots/saws-patient-booking.png", label: "Booking confirmation" },
+        { src: "screenshots/saws-feedback-list.png", label: "Patient feedback + sentiment" },
+        { src: "screenshots/saws-coordinator-dashboard.png", label: "Coordinator dashboard" },
+        { src: "screenshots/saws-coordinator-audit.png", label: "Audit trail" },
+        { src: "screenshots/saws-error-state.png", label: "Graceful service-down handling" }
+      ]
     },
     driftwatch: {
       title: "DriftWatch", eyebrow: "SOLO PROJECT · 2026", meta: "AWS Lambda · Kinesis · Step Functions",
