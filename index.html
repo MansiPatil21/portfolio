@@ -234,6 +234,11 @@
   .modal-section-label{ font-size:.76rem; text-transform:uppercase; letter-spacing:.06em; color:var(--text-faint); margin-bottom:10px; }
   .modal-tech{ display:flex; gap:8px; flex-wrap:wrap; }
   .modal-tech span{ font-size:.78rem; font-weight:600; padding:6px 14px; border-radius:999px; background:var(--surface-2); border:1px solid var(--border); color:var(--text-muted); }
+  .modal-gallery{ display:flex; gap:10px; overflow-x:auto; padding-bottom:6px; margin-bottom:22px; scrollbar-width:thin; }
+  .modal-gallery a{ flex:0 0 auto; display:flex; flex-direction:column; gap:6px; }
+  .modal-gallery img{ height:120px; width:auto; border-radius:8px; border:1px solid var(--border); display:block; transition:border-color .2s ease, transform .2s ease; }
+  .modal-gallery a:hover img{ border-color:var(--accent); transform:translateY(-2px); }
+  .modal-gallery span{ font-size:.68rem; color:var(--text-faint); text-align:center; }
   @media (max-width:640px){ .modal-body{ padding:8px 20px 26px; } .modal-title{ font-size:1.35rem; } }
 </style>
 </head>
@@ -367,7 +372,7 @@
         </div>
 
         <div class="poster-card" data-id="collabry" tabindex="0" role="button" aria-haspopup="dialog">
-          <div class="poster tile"><span class="letters">CO</span><span class="pname">Collabry</span></div>
+          <div class="poster"><img src="screenshots/collabry-landing.png" alt="Collabry"></div>
           <div class="poster-title">Collabry</div>
           <div class="poster-year">2026 · React 19</div>
           <div class="poster-stats">
@@ -609,11 +614,20 @@
     },
     collabry: {
       title: "Collabry", eyebrow: "GROUP PROJECT · 2026", meta: "Spring Boot · React · GitLab CI/CD",
-      media: { type: "tile", letters: "CO" },
+      media: { type: "img", src: "screenshots/collabry-landing.png" },
       desc: "A full-stack influencer and brand collaboration platform built by a four-person course group. I owned the AI-based matchmaking engine, the payments module, most of the UI, and part of the test suite, on top of a 6-stage GitLab CI/CD pipeline (build, test with JaCoCo coverage, a DesigniteJava code-smell scan, Docker image publish, and SSH deploy to separate dev and production environments).",
       stats: [ ["6", "GitLab CI/CD stages"], ["AI", "Matchmaking engine"], ["JaCoCo", "Coverage gate"] ],
       tech: ["Spring Boot", "React", "Recharts", "Figma", "JUnit 5", "Mockito", "GitLab CI/CD"],
-      live: null, repo: "https://github.com/MansiPatil21/Collabry-influencer-platform"
+      live: null, repo: "https://github.com/MansiPatil21/Collabry-influencer-platform",
+      gallery: [
+        { src: "screenshots/collabry-profile.png", label: "Influencer profile" },
+        { src: "screenshots/collabry-find-influencers.png", label: "Find influencers" },
+        { src: "screenshots/collabry-ai-matchmaker.png", label: "AI matchmaker" },
+        { src: "screenshots/collabry-campaigns.png", label: "Campaigns" },
+        { src: "screenshots/collabry-payments.png", label: "Payments" },
+        { src: "screenshots/collabry-dashboard.png", label: "Influencer dashboard" },
+        { src: "screenshots/collabry-my-collabs.png", label: "My collaborations" }
+      ]
     },
     documantic: {
       title: "Documantic", eyebrow: "SOLO PROJECT · 2026", meta: "AWS Serverless · LLM",
@@ -687,6 +701,17 @@
 
       var techHtml = p.tech.map(function(t){ return '<span>' + t + '</span>'; }).join('');
 
+      var galleryHtml = '';
+      if (p.gallery && p.gallery.length) {
+        galleryHtml =
+          '<div class="modal-section-label">Product Tour</div>' +
+          '<div class="modal-gallery">' +
+          p.gallery.map(function(g){
+            return '<a href="' + g.src + '" target="_blank" rel="noopener"><img src="' + g.src + '" alt="' + g.label + '"><span>' + g.label + '</span></a>';
+          }).join('') +
+          '</div>';
+      }
+
       contentEl.innerHTML =
         mediaHtml +
         '<div class="modal-body">' +
@@ -695,6 +720,7 @@
           '<div class="modal-meta">' + p.meta + '</div>' +
           '<div class="modal-actions">' + actionsHtml + '</div>' +
           '<p class="modal-desc">' + p.desc + '</p>' +
+          galleryHtml +
           '<div class="modal-stats">' + statsHtml + '</div>' +
           '<div class="modal-section-label">Tech Stack</div>' +
           '<div class="modal-tech">' + techHtml + '</div>' +
