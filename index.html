@@ -379,7 +379,7 @@
         </div>
 
         <div class="poster-card" data-id="driftwatch" tabindex="0" role="button" aria-haspopup="dialog">
-          <div class="poster tile"><span class="letters">DW</span><span class="pname">DriftWatch</span></div>
+          <div class="poster"><img src="screenshots/driftwatch-dashboard.png" alt="DriftWatch"></div>
           <div class="poster-title">DriftWatch</div>
           <div class="poster-year">2026 · Python</div>
           <div class="poster-stats">
@@ -642,12 +642,23 @@
     },
     driftwatch: {
       title: "DriftWatch", eyebrow: "SOLO PROJECT · 2026", meta: "AWS Lambda · Kinesis · Step Functions",
-      media: { type: "tile", letters: "DW" },
-      summary: "DriftWatch solves a problem that quietly breaks a lot of real-world machine learning: a model that performs well on launch day can slowly get worse as the real world changes around it (a bank starts seeing new spending patterns, a recommendation model starts seeing new kinds of users), and often nobody notices until it's already causing damage. DriftWatch continuously watches a deployed model's incoming data, statistically detects when it has drifted away from what the model was originally trained on, and automatically kicks off an alert and response, all without needing a server running around the clock.",
-      desc: "A solo-built serverless pipeline that watches a deployed ML model for data drift in production instead of trusting it silently. Kinesis Data Streams carries inference logs to a PSI-based drift detector, Step Functions coordinates the response, and a Streamlit dashboard surfaces the result, all glued together by 9 Lambda functions and EventBridge schedules running every 5 minutes, every 15 minutes, and daily.",
-      stats: [ ["9", "Lambda functions"], ["3", "EventBridge schedules"], ["PSI", "Drift detection method"] ],
-      tech: ["AWS Lambda", "Kinesis", "Step Functions", "EventBridge", "DynamoDB", "S3", "Terraform", "Streamlit"],
-      live: null, repo: "https://github.com/MansiPatil21/driftwatch-ml-cloud"
+      media: { type: "img", src: "screenshots/driftwatch-dashboard.png" },
+      summary: "DriftWatch solves a problem that quietly breaks a lot of real-world machine learning: a model that performs well on launch day can slowly get worse as the real world changes around it (spam gets worded differently, a bank starts seeing new spending patterns), and often nobody notices until it's already causing damage. DriftWatch continuously watches a deployed model's incoming predictions, statistically detects when the input data has drifted away from what the model was originally trained on, and automatically fires an alert email and kicks off an automated response, all without needing a server running around the clock. To make the demo honest rather than fake, it monitors a real TF-IDF + Naive Bayes spam classifier trained on 5,574 real SMS messages (98.5% accuracy), with a live classifier tab where you can type a message and watch its prediction flow into the same monitoring pipeline.",
+      desc: "A solo-built serverless pipeline that watches a deployed ML model for data drift in production instead of trusting it silently. Kinesis Data Streams carries prediction events to a PSI-based (Population Stability Index) drift detector running on a 5-minute EventBridge schedule, an anomaly detector and an accuracy publisher run on their own schedules, and a Step Functions workflow handles the automated response once drift crosses the significance threshold, sending an SNS email alert with the PSI score and a recommendation to retrain. A Simulate Drift tab can walk the classifier through synthetic stable, early, mid and severe drift phases to trigger the whole pipeline on demand, and a CloudWatch dashboard tracks confidence, PSI score, prediction volume and ground-truth accuracy over time.",
+      stats: [ ["9", "Lambda functions"], ["98.5%", "Real classifier accuracy"], ["PSI", "Drift detection method"] ],
+      tech: ["AWS Lambda", "Kinesis", "Step Functions", "EventBridge", "DynamoDB", "S3", "SNS", "CloudWatch", "Terraform", "Streamlit"],
+      live: null, repo: "https://github.com/MansiPatil21/driftwatch-ml-cloud",
+      gallery: [
+        { src: "screenshots/driftwatch-live-classifier.png", label: "Live classifier (real model)" },
+        { src: "screenshots/driftwatch-simulate-drift.png", label: "Simulate Drift" },
+        { src: "screenshots/driftwatch-alert-email.png", label: "Drift alert email" },
+        { src: "screenshots/driftwatch-cloudwatch.png", label: "CloudWatch dashboard" },
+        { src: "screenshots/driftwatch-architecture.png", label: "Architecture diagram" },
+        { src: "screenshots/driftwatch-sequence.png", label: "Sequence diagram" },
+        { src: "screenshots/driftwatch-lambda-functions.png", label: "9 Lambda functions (AWS console)" },
+        { src: "screenshots/driftwatch-dynamodb.png", label: "DynamoDB tables (AWS console)" },
+        { src: "screenshots/driftwatch-stepfunctions.png", label: "Step Functions executions (AWS console)" }
+      ]
     },
     collabry: {
       title: "Collabry", eyebrow: "GROUP PROJECT · 2026", meta: "Spring Boot · React · GitLab CI/CD",
