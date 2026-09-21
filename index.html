@@ -121,12 +121,13 @@
   .card{
     flex:0 0 auto; width:min(74vw, 300px); border-radius:6px; overflow:hidden; position:relative;
     background:var(--surface); border:1px solid var(--border); cursor:pointer;
+    display:flex; flex-direction:column;
     transition: transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s ease, border-color .3s ease;
   }
   @media (prefers-reduced-motion: no-preference){
     .card:hover{ transform:scale(1.09) translateY(-6px); z-index:10; box-shadow:0 24px 48px -12px var(--glow), 0 0 0 1px var(--accent-deep); border-color:var(--accent-deep); }
   }
-  .card .poster{ aspect-ratio:16/9; position:relative; overflow:hidden; background:var(--surface-2); }
+  .card .poster{ aspect-ratio:16/9; position:relative; overflow:hidden; background:var(--surface-2); flex-shrink:0; }
   .card .poster img{ width:100%; height:100%; object-fit:cover; object-position:top; display:block; }
   .card .poster.tile{
     display:flex; align-items:center; justify-content:center; flex-direction:column; gap:6px;
@@ -139,7 +140,7 @@
     background:rgba(0,0,0,.55); border:1px solid rgba(255,255,255,.15); color:var(--text);
     padding:2px 8px; border-radius:999px; backdrop-filter:blur(4px);
   }
-  .card .body{ padding:12px 14px 14px; }
+  .card .body{ padding:12px 14px 14px; display:flex; flex-direction:column; flex-grow:1; }
   .card .title{ font-weight:700; font-size:.92rem; }
   .card .desc{
     font-size:.78rem; color:var(--text-muted); margin-top:6px; line-height:1.5;
@@ -150,7 +151,7 @@
     font-size:.66rem; font-family:"IBM Plex Mono",monospace; color:var(--text-faint);
     border:1px solid var(--border); padding:1px 7px; border-radius:999px;
   }
-  .card .links{ display:flex; gap:12px; margin-top:10px; }
+  .card .links{ display:flex; gap:14px; margin-top:auto; padding-top:10px; }
   .card .links a{ font-size:.72rem; font-weight:600; color:var(--accent); }
   .card .links a:hover{ text-decoration:underline; }
 
@@ -244,7 +245,7 @@
 
       <div class="row-track">
 
-        <a class="card" href="https://github.com/MansiPatil21/corebank" target="_blank" rel="noopener">
+        <div class="card">
           <div class="poster"><img src="screenshots/corebank.png" alt="CoreBank engineer view showing the live saga feed and concurrency proof"><span class="badge">Live ↗</span></div>
           <div class="body">
             <div class="title">corebank</div>
@@ -252,9 +253,9 @@
             <div class="stack"><span>Java</span><span>Spring Boot</span><span>PostgreSQL</span></div>
             <div class="links"><a href="https://corebank-mu.vercel.app" target="_blank" rel="noopener">Live demo</a><a href="https://github.com/MansiPatil21/corebank" target="_blank" rel="noopener">Source</a></div>
           </div>
-        </a>
+        </div>
 
-        <a class="card" href="https://github.com/MansiPatil21/FundEd" target="_blank" rel="noopener">
+        <div class="card">
           <div class="poster"><img src="screenshots/funded.png" alt="FundEd landing dashboard showing permit hours and money sent home"><span class="badge">Live ↗</span></div>
           <div class="body">
             <div class="title">FundEd</div>
@@ -262,9 +263,9 @@
             <div class="stack"><span>Next.js</span><span>GraphQL</span><span>Kubernetes</span></div>
             <div class="links"><a href="https://fund-ed-sigma.vercel.app" target="_blank" rel="noopener">Live demo</a><a href="https://github.com/MansiPatil21/FundEd" target="_blank" rel="noopener">Source</a></div>
           </div>
-        </a>
+        </div>
 
-        <a class="card" href="https://github.com/MansiPatil21/spindle" target="_blank" rel="noopener">
+        <div class="card">
           <div class="poster tile"><span class="mono-letter">SP</span><span class="tile-name">spindle</span></div>
           <div class="body">
             <div class="title">spindle</div>
@@ -272,9 +273,9 @@
             <div class="stack"><span>Java</span><span>C++</span><span>TCP</span></div>
             <div class="links"><a href="https://github.com/MansiPatil21/spindle" target="_blank" rel="noopener">Source</a></div>
           </div>
-        </a>
+        </div>
 
-        <a class="card" href="https://github.com/MansiPatil21/smartcare-appointment-wellness-system" target="_blank" rel="noopener">
+        <div class="card">
           <div class="poster tile"><span class="mono-letter">SC</span><span class="tile-name">smartcare-appointment-wellness-system</span></div>
           <div class="body">
             <div class="title">SmartCare (SAWS)</div>
@@ -282,9 +283,9 @@
             <div class="stack"><span>AWS</span><span>GCP</span><span>Agile</span></div>
             <div class="links"><a href="https://github.com/MansiPatil21/smartcare-appointment-wellness-system" target="_blank" rel="noopener">Source</a></div>
           </div>
-        </a>
+        </div>
 
-        <a class="card" href="https://github.com/MansiPatil21/driftwatch-ml-cloud" target="_blank" rel="noopener">
+        <div class="card">
           <div class="poster tile"><span class="mono-letter">DW</span><span class="tile-name">driftwatch-ml-cloud</span></div>
           <div class="body">
             <div class="title">DriftWatch</div>
@@ -292,9 +293,9 @@
             <div class="stack"><span>Lambda</span><span>Kinesis</span><span>Python</span></div>
             <div class="links"><a href="https://github.com/MansiPatil21/driftwatch-ml-cloud" target="_blank" rel="noopener">Source</a></div>
           </div>
-        </a>
+        </div>
 
-        <a class="card" href="https://github.com/MansiPatil21/Collabry-influencer-platform" target="_blank" rel="noopener">
+        <div class="card">
           <div class="poster tile"><span class="mono-letter">CO</span><span class="tile-name">Collabry-influencer-platform</span></div>
           <div class="body">
             <div class="title">Collabry</div>
@@ -302,7 +303,7 @@
             <div class="stack"><span>React 19</span><span>TypeScript</span><span>Figma</span></div>
             <div class="links"><a href="https://github.com/MansiPatil21/Collabry-influencer-platform" target="_blank" rel="noopener">Source</a></div>
           </div>
-        </a>
+        </div>
 
       </div>
       <button class="row-arrow right" data-dir="1" aria-label="Scroll right"><svg viewBox="0 0 24 24"><path d="M8.6 16.6 10 18l6-6-6-6-1.4 1.4L13.2 12z"/></svg></button>
@@ -318,50 +319,50 @@
       <button class="row-arrow left" data-dir="-1" aria-label="Scroll left"><svg viewBox="0 0 24 24"><path d="M15.4 7.4 14 6l-6 6 6 6 1.4-1.4L10.8 12z"/></svg></button>
       <div class="row-track">
 
-        <a class="card" href="https://github.com/MansiPatil21/Documantic" target="_blank" rel="noopener">
+        <div class="card">
           <div class="poster tile"><span class="mono-letter">DM</span><span class="tile-name">Documantic</span></div>
           <div class="body"><div class="title">Documantic</div>
             <p class="desc">Upload a codebase, get a README, API docs, a quality report, and commented source, generated by an async Lambda pipeline in ~2 minutes.</p>
             <div class="stack"><span>React</span><span>Lambda</span><span>Terraform</span></div>
             <div class="links"><a href="https://github.com/MansiPatil21/Documantic" target="_blank" rel="noopener">Source</a></div>
           </div>
-        </a>
+        </div>
 
-        <a class="card" href="https://github.com/MansiPatil21/Syllabify" target="_blank" rel="noopener">
+        <div class="card">
           <div class="poster tile"><span class="mono-letter">SY</span><span class="tile-name">Syllabify</span></div>
           <div class="body"><div class="title">Syllabify</div>
             <p class="desc">OCR reads a syllabus PDF, an LLM turns it into a study roadmap. Bare network to running app with one Terraform + Bash command.</p>
             <div class="stack"><span>React</span><span>Terraform</span><span>AWS</span></div>
             <div class="links"><a href="https://github.com/MansiPatil21/Syllabify" target="_blank" rel="noopener">Source</a></div>
           </div>
-        </a>
+        </div>
 
-        <a class="card" href="https://github.com/MansiPatil21/FantasySailGP" target="_blank" rel="noopener">
+        <div class="card">
           <div class="poster"><img src="assets/fantasysailgp.jpg" alt="FantasySailGP demo video thumbnail"><span class="badge">Video ↗</span></div>
           <div class="body"><div class="title">FantasySailGP</div>
             <p class="desc">Hackathon fantasy-sailing predictor. Wrote the scoring engine, trained the model, shipped the original 5-screen frontend within the event window.</p>
             <div class="stack"><span>Python</span><span>scikit-learn</span><span>FastAPI</span></div>
             <div class="links"><a href="https://youtu.be/bazaQ3WcxNI" target="_blank" rel="noopener">Demo video</a><a href="https://github.com/MansiPatil21/FantasySailGP" target="_blank" rel="noopener">Source</a></div>
           </div>
-        </a>
+        </div>
 
-        <a class="card" href="https://github.com/MansiPatil21/mental-health-nlp" target="_blank" rel="noopener">
+        <div class="card">
           <div class="poster tile"><span class="mono-letter">BK</span><span class="tile-name">mental-health-nlp</span></div>
           <div class="body"><div class="title">Beyond Keywords</div>
             <p class="desc">Fine-tuned BERT and DistilBERT on mental-health signal in text, then used SHAP to check whether the model learned real signal or a shortcut.</p>
             <div class="stack"><span>PyTorch</span><span>Transformers</span><span>SHAP</span></div>
             <div class="links"><a href="https://github.com/MansiPatil21/mental-health-nlp" target="_blank" rel="noopener">Source</a></div>
           </div>
-        </a>
+        </div>
 
-        <a class="card" href="https://github.com/MansiPatil21/Fake-News-Detection" target="_blank" rel="noopener">
+        <div class="card">
           <div class="poster tile"><span class="mono-letter">FN</span><span class="tile-name">Fake-News-Detection</span></div>
           <div class="body"><div class="title">Fake News Detection</div>
             <p class="desc">Compared SVM and Logistic Regression for fake-news classification. Extended into a paper presented at IDICAIEI, indexed in IEEE Xplore.</p>
             <div class="stack"><span>Python</span><span>scikit-learn</span><span>NLP</span></div>
             <div class="links"><a href="https://github.com/MansiPatil21/Fake-News-Detection" target="_blank" rel="noopener">Source</a></div>
           </div>
-        </a>
+        </div>
 
       </div>
       <button class="row-arrow right" data-dir="1" aria-label="Scroll right"><svg viewBox="0 0 24 24"><path d="M8.6 16.6 10 18l6-6-6-6-1.4 1.4L13.2 12z"/></svg></button>
