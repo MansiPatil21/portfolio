@@ -702,13 +702,13 @@
       live: null, repo: "https://github.com/MansiPatil21/Documantic"
     },
     syllabify: {
-      title: "Syllabify", eyebrow: "SOLO PROJECT · 2026", meta: "OCR · LLM · Terraform",
+      title: "Syllabify", eyebrow: "SOLO PROJECT · WINTER 2026", meta: "React · FastAPI · AWS · Terraform",
       media: { type: "tile", letters: "SY" },
-      summary: "Syllabify takes a course syllabus PDF, which are usually dense and easy to lose track of, and turns it into an organized semester schedule automatically. It reads the PDF, including scanned or image-based ones using optical character recognition, pulls out assignment and exam dates with an AI model, and lays the whole term out on a calendar so a student can see everything at a glance instead of re-reading the syllabus every week.",
-      desc: "An AI study-planner that OCRs an uploaded course syllabus PDF and turns it into a semester schedule. Built solo for a cloud-computing term project with a defense-in-depth security design and a one-command Terraform plus Bash deployment so the whole stack (DynamoDB, S3, EC2, all on one VPC) stands up from scratch on request.",
-      stats: [ ["1", "Command to deploy"], ["OCR", "pytesseract + PyMuPDF"], ["Groq", "LLaMA-3 planning"] ],
-      tech: ["Terraform", "Nginx", "PyMuPDF", "pytesseract", "Groq / LLaMA-3", "DynamoDB", "Docker Compose"],
-      live: null, repo: "https://github.com/MansiPatil21/Syllabify"
+      summary: "Syllabify takes a course syllabus PDF, which are usually dense and easy to lose track of, and turns it into an organized semester schedule automatically. A student uploads a syllabus (even a scanned one), the app reads the text off the page using OCR, sends it to an AI model, and gets back a structured roadmap of milestones, weekly and daily tasks, and curated resources, laid out on a personal dashboard so they can track progress instead of re-reading the syllabus every week. Built solo as a term project for a graduate cloud-computing course, with a written report covering the architecture, security model, and a real cost estimate for running it in production.",
+      desc: "A 3-tier cloud application: a React/TypeScript frontend built and served as static files behind Nginx, a Python FastAPI backend exposing REST endpoints (/api/upload, /api/login) that Nginx reverse-proxies to, and a data layer where the backend talks to DynamoDB (user accounts and AI-generated roadmaps as JSON) and S3 (uploaded PDFs, kept as persistent backups) over the boto3 SDK. The backend runs PyMuPDF and pytesseract for OCR, then calls Groq's LLaMA-3 to turn the extracted text into a structured JSON roadmap. Everything sits inside one VPC on a single EC2 instance running both containers via Docker Compose, provisioned end to end by a one-command Terraform + Bash deploy script (build frontend, push to GitHub, provision VPC/EC2/S3/DynamoDB, SSH in, docker compose up --build). Security follows a defense-in-depth strategy: VPC network isolation, a security group that only opens ports 80, 443 and 22, and Docker container isolation between the frontend and backend. The report also works out a real production cost estimate (~$44/month on EC2 + DynamoDB + S3 + the LLM API) and justifies EC2 over Lambda for this workload, since packaging Tesseract OCR for Lambda adds cold-start latency that would blow past the OCR performance target.",
+      stats: [ ["<10s", "OCR target, 5-10 page PDF"], ["<15s", "LLM roadmap generation target"], ["~$44/mo", "Estimated production cost"] ],
+      tech: ["React", "TypeScript", "FastAPI", "Terraform", "Nginx", "PyMuPDF", "pytesseract", "Groq / LLaMA-3", "DynamoDB", "S3", "Docker Compose"],
+      live: null, repo: "https://github.com/MansiPatil21/Syllabify", video: "https://youtu.be/-WtPnUNxjw8"
     },
     fantasysailgp: {
       title: "FantasySailGP", eyebrow: "HACKATHON · TEAM OF 3 · 2026", meta: "Python · scikit-learn · React",
