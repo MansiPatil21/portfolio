@@ -29,7 +29,8 @@
   a:focus-visible, button:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; border-radius:3px; }
   @media (prefers-reduced-motion: reduce){ *{ animation-duration:.001ms !important; transition-duration:.001ms !important; } }
 
-  .wrap{ max-width:1400px; margin-inline:auto; padding-inline:clamp(16px,4vw,56px); }
+  .wrap{ max-width:1200px; margin:0 auto; padding-inline:24px; width:100%; }
+  @media (max-width:640px){ .wrap{ padding-inline:16px; } }
 
   /* ============ NAV ============ */
   .nav{
@@ -55,8 +56,8 @@
 
   /* ============ HERO ============ */
   .hero{
-    position:relative; min-height:min(74vh,660px); display:flex; align-items:center;
-    padding-block:120px 40px; overflow:hidden;
+    position:relative; min-height:min(68vh,600px); display:flex; align-items:center;
+    padding-block:110px 16px; overflow:hidden;
   }
   .hero-avail{
     display:inline-flex; align-items:center; gap:8px; margin-top:20px;
@@ -103,9 +104,11 @@
   .btn.primary:hover{ background:#D690B7; }
   .btn.ghost{ background:rgba(140,140,155,.28); color:var(--text); backdrop-filter:blur(6px); }
   .btn.ghost:hover{ background:rgba(140,140,155,.4); }
-  /* ============ SECTION HEAD ============ */
-  .sec{ padding-block:34px; }
-  .sec:first-of-type{ padding-top:8px; }
+  /* ============ SECTIONS (full-bleed background, centered content) ============ */
+  .sec{ width:100%; padding-block:48px; }
+  .sec + .sec{ border-top:1px solid var(--border); }
+  .sec.tint{ background:#0D0E13; }
+  .sec:first-of-type{ padding-top:20px; }
   .sec-head{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px; margin-bottom:16px; }
   .sec-title{ display:flex; align-items:center; gap:10px; }
   .sec-title svg{ width:20px; height:20px; fill:var(--accent); }
@@ -138,22 +141,13 @@
   }
   .gpa-badge svg{ width:14px; height:14px; fill:var(--accent); }
 
-  /* ============ ROW TRACK / CARDS ============ */
-  .row-container{ position:relative; }
-  .row-track{ display:flex; gap:16px; overflow-x:auto; scroll-behavior:smooth; padding:8px 0 20px; scrollbar-width:none; }
-  .row-track::-webkit-scrollbar{ display:none; }
-  .row-arrow{
-    position:absolute; top:0; bottom:20px; width:52px; z-index:20; border:none; cursor:pointer;
-    display:flex; align-items:center; color:var(--text); opacity:0; transition:opacity .2s;
+  /* ============ PROJECT GRID / CARDS ============ */
+  .row-track{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+    gap:24px 16px; padding:8px 0 4px;
   }
-  .row-container:hover .row-arrow{ opacity:1; }
-  .row-arrow.left{ left:0; background:linear-gradient(to right, var(--bg) 25%, transparent); justify-content:flex-start; }
-  .row-arrow.right{ right:0; background:linear-gradient(to left, var(--bg) 25%, transparent); justify-content:flex-end; }
-  .row-arrow svg{ width:26px; height:26px; fill:var(--text); }
-  @media (hover:none){ .row-arrow{ display:none; } }
-
   .poster-card{
-    flex:0 0 auto; width:300px; display:flex; flex-direction:column; gap:10px; cursor:pointer;
+    display:flex; flex-direction:column; gap:10px; cursor:pointer; min-width:0;
   }
   .poster{
     width:100%; aspect-ratio:16/10; border-radius:8px; overflow:hidden; position:relative;
@@ -167,7 +161,6 @@
   .poster.tile{ display:flex; align-items:center; justify-content:center; flex-direction:column; gap:8px; padding:16px; text-align:center; background:linear-gradient(160deg, var(--accent-deep) 0%, var(--surface-2) 70%); }
   .poster.tile .letters{ font-family:"IBM Plex Mono",monospace; font-weight:800; font-size:2.4rem; color:var(--accent); }
   .poster.tile .pname{ font-size:.78rem; color:var(--text-muted); font-family:"IBM Plex Mono",monospace; }
-  @media (max-width:640px){ .poster-card{ width:230px; } }
   .poster .live-badge{
     position:absolute; top:8px; right:8px; font-size:.62rem; font-weight:700; letter-spacing:.03em;
     background:var(--accent); color:var(--accent-ink); padding:3px 9px; border-radius:999px; text-transform:uppercase;
@@ -323,199 +316,201 @@
   </div>
 </header>
 
-<main class="wrap">
+<main>
 
   <section class="sec" id="pinned">
-    <div class="sec-head">
-      <div class="sec-title">
-        <svg viewBox="0 0 24 24"><path d="M13 5.83 15.17 8l1.41-1.41L13 3l-3.59 3.59L11 8l2-2.17zM8 13.83 10.17 16l1.41-1.41L8 11l-3.59 3.59L6 16l2-2.17zM18 13.83 20.17 16l1.41-1.41L18 11l-3.59 3.59L16 16l2-2.17zM13 21.83 15.17 24l1.41-1.41L13 19l-3.59 3.59L11 24l2-2.17z" transform="rotate(90 12 12)"/><path d="M12 2l2.9 8.26L23 13l-8.1 2.74L12 24l-2.9-8.26L1 13l8.1-2.74z"/></svg>
-        <h2>Pinned Projects</h2>
-        <span class="dot-mark"></span>
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-title">
+          <svg viewBox="0 0 24 24"><path d="M13 5.83 15.17 8l1.41-1.41L13 3l-3.59 3.59L11 8l2-2.17zM8 13.83 10.17 16l1.41-1.41L8 11l-3.59 3.59L6 16l2-2.17zM18 13.83 20.17 16l1.41-1.41L18 11l-3.59 3.59L16 16l2-2.17zM13 21.83 15.17 24l1.41-1.41L13 19l-3.59 3.59L11 24l2-2.17z" transform="rotate(90 12 12)"/><path d="M12 2l2.9 8.26L23 13l-8.1 2.74L12 24l-2.9-8.26L1 13l8.1-2.74z"/></svg>
+          <h2>Pinned Projects</h2>
+          <span class="dot-mark"></span>
+        </div>
       </div>
-    </div>
 
-    <div class="pill-row" id="pinnedPills">
-      <span class="pill" data-tag="java">Java</span><span class="pill" data-tag="python">Python</span><span class="pill" data-tag="typescript">TypeScript</span>
-      <span class="pill" data-tag="cloud">Cloud</span><span class="pill" data-tag="fullstack">Full-Stack</span><span class="pill" data-tag="distributedsystems">Distributed Systems</span><span class="pill" data-tag="machinelearning">ML</span>
-    </div>
-
-    <div class="row-container">
-      <button class="row-arrow left" data-dir="-1" aria-label="Scroll left"><svg viewBox="0 0 24 24"><path d="M15.4 7.4 14 6l-6 6 6 6 1.4-1.4L10.8 12z"/></svg></button>
-      <div class="row-track">
-
-        <div class="poster-card" data-id="corebank" tabindex="0" role="button" aria-haspopup="dialog">
-          <div class="poster"><img src="screenshots/corebank.png" alt="CoreBank"><span class="live-badge">Live</span></div>
-          <div class="poster-title">corebank</div>
-          <div class="poster-year">2026 · Java</div>
-          <div class="poster-stats">
-            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-            <span>20 automated tests, 5 levels</span>
-          </div>
-        </div>
-
-        <div class="poster-card" data-id="funded" tabindex="0" role="button" aria-haspopup="dialog">
-          <div class="poster"><img src="screenshots/funded.png" alt="FundEd"><span class="live-badge">Live</span></div>
-          <div class="poster-title">FundEd</div>
-          <div class="poster-year">2026 · TypeScript</div>
-          <div class="poster-stats">
-            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-            <span>312 automated tests, 3 languages</span>
-          </div>
-        </div>
-
-        <div class="poster-card" data-id="spindle" tabindex="0" role="button" aria-haspopup="dialog">
-          <div class="poster"><img src="screenshots/spindle-banner.png" alt="spindle"></div>
-          <div class="poster-title">spindle</div>
-          <div class="poster-year">2026 · Java, C++</div>
-          <div class="poster-stats">
-            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-            <span>12 C++ tests, zero framework</span>
-          </div>
-        </div>
-
-        <div class="poster-card" data-id="smartcare" tabindex="0" role="button" aria-haspopup="dialog">
-          <div class="poster"><img src="screenshots/saws-landing.png" alt="SmartCare (SAWS)"></div>
-          <div class="poster-title">SmartCare (SAWS)</div>
-          <div class="poster-year">2026 · AWS/GCP</div>
-          <div class="poster-stats">
-            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-            <span>Led architecture for a 7-person team</span>
-          </div>
-        </div>
-
-        <div class="poster-card" data-id="driftwatch" tabindex="0" role="button" aria-haspopup="dialog">
-          <div class="poster"><img src="screenshots/driftwatch-dashboard.png" alt="DriftWatch"></div>
-          <div class="poster-title">DriftWatch</div>
-          <div class="poster-year">2026 · Python</div>
-          <div class="poster-stats">
-            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-            <span>98.5% accuracy on the live classifier</span>
-          </div>
-        </div>
-
-        <div class="poster-card" data-id="collabry" tabindex="0" role="button" aria-haspopup="dialog">
-          <div class="poster"><img src="screenshots/collabry-landing.png" alt="Collabry"></div>
-          <div class="poster-title">Collabry</div>
-          <div class="poster-year">2026 · React 19</div>
-          <div class="poster-stats">
-            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-            <span>Built the AI matchmaker + payments</span>
-          </div>
-        </div>
-
+      <div class="pill-row" id="pinnedPills">
+        <span class="pill" data-tag="java">Java</span><span class="pill" data-tag="python">Python</span><span class="pill" data-tag="typescript">TypeScript</span>
+        <span class="pill" data-tag="cloud">Cloud</span><span class="pill" data-tag="fullstack">Full-Stack</span><span class="pill" data-tag="distributedsystems">Distributed Systems</span><span class="pill" data-tag="machinelearning">ML</span>
       </div>
-      <button class="row-arrow right" data-dir="1" aria-label="Scroll right"><svg viewBox="0 0 24 24"><path d="M8.6 16.6 10 18l6-6-6-6-1.4 1.4L13.2 12z"/></svg></button>
+
+      <div class="row-container">
+        <div class="row-track">
+
+          <div class="poster-card" data-id="corebank" tabindex="0" role="button" aria-haspopup="dialog">
+            <div class="poster"><img src="screenshots/corebank.png" alt="CoreBank"><span class="live-badge">Live</span></div>
+            <div class="poster-title">corebank</div>
+            <div class="poster-year">2026 · Java</div>
+            <div class="poster-stats">
+              <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span>20 automated tests, 5 levels</span>
+            </div>
+          </div>
+
+          <div class="poster-card" data-id="funded" tabindex="0" role="button" aria-haspopup="dialog">
+            <div class="poster"><img src="screenshots/funded.png" alt="FundEd"><span class="live-badge">Live</span></div>
+            <div class="poster-title">FundEd</div>
+            <div class="poster-year">2026 · TypeScript</div>
+            <div class="poster-stats">
+              <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span>312 automated tests, 3 languages</span>
+            </div>
+          </div>
+
+          <div class="poster-card" data-id="spindle" tabindex="0" role="button" aria-haspopup="dialog">
+            <div class="poster"><img src="screenshots/spindle-banner.png" alt="spindle"></div>
+            <div class="poster-title">spindle</div>
+            <div class="poster-year">2026 · Java, C++</div>
+            <div class="poster-stats">
+              <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span>12 C++ tests, zero framework</span>
+            </div>
+          </div>
+
+          <div class="poster-card" data-id="smartcare" tabindex="0" role="button" aria-haspopup="dialog">
+            <div class="poster"><img src="screenshots/saws-landing.png" alt="SmartCare (SAWS)"></div>
+            <div class="poster-title">SmartCare (SAWS)</div>
+            <div class="poster-year">2026 · AWS/GCP</div>
+            <div class="poster-stats">
+              <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span>Led architecture for a 7-person team</span>
+            </div>
+          </div>
+
+          <div class="poster-card" data-id="driftwatch" tabindex="0" role="button" aria-haspopup="dialog">
+            <div class="poster"><img src="screenshots/driftwatch-dashboard.png" alt="DriftWatch"></div>
+            <div class="poster-title">DriftWatch</div>
+            <div class="poster-year">2026 · Python</div>
+            <div class="poster-stats">
+              <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span>98.5% accuracy on the live classifier</span>
+            </div>
+          </div>
+
+          <div class="poster-card" data-id="collabry" tabindex="0" role="button" aria-haspopup="dialog">
+            <div class="poster"><img src="screenshots/collabry-landing.png" alt="Collabry"></div>
+            <div class="poster-title">Collabry</div>
+            <div class="poster-year">2026 · React 19</div>
+            <div class="poster-stats">
+              <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span>Built the AI matchmaker + payments</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="empty-filter" id="pinnedEmpty">None of the pinned projects use this — try "All Repositories" below, or clear the filter.</div>
     </div>
-    <div class="empty-filter" id="pinnedEmpty">None of the pinned projects use this — try "All Repositories" below, or clear the filter.</div>
   </section>
 
-  <section class="sec" id="all-repos">
-    <div class="sec-head">
-      <div class="sec-title">
-        <svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg>
-        <h2>All Repositories</h2>
-        <span class="dot-mark"></span>
+  <section class="sec tint" id="all-repos">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-title">
+          <svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg>
+          <h2>All Repositories</h2>
+          <span class="dot-mark"></span>
+        </div>
       </div>
-    </div>
 
-    <div class="pill-row" id="allReposPills">
-      <span class="pill" data-tag="python">Python</span><span class="pill" data-tag="react">React</span><span class="pill" data-tag="serverless">Serverless</span>
-      <span class="pill" data-tag="machinelearning">Machine Learning</span><span class="pill" data-tag="research">Research</span><span class="pill" data-tag="terraform">Terraform</span>
-    </div>
-
-    <div class="sort-row">
-      <div class="gpa-badge">
-        <svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-        3.99 GPA
+      <div class="pill-row" id="allReposPills">
+        <span class="pill" data-tag="python">Python</span><span class="pill" data-tag="react">React</span><span class="pill" data-tag="serverless">Serverless</span>
+        <span class="pill" data-tag="machinelearning">Machine Learning</span><span class="pill" data-tag="research">Research</span><span class="pill" data-tag="terraform">Terraform</span>
       </div>
-    </div>
 
-    <div class="row-container">
-      <button class="row-arrow left" data-dir="-1" aria-label="Scroll left"><svg viewBox="0 0 24 24"><path d="M15.4 7.4 14 6l-6 6 6 6 1.4-1.4L10.8 12z"/></svg></button>
-      <div class="row-track">
-
-        <div class="poster-card" data-id="documantic" tabindex="0" role="button" aria-haspopup="dialog">
-          <div class="poster"><img src="screenshots/documantic-landing.png" alt="Documantic"></div>
-          <div class="poster-title">Documantic</div>
-          <div class="poster-year">2026 · React</div>
-          <div class="poster-stats">
-            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-            <span>Generates docs in under 2 minutes</span>
-          </div>
+      <div class="sort-row">
+        <div class="gpa-badge">
+          <svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          3.99 GPA
         </div>
-
-        <div class="poster-card" data-id="syllabify" tabindex="0" role="button" aria-haspopup="dialog">
-          <div class="poster"><img src="screenshots/syllabify-landing.png" alt="Syllabify"></div>
-          <div class="poster-title">Syllabify</div>
-          <div class="poster-year">2026 · Terraform</div>
-          <div class="poster-stats">
-            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-            <span>Turns a syllabus PDF into a schedule</span>
-          </div>
-        </div>
-
-        <div class="poster-card" data-id="fantasysailgp" tabindex="0" role="button" aria-haspopup="dialog">
-          <div class="poster"><img src="assets/fantasysailgp.jpg" alt="FantasySailGP"><span class="live-badge">Video</span></div>
-          <div class="poster-title">FantasySailGP</div>
-          <div class="poster-year">2026 · Python</div>
-          <div class="poster-stats">
-            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-            <span>Built the ML scoring engine</span>
-          </div>
-        </div>
-
-        <div class="poster-card" data-id="ecobridge" tabindex="0" role="button" aria-haspopup="dialog">
-          <div class="poster"><img src="screenshots/ecobridge-simulator.png" alt="EcoBridge"><span class="live-badge">Video</span></div>
-          <div class="poster-title">EcoBridge</div>
-          <div class="poster-year">2026 · React</div>
-          <div class="poster-stats">
-            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-            <span>Built the chain-analysis view and map</span>
-          </div>
-        </div>
-
-        <div class="poster-card" data-id="beyondkeywords" tabindex="0" role="button" aria-haspopup="dialog">
-          <div class="poster"><img src="screenshots/beyondkeywords-confusion-matrix.png" alt="Beyond Keywords"></div>
-          <div class="poster-title">Beyond Keywords</div>
-          <div class="poster-year">2026 · PyTorch</div>
-          <div class="poster-stats">
-            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-            <span>82% accuracy across 7 classes</span>
-          </div>
-        </div>
-
-        <div class="poster-card" data-id="fakenews" tabindex="0" role="button" aria-haspopup="dialog">
-          <div class="poster"><img src="screenshots/fakenews-ieee-page.png" alt="Fake News Detection, IEEE Xplore"></div>
-          <div class="poster-title">Fake News Detection</div>
-          <div class="poster-year">2025 · IEEE</div>
-          <div class="poster-stats">
-            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-            <span>147 IEEE Xplore full-text views</span>
-          </div>
-        </div>
-
       </div>
-      <button class="row-arrow right" data-dir="1" aria-label="Scroll right"><svg viewBox="0 0 24 24"><path d="M8.6 16.6 10 18l6-6-6-6-1.4 1.4L13.2 12z"/></svg></button>
+
+      <div class="row-container">
+        <div class="row-track">
+
+          <div class="poster-card" data-id="documantic" tabindex="0" role="button" aria-haspopup="dialog">
+            <div class="poster"><img src="screenshots/documantic-landing.png" alt="Documantic"></div>
+            <div class="poster-title">Documantic</div>
+            <div class="poster-year">2026 · React</div>
+            <div class="poster-stats">
+              <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span>Generates docs in under 2 minutes</span>
+            </div>
+          </div>
+
+          <div class="poster-card" data-id="syllabify" tabindex="0" role="button" aria-haspopup="dialog">
+            <div class="poster"><img src="screenshots/syllabify-landing.png" alt="Syllabify"></div>
+            <div class="poster-title">Syllabify</div>
+            <div class="poster-year">2026 · Terraform</div>
+            <div class="poster-stats">
+              <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span>Turns a syllabus PDF into a schedule</span>
+            </div>
+          </div>
+
+          <div class="poster-card" data-id="fantasysailgp" tabindex="0" role="button" aria-haspopup="dialog">
+            <div class="poster"><img src="assets/fantasysailgp.jpg" alt="FantasySailGP"><span class="live-badge">Video</span></div>
+            <div class="poster-title">FantasySailGP</div>
+            <div class="poster-year">2026 · Python</div>
+            <div class="poster-stats">
+              <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span>Built the ML scoring engine</span>
+            </div>
+          </div>
+
+          <div class="poster-card" data-id="ecobridge" tabindex="0" role="button" aria-haspopup="dialog">
+            <div class="poster"><img src="screenshots/ecobridge-simulator.png" alt="EcoBridge"><span class="live-badge">Video</span></div>
+            <div class="poster-title">EcoBridge</div>
+            <div class="poster-year">2026 · React</div>
+            <div class="poster-stats">
+              <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span>Built the chain-analysis view and map</span>
+            </div>
+          </div>
+
+          <div class="poster-card" data-id="beyondkeywords" tabindex="0" role="button" aria-haspopup="dialog">
+            <div class="poster"><img src="screenshots/beyondkeywords-confusion-matrix.png" alt="Beyond Keywords"></div>
+            <div class="poster-title">Beyond Keywords</div>
+            <div class="poster-year">2026 · PyTorch</div>
+            <div class="poster-stats">
+              <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span>82% accuracy across 7 classes</span>
+            </div>
+          </div>
+
+          <div class="poster-card" data-id="fakenews" tabindex="0" role="button" aria-haspopup="dialog">
+            <div class="poster"><img src="screenshots/fakenews-ieee-page.png" alt="Fake News Detection, IEEE Xplore"></div>
+            <div class="poster-title">Fake News Detection</div>
+            <div class="poster-year">2025 · IEEE</div>
+            <div class="poster-stats">
+              <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span>147 IEEE Xplore full-text views</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="empty-filter" id="allReposEmpty">No repository uses this skill yet — check back as more projects get added.</div>
     </div>
-    <div class="empty-filter" id="allReposEmpty">No repository uses this skill yet — check back as more projects get added.</div>
   </section>
 
   <section class="sec" id="skills">
-    <div class="sec-head">
-      <div class="sec-title">
-        <svg viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg>
-        <h2>Skills &amp; Tools</h2>
-        <span class="dot-mark"></span>
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-title">
+          <svg viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg>
+          <h2>Skills &amp; Tools</h2>
+          <span class="dot-mark"></span>
+        </div>
       </div>
+      <div class="pill-row" id="skillsPills" style="border-bottom:none;">
+        <span class="pill" data-tag="java">Java</span><span class="pill" data-tag="python">Python</span><span class="pill" data-tag="typescript">TypeScript</span><span class="pill" data-tag="cpp">C++</span><span class="pill" data-tag="sql">SQL</span>
+        <span class="pill" data-tag="azure">Azure</span><span class="pill" data-tag="aws">AWS</span><span class="pill" data-tag="gcp">GCP</span><span class="pill" data-tag="kubernetes">Kubernetes</span><span class="pill" data-tag="docker">Docker</span><span class="pill" data-tag="terraform">Terraform</span>
+        <span class="pill" data-tag="react">React</span><span class="pill" data-tag="nextjs">Next.js</span><span class="pill" data-tag="springboot">Spring Boot</span><span class="pill" data-tag="nodejs">Node.js</span>
+        <span class="pill" data-tag="postgresql">PostgreSQL</span><span class="pill" data-tag="mongodb">MongoDB</span><span class="pill" data-tag="redis">Redis</span>
+        <span class="pill" data-tag="pytorch">PyTorch</span><span class="pill" data-tag="scikitlearn">scikit-learn</span><span class="pill" data-tag="powerbi">Power BI</span><span class="pill" data-tag="tableau">Tableau</span>
+      </div>
+      <p class="skills-hint">Click a skill to see the projects that use it.</p>
     </div>
-    <div class="pill-row" id="skillsPills" style="border-bottom:none;">
-      <span class="pill" data-tag="java">Java</span><span class="pill" data-tag="python">Python</span><span class="pill" data-tag="typescript">TypeScript</span><span class="pill" data-tag="cpp">C++</span><span class="pill" data-tag="sql">SQL</span>
-      <span class="pill" data-tag="azure">Azure</span><span class="pill" data-tag="aws">AWS</span><span class="pill" data-tag="gcp">GCP</span><span class="pill" data-tag="kubernetes">Kubernetes</span><span class="pill" data-tag="docker">Docker</span><span class="pill" data-tag="terraform">Terraform</span>
-      <span class="pill" data-tag="react">React</span><span class="pill" data-tag="nextjs">Next.js</span><span class="pill" data-tag="springboot">Spring Boot</span><span class="pill" data-tag="nodejs">Node.js</span>
-      <span class="pill" data-tag="postgresql">PostgreSQL</span><span class="pill" data-tag="mongodb">MongoDB</span><span class="pill" data-tag="redis">Redis</span>
-      <span class="pill" data-tag="pytorch">PyTorch</span><span class="pill" data-tag="scikitlearn">scikit-learn</span><span class="pill" data-tag="powerbi">Power BI</span><span class="pill" data-tag="tableau">Tableau</span>
-    </div>
-    <p class="skills-hint">Click a skill to see the projects that use it.</p>
   </section>
 
 </main>
@@ -585,17 +580,6 @@
       nav.classList.toggle('solid', window.scrollY > 40);
     }, { passive:true });
   })();
-  document.querySelectorAll('.row-container').forEach(function(container){
-    var track = container.querySelector('.row-track');
-    container.querySelectorAll('.row-arrow').forEach(function(btn){
-      btn.addEventListener('click', function(e){
-        e.stopPropagation();
-        var dir = parseInt(btn.dataset.dir, 10);
-        track.scrollBy({ left: dir * track.clientWidth * 0.85, behavior: 'smooth' });
-      });
-    });
-  });
-
   /* ============ TAG FILTERING ============ */
   var PROJECT_TAGS = {
     corebank:       ['java','springboot','react','redis','postgresql','sql','fullstack','cloud'],
