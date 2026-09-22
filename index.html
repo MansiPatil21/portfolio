@@ -55,18 +55,29 @@
 
   /* ============ HERO ============ */
   .hero{
-    position:relative; min-height:min(92vh,820px); display:flex; align-items:flex-end;
+    position:relative; min-height:min(92vh,820px); display:flex; align-items:center;
     padding-block:130px 56px; overflow:hidden;
   }
-  .hero-bg{ position:absolute; inset:0; z-index:0; }
-  .hero-bg img{ width:100%; height:100%; object-fit:cover; object-position:center 20%; opacity:.55; }
-  .hero-bg::after{
-    content:""; position:absolute; inset:0;
-    background:
-      linear-gradient(to top, var(--bg) 0%, rgba(10,11,15,.4) 30%, transparent 55%),
-      linear-gradient(to right, var(--bg) 8%, rgba(10,11,15,.75) 32%, rgba(10,11,15,.15) 62%, transparent 85%);
+  .hero::before{
+    content:""; position:absolute; inset:-15%; z-index:0; pointer-events:none;
+    background:radial-gradient(circle at 78% 45%, var(--accent-deep) 0%, transparent 58%);
+    opacity:.4;
   }
-  .hero-inner{ position:relative; z-index:2; max-width:640px; }
+  .hero-flex{ position:relative; z-index:2; display:flex; align-items:center; justify-content:space-between; gap:56px; width:100%; }
+  .hero-inner{ max-width:640px; }
+  .hero-portrait{
+    flex:0 0 auto; width:clamp(220px,26vw,400px); aspect-ratio:1; border-radius:50%;
+    overflow:hidden; box-shadow:0 0 0 1px var(--border), 0 40px 90px -20px var(--glow);
+  }
+  .hero-portrait img{ width:100%; height:100%; object-fit:cover; display:block; }
+  @media (max-width:900px){
+    .hero-flex{ flex-direction:column-reverse; text-align:center; gap:32px; }
+    .hero-portrait{ width:clamp(160px,44vw,240px); }
+    .hero-inner{ max-width:100%; }
+    .hero-rating{ justify-content:center; }
+    .hero-actions{ justify-content:center; }
+    .hero-dots{ justify-content:center; }
+  }
   .hero-meta{ font-family:"IBM Plex Mono",monospace; font-size:.78rem; letter-spacing:.1em; text-transform:uppercase; color:var(--text-muted); }
   .hero-rating{ display:flex; align-items:center; gap:10px; margin-top:12px; font-size:.88rem; color:var(--text-muted); flex-wrap:wrap; }
   .hero-rating .star{ color:var(--accent); font-weight:700; }
@@ -284,29 +295,31 @@
 <div id="top"></div>
 
 <header class="hero">
-  <div class="hero-bg"><img src="screenshots/corebank.png" alt=""></div>
-  <div class="wrap hero-inner">
-    <div class="hero-meta">MACS CANDIDATE · DALHOUSIE UNIVERSITY</div>
-    <div class="hero-rating">
-      <span class="star">★ 3.99</span>
-      <span class="dot">·</span>
-      <span>GPA</span>
-      <span class="dot">·</span>
-      <span>Cloud &amp; AI Engineer</span>
-      <span class="dot">·</span>
-      <span>Halifax, NS</span>
+  <div class="wrap hero-flex">
+    <div class="hero-inner">
+      <div class="hero-meta">MACS CANDIDATE · DALHOUSIE UNIVERSITY</div>
+      <div class="hero-rating">
+        <span class="star">★ 3.99</span>
+        <span class="dot">·</span>
+        <span>GPA</span>
+        <span class="dot">·</span>
+        <span>Cloud &amp; AI Engineer</span>
+        <span class="dot">·</span>
+        <span>Halifax, NS</span>
+      </div>
+      <h1>Mansi Patil</h1>
+      <p class="lede">
+        I work at the layer between "a model works" and "a system runs reliably in production" —
+        serverless pipelines, deployment automation, and infrastructure that keeps holding up after
+        the demo ends. Cybersecurity background, still shapes how I think about failure modes.
+      </p>
+      <div class="hero-actions">
+        <a class="btn primary" href="mailto:mansican908@gmail.com">▶ Hire Me</a>
+        <a class="btn ghost" href="https://github.com/MansiPatil21" target="_blank" rel="noopener">+ View GitHub</a>
+      </div>
+      <div class="hero-dots"><span class="active"></span><span></span><span></span></div>
     </div>
-    <h1>Mansi Patil</h1>
-    <p class="lede">
-      I work at the layer between "a model works" and "a system runs reliably in production" —
-      serverless pipelines, deployment automation, and infrastructure that keeps holding up after
-      the demo ends. Cybersecurity background, still shapes how I think about failure modes.
-    </p>
-    <div class="hero-actions">
-      <a class="btn primary" href="mailto:mansican908@gmail.com">▶ Hire Me</a>
-      <a class="btn ghost" href="https://github.com/MansiPatil21" target="_blank" rel="noopener">+ View GitHub</a>
-    </div>
-    <div class="hero-dots"><span class="active"></span><span></span><span></span></div>
+    <div class="hero-portrait"><img src="assets/hero-portrait.png" alt="Mansi Patil"></div>
   </div>
 </header>
 
