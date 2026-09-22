@@ -124,8 +124,16 @@
   .pill{
     flex:0 0 auto; font-size:.82rem; font-weight:600; padding:8px 18px; border-radius:999px;
     background:var(--surface); color:var(--text-muted); border:1px solid var(--border);
+    cursor:pointer; transition:background .15s ease, color .15s ease, border-color .15s ease;
   }
+  .pill:hover{ border-color:var(--accent-deep); color:var(--text); }
   .pill.on{ background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
+  .skills-hint{ font-size:.78rem; color:var(--text-faint); margin:10px 0 0; }
+  .empty-filter{
+    display:none; padding:32px 4px; color:var(--text-faint); font-size:.9rem;
+    border:1px dashed var(--border); border-radius:10px; text-align:center;
+  }
+  .sec{ scroll-margin-top:90px; }
 
   /* ============ SORT ROW (2nd section) ============ */
   .sort-row{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px; padding-block:14px; margin-bottom:4px; }
@@ -340,9 +348,9 @@
       </div>
     </div>
 
-    <div class="pill-row">
-      <span class="pill on">Java</span><span class="pill">Python</span><span class="pill">TypeScript</span>
-      <span class="pill on">Cloud</span><span class="pill">Full-Stack</span><span class="pill">Distributed Systems</span><span class="pill">ML</span>
+    <div class="pill-row" id="pinnedPills">
+      <span class="pill" data-tag="java">Java</span><span class="pill" data-tag="python">Python</span><span class="pill" data-tag="typescript">TypeScript</span>
+      <span class="pill" data-tag="cloud">Cloud</span><span class="pill" data-tag="fullstack">Full-Stack</span><span class="pill" data-tag="distributedsystems">Distributed Systems</span><span class="pill" data-tag="machinelearning">ML</span>
     </div>
 
     <div class="row-container">
@@ -412,6 +420,7 @@
       </div>
       <button class="row-arrow right" data-dir="1" aria-label="Scroll right"><svg viewBox="0 0 24 24"><path d="M8.6 16.6 10 18l6-6-6-6-1.4 1.4L13.2 12z"/></svg></button>
     </div>
+    <div class="empty-filter" id="pinnedEmpty">None of the pinned projects use this — try "All Repositories" below, or clear the filter.</div>
   </section>
 
   <section class="sec" id="all-repos">
@@ -428,9 +437,9 @@
       </div>
     </div>
 
-    <div class="pill-row">
-      <span class="pill on">Python</span><span class="pill">React</span><span class="pill">Serverless</span>
-      <span class="pill on">Machine Learning</span><span class="pill">Research</span><span class="pill">Terraform</span>
+    <div class="pill-row" id="allReposPills">
+      <span class="pill" data-tag="python">Python</span><span class="pill" data-tag="react">React</span><span class="pill" data-tag="serverless">Serverless</span>
+      <span class="pill" data-tag="machinelearning">Machine Learning</span><span class="pill" data-tag="research">Research</span><span class="pill" data-tag="terraform">Terraform</span>
     </div>
 
     <div class="sort-row">
@@ -503,6 +512,7 @@
       </div>
       <button class="row-arrow right" data-dir="1" aria-label="Scroll right"><svg viewBox="0 0 24 24"><path d="M8.6 16.6 10 18l6-6-6-6-1.4 1.4L13.2 12z"/></svg></button>
     </div>
+    <div class="empty-filter" id="allReposEmpty">No repository uses this skill yet — check back as more projects get added.</div>
   </section>
 
   <section class="sec" id="skills">
@@ -513,13 +523,14 @@
         <span class="dot-mark"></span>
       </div>
     </div>
-    <div class="pill-row" style="border-bottom:none;">
-      <span class="pill on">Java</span><span class="pill on">Python</span><span class="pill">TypeScript</span><span class="pill">C++</span><span class="pill">SQL</span>
-      <span class="pill on">Azure</span><span class="pill">AWS</span><span class="pill">GCP</span><span class="pill">Kubernetes</span><span class="pill">Docker</span><span class="pill">Terraform</span>
-      <span class="pill">React</span><span class="pill">Next.js</span><span class="pill">Spring Boot</span><span class="pill">Node.js</span>
-      <span class="pill">PostgreSQL</span><span class="pill">MongoDB</span><span class="pill">Redis</span>
-      <span class="pill">PyTorch</span><span class="pill">scikit-learn</span><span class="pill">Power BI</span><span class="pill">Tableau</span>
+    <div class="pill-row" id="skillsPills" style="border-bottom:none;">
+      <span class="pill" data-tag="java">Java</span><span class="pill" data-tag="python">Python</span><span class="pill" data-tag="typescript">TypeScript</span><span class="pill" data-tag="cpp">C++</span><span class="pill" data-tag="sql">SQL</span>
+      <span class="pill" data-tag="azure">Azure</span><span class="pill" data-tag="aws">AWS</span><span class="pill" data-tag="gcp">GCP</span><span class="pill" data-tag="kubernetes">Kubernetes</span><span class="pill" data-tag="docker">Docker</span><span class="pill" data-tag="terraform">Terraform</span>
+      <span class="pill" data-tag="react">React</span><span class="pill" data-tag="nextjs">Next.js</span><span class="pill" data-tag="springboot">Spring Boot</span><span class="pill" data-tag="nodejs">Node.js</span>
+      <span class="pill" data-tag="postgresql">PostgreSQL</span><span class="pill" data-tag="mongodb">MongoDB</span><span class="pill" data-tag="redis">Redis</span>
+      <span class="pill" data-tag="pytorch">PyTorch</span><span class="pill" data-tag="scikitlearn">scikit-learn</span><span class="pill" data-tag="powerbi">Power BI</span><span class="pill" data-tag="tableau">Tableau</span>
     </div>
+    <p class="skills-hint">Click a skill to see the projects that use it.</p>
   </section>
 
 </main>
@@ -599,6 +610,65 @@
       });
     });
   });
+
+  /* ============ TAG FILTERING ============ */
+  var PROJECT_TAGS = {
+    corebank:       ['java','springboot','react','redis','postgresql','sql','fullstack','cloud'],
+    funded:         ['nodejs','react','mongodb','python','redis','kubernetes','terraform','azure','postgresql','powerbi','tableau','fullstack','cloud'],
+    spindle:        ['java','cpp','docker','distributedsystems'],
+    smartcare:      ['aws','gcp','serverless','cloud'],
+    driftwatch:     ['aws','terraform','python','machinelearning','serverless','cloud'],
+    collabry:       ['java','springboot','react','fullstack'],
+    documantic:     ['aws','terraform','react','serverless','cloud'],
+    syllabify:      ['react','typescript','python','terraform','aws','docker','fullstack','cloud'],
+    fantasysailgp:  ['python','react','machinelearning','scikitlearn','fullstack'],
+    beyondkeywords: ['python','pytorch','scikitlearn','machinelearning','research'],
+    fakenews:       ['python','scikitlearn','machinelearning','research']
+  };
+
+  (function(){
+    var ROWS = [
+      { section: '#pinned',    empty: 'pinnedEmpty',    pills: 'pinnedPills' },
+      { section: '#all-repos', empty: 'allReposEmpty',  pills: 'allReposPills' }
+    ];
+
+    function applyFilter(tag){
+      ROWS.forEach(function(row){
+        var section = document.querySelector(row.section);
+        var anyVisible = false;
+        section.querySelectorAll('.poster-card').forEach(function(card){
+          var tags = PROJECT_TAGS[card.dataset.id] || [];
+          var show = !tag || tags.indexOf(tag) !== -1;
+          card.style.display = show ? '' : 'none';
+          if (show) anyVisible = true;
+        });
+        document.getElementById(row.empty).style.display = anyVisible ? 'none' : 'block';
+      });
+    }
+
+    function syncPills(tag){
+      document.querySelectorAll('.pill').forEach(function(p){
+        p.classList.toggle('on', !!tag && p.dataset.tag === tag);
+      });
+    }
+
+    var activeTag = null;
+    function selectTag(tag, scrollToProjects){
+      activeTag = (activeTag === tag) ? null : tag;
+      syncPills(activeTag);
+      applyFilter(activeTag);
+      if (activeTag && scrollToProjects) {
+        document.getElementById('pinned').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    document.querySelectorAll('.pill').forEach(function(pill){
+      var fromSkills = pill.closest('#skillsPills') !== null;
+      pill.addEventListener('click', function(){
+        selectTag(pill.dataset.tag, fromSkills);
+      });
+    });
+  })();
 
   /* ============ PROJECT DATA ============ */
   var PROJECTS = {
