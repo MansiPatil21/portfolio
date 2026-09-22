@@ -364,7 +364,7 @@
         </div>
 
         <div class="poster-card" data-id="spindle" tabindex="0" role="button" aria-haspopup="dialog">
-          <div class="poster tile"><span class="letters">SP</span><span class="pname">spindle</span></div>
+          <div class="poster"><img src="screenshots/spindle-banner.png" alt="spindle"></div>
           <div class="poster-title">spindle</div>
           <div class="poster-year">2026 · Java, C++</div>
           <div class="poster-stats">
@@ -667,12 +667,15 @@
     },
     spindle: {
       title: "spindle", eyebrow: "SOLO PROJECT · 2026", meta: "Java · C++ · TCP sockets",
-      media: { type: "tile", letters: "SP" },
+      media: { type: "img", src: "screenshots/spindle-banner.png" },
       summary: "spindle is a small-scale version of the kind of system that powers Hadoop and other \"big data\" platforms: it spreads a large file across multiple machines and lets you run a computation over all of it in parallel, instead of needing one giant computer. I built it to genuinely understand how distributed systems work under the hood, so instead of using an existing framework, I wrote the network communication between machines myself, byte by byte, over raw TCP.",
       desc: "A Hadoop-style distributed file system and MapReduce engine, modelled on HDFS's shape but built from scratch over raw TCP sockets to demonstrate distributed-systems fundamentals directly rather than through a framework. Includes a from-scratch C++ reimplementation of the wire protocol and its CRC-32C checksum, verified against the published Castagnoli test vector, so a non-JVM client can talk to the cluster. There is no live demo because it is a cluster, not a web app; GitHub Actions runs both the Java and C++ test suites on every push.",
       stats: [ ["12", "C++ tests, no framework"], ["CI", "Java + C++, green"], ["TCP", "Custom binary protocol"] ],
       tech: ["Java", "C++17", "TCP Sockets", "CRC-32C", "Docker", "GitHub Actions"],
-      live: null, repo: "https://github.com/MansiPatil21/spindle"
+      live: null, repo: "https://github.com/MansiPatil21/spindle",
+      gallery: [
+        { src: "screenshots/spindle-diagram.jpg", label: "How replication survives a lost node" }
+      ]
     },
     smartcare: {
       title: "SmartCare (SAWS)", eyebrow: "TEAM OF 7 · TECHNICAL DIRECTOR · 2026", meta: "AWS · GCP · Serverless",
