@@ -457,7 +457,7 @@
       <div class="row-track">
 
         <div class="poster-card" data-id="documantic" tabindex="0" role="button" aria-haspopup="dialog">
-          <div class="poster tile"><span class="letters">DM</span><span class="pname">Documantic</span></div>
+          <div class="poster"><img src="screenshots/documantic-landing.png" alt="Documantic"></div>
           <div class="poster-title">Documantic</div>
           <div class="poster-year">2026 · React</div>
           <div class="poster-stats">
@@ -693,13 +693,16 @@
       ]
     },
     documantic: {
-      title: "Documantic", eyebrow: "SOLO PROJECT · 2026", meta: "AWS Serverless · LLM",
-      media: { type: "tile", letters: "DM" },
-      summary: "Documantic is a developer tool that reads through a codebase and automatically writes documentation for it using an AI model, so a developer does not have to manually write and maintain docs for code that already exists. It runs entirely on serverless AWS infrastructure, so there's no server to keep running or patch.",
-      desc: "A serverless AI dev-tool that generates code documentation automatically, built solo on AWS with an LLM in the loop. Built as an independent, end-to-end delivery outside of a team setting.",
-      stats: [ ["Solo", "End to end"], ["AWS", "Serverless"], ["LLM", "In the loop"] ],
-      tech: ["AWS Lambda", "React", "LLM API", "Serverless"],
-      live: null, repo: "https://github.com/MansiPatil21/Documantic"
+      title: "Documantic", eyebrow: "SOLO PROJECT · 2026", meta: "AWS Lambda · Groq LLaMA-3 · Terraform",
+      media: { type: "img", src: "screenshots/documantic-landing.png" },
+      summary: "Documantic takes a GitHub repo URL or an uploaded zip file and generates a full set of documentation for it in under 2 minutes: a README, API docs, a code quality report, and inline comments, all without a developer writing a word of it by hand. It runs entirely on serverless AWS infrastructure, so there's no server sitting idle waiting for someone to submit a repo, and no server to patch or scale manually either.",
+      desc: "A serverless pipeline built entirely on AWS Lambda: uploading a repo (via GitHub URL or zip) drops the source into an S3 uploads bucket, which triggers a processor Lambda that runs the AI documentation pipeline, calling out to Groq Cloud's LLaMA-3 over HTTPS for the actual generation. Job status lives in DynamoDB, a separate API Handler Lambda serves status/download requests through API Gateway, and a scheduled Cleanup Lambda (on a 24-hour EventBridge schedule) clears old jobs. The Groq API key is kept in Secrets Manager rather than hardcoded, SNS sends job-completion notifications, and CloudWatch watches logs and alarms across the whole pipeline. The React frontend itself is static, served straight from an S3 bucket. The entire stack is provisioned by Terraform.",
+      stats: [ ["<2min", "End-to-end doc generation"], ["4", "Lambda functions"], ["4", "Doc types generated"] ],
+      tech: ["AWS Lambda", "S3", "DynamoDB", "API Gateway", "EventBridge", "SNS", "Secrets Manager", "CloudWatch", "Terraform", "React", "Groq / LLaMA-3"],
+      live: null, repo: "https://github.com/MansiPatil21/Documantic",
+      gallery: [
+        { src: "screenshots/documantic-architecture.png", label: "Architecture diagram" }
+      ]
     },
     syllabify: {
       title: "Syllabify", eyebrow: "SOLO PROJECT · WINTER 2026", meta: "React · FastAPI · AWS · Terraform",
