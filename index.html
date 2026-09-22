@@ -464,6 +464,16 @@
           </div>
         </div>
 
+        <div class="poster-card" data-id="ecobridge" tabindex="0" role="button" aria-haspopup="dialog">
+          <div class="poster tile"><span class="letters">EB</span><span class="pname">EcoBridge</span></div>
+          <div class="poster-title">EcoBridge</div>
+          <div class="poster-year">2026 · React</div>
+          <div class="poster-stats">
+            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            <span>Built the chain-analysis view and map</span>
+          </div>
+        </div>
+
         <div class="poster-card" data-id="beyondkeywords" tabindex="0" role="button" aria-haspopup="dialog">
           <div class="poster"><img src="screenshots/beyondkeywords-confusion-matrix.png" alt="Beyond Keywords"></div>
           <div class="poster-title">Beyond Keywords</div>
@@ -597,6 +607,7 @@
     documantic:     ['aws','terraform','react','serverless','cloud'],
     syllabify:      ['react','typescript','python','terraform','aws','docker','fullstack','cloud'],
     fantasysailgp:  ['python','react','machinelearning','scikitlearn','fullstack'],
+    ecobridge:      ['react','python','fullstack'],
     beyondkeywords: ['python','pytorch','scikitlearn','machinelearning','research'],
     fakenews:       ['python','scikitlearn','machinelearning','research']
   };
@@ -765,6 +776,15 @@
       stats: [ ["3", "Team size"], ["5", "React screens (original)"], ["14", "Races, train + test"] ],
       tech: ["Python", "pandas", "scikit-learn", "FastAPI", "React", "SQLite"],
       live: null, repo: "https://github.com/MansiPatil21/FantasySailGP", video: "https://youtu.be/bazaQ3WcxNI"
+    },
+    ecobridge: {
+      title: "EcoBridge", eyebrow: "HACKATHON · TEAM OF 5 · 2026", meta: "React · FastAPI · Leaflet",
+      media: { type: "tile", letters: "EB" },
+      summary: "EcoBridge (built as \"Chain Reaction\" at the Hack the Elements hackathon) simulates how a single climate disaster cascades across a region instead of staying where it started. Trigger a wildfire, flood, heatwave or drought in one of four connected Atlantic Canadian cities, and the simulator models what happens next: people are displaced, the influx strains water, air, land and waste systems in the cities they move to, and those secondary failures set off further crises downstream. The goal is to make the knock-on effects of a climate event visible rather than abstract.",
+      desc: "A React and FastAPI simulator built by a team of five over a hackathon weekend. My contribution was the front-end analysis and interaction layer, delivered as a single 1,768-line commit across 15 files: the Chain Analysis page that traces a disaster's downstream effects, the Leaflet crisis map, the disaster-trigger controls, the simulation input form, and the ecological-stress gauges, plus the two Zustand stores holding simulation and cityflow state. The repo on my account is a fork of the team's original, so the full commit history and every contributor's work stay visible.",
+      stats: [ ["1,768", "Lines in my commit"], ["15", "Files touched"], ["4", "Interconnected cities modelled"] ],
+      tech: ["React", "Vite", "FastAPI", "Zustand", "Leaflet", "Recharts", "Tailwind CSS", "Framer Motion"],
+      live: null, repo: "https://github.com/MansiPatil21/EcoBridge"
     },
     beyondkeywords: {
       title: "Beyond Keywords", eyebrow: "SOLO PROJECT · 2026", meta: "PyTorch · BERT · SHAP",
