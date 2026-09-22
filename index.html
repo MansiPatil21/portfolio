@@ -111,12 +111,6 @@
   .sec-title svg{ width:20px; height:20px; fill:var(--accent); }
   .sec-title h2{ font-size:1.25rem; font-weight:800; margin:0; }
   .sec-title .dot-mark{ width:6px; height:6px; border-radius:50%; background:var(--accent); margin-left:2px; }
-  .sec-tabs{ display:flex; gap:22px; }
-  .sec-tabs span{ display:flex; align-items:center; gap:6px; font-size:.82rem; color:var(--text-faint); font-weight:500; }
-  .sec-tabs span svg{ width:14px; height:14px; fill:var(--text-faint); }
-  .sec-tabs span.on{ color:var(--accent); }
-  .sec-tabs span.on svg{ fill:var(--accent); }
-  @media (max-width:640px){ .sec-tabs{ display:none; } }
 
   /* ============ GENRE PILLS ============ */
   .pill-row{ display:flex; gap:10px; overflow-x:auto; padding-bottom:14px; margin-bottom:6px; scrollbar-width:none; border-bottom:1px solid var(--border); }
@@ -136,10 +130,7 @@
   .sec{ scroll-margin-top:90px; }
 
   /* ============ SORT ROW (2nd section) ============ */
-  .sort-row{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px; padding-block:14px; margin-bottom:4px; }
-  .sort-left{ display:flex; align-items:center; gap:10px; font-size:.82rem; color:var(--text-muted); }
-  .sort-left .chip{ background:var(--surface); border:1px solid var(--border); border-radius:999px; padding:6px 14px; display:flex; align-items:center; gap:5px; }
-  .sort-left .chip.on{ background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
+  .sort-row{ display:flex; align-items:center; justify-content:flex-end; flex-wrap:wrap; gap:14px; padding-block:14px; margin-bottom:4px; }
   .gpa-badge{
     display:inline-flex; align-items:center; gap:7px; font-family:"IBM Plex Mono",monospace;
     font-size:.82rem; font-weight:600; color:var(--text); background:var(--surface);
@@ -341,11 +332,6 @@
         <h2>Pinned Projects</h2>
         <span class="dot-mark"></span>
       </div>
-      <div class="sec-tabs">
-        <span class="on"><svg viewBox="0 0 24 24"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67z"/></svg> Featured</span>
-        <span><svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg> Live Demo</span>
-        <span><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg> Recent</span>
-      </div>
     </div>
 
     <div class="pill-row" id="pinnedPills">
@@ -430,11 +416,6 @@
         <h2>All Repositories</h2>
         <span class="dot-mark"></span>
       </div>
-      <div class="sec-tabs">
-        <span><svg viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg> Source</span>
-        <span><svg viewBox="0 0 24 24"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Verified</span>
-        <span><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg> Search</span>
-      </div>
     </div>
 
     <div class="pill-row" id="allReposPills">
@@ -443,12 +424,6 @@
     </div>
 
     <div class="sort-row">
-      <div class="sort-left">
-        <span>Sort by:</span>
-        <span class="chip on">Recent</span>
-        <span class="chip">Language</span>
-        <span class="chip">A–Z</span>
-      </div>
       <div class="gpa-badge">
         <svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
         3.99 GPA
