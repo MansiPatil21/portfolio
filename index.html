@@ -487,11 +487,11 @@
         </div>
 
         <div class="poster-card" data-id="beyondkeywords" tabindex="0" role="button" aria-haspopup="dialog">
-          <div class="poster tile"><span class="letters">BK</span><span class="pname">Beyond Keywords</span></div>
+          <div class="poster"><img src="screenshots/beyondkeywords-confusion-matrix.png" alt="Beyond Keywords"></div>
           <div class="poster-title">Beyond Keywords</div>
           <div class="poster-year">2026 · PyTorch</div>
           <div class="poster-stats">
-            <span class="heart"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>26.3k</span>
+            <span class="heart"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>82%</span>
             <span class="eye"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>SHAP</span>
           </div>
         </div>
@@ -727,12 +727,20 @@
     },
     beyondkeywords: {
       title: "Beyond Keywords", eyebrow: "SOLO PROJECT · 2026", meta: "PyTorch · BERT · SHAP",
-      media: { type: "tile", letters: "BK" },
-      summary: "This project asks a research question that matters a lot for trustworthy AI: when a language model correctly flags a Reddit post as showing signs of a mental-health condition, is it actually understanding the content, or is it just reacting to a handful of obvious trigger words? I trained transformer-based models (BERT and a smaller, faster DistilBERT) to do the classification, then used an interpretability technique called SHAP to check exactly which words each model was paying attention to, to see whether the accuracy was backed by genuine understanding or a shortcut.",
-      desc: "A solo deep-learning project classifying mental-health conditions from Reddit posts using transformer models (BERT and DistilBERT), then using SHAP to probe whether the best model actually learned clinical signal or was leaning on surface-level lexical shortcuts.",
-      stats: [ ["Solo", "Report + build"], ["SHAP", "Interpretability"], ["BERT", "+ DistilBERT"] ],
-      tech: ["PyTorch", "Hugging Face Transformers", "BERT", "DistilBERT", "SHAP"],
-      live: null, repo: "https://github.com/MansiPatil21/mental-health-nlp"
+      media: { type: "img", src: "screenshots/beyondkeywords-confusion-matrix.png" },
+      summary: "This project asks a research question that matters a lot for trustworthy AI: when a language model correctly flags a Reddit post as showing signs of a mental-health condition, is it actually understanding the content, or is it just reacting to a handful of obvious trigger words? I trained a BERT model to classify posts into 7 categories (Anxiety, Bipolar, Depression, Normal, Personality Disorder, Stress, Suicidal), then used an interpretability technique called SHAP to check exactly which words the model was actually paying attention to for each class, to see whether its accuracy was backed by genuine understanding or a shortcut.",
+      desc: "A solo deep-learning project classifying mental-health conditions from Reddit posts using a fine-tuned BERT model, which reached 82% overall accuracy across 7 classes on the held-out test set (confusion matrix above; strongest on Normal and Suicidal, most confusion between Depression and Suicidal, which overlap in real language). Per-class SHAP word-importance plots show the model leaning on genuinely clinically relevant words rather than noise: 'lamictal' (a real bipolar medication) drives Bipolar predictions, 'hanging' / 'myself' / 'lonely' drive Suicidal, 'personality' / 'disorders' / 'autism' drive Personality Disorder, and 'depression' / 'anxiety' drive their respective classes directly. One Normal-class example is also a useful negative control: a weightlifting post using the word 'lift' repeatedly was correctly classified as Normal, with SHAP confirming the model keyed on 'lifting' and gym terminology rather than misreading it as distress language.",
+      stats: [ ["82%", "Overall BERT accuracy, 7 classes"], ["2,635", "Test-set posts"], ["SHAP", "Per-class word interpretability"] ],
+      tech: ["PyTorch", "Hugging Face Transformers", "BERT", "DistilBERT", "SHAP", "scikit-learn"],
+      live: null, repo: "https://github.com/MansiPatil21/mental-health-nlp",
+      gallery: [
+        { src: "screenshots/beyondkeywords-per-class-accuracy.png", label: "Per-class accuracy" },
+        { src: "screenshots/beyondkeywords-shap-force-1.png", label: "SHAP force plots: Personality Disorder, Stress" },
+        { src: "screenshots/beyondkeywords-shap-force-2.png", label: "SHAP force plots: Anxiety, Bipolar, Depression, Normal" },
+        { src: "screenshots/beyondkeywords-shap-words-suicidal.png", label: "Top SHAP words: Suicidal" },
+        { src: "screenshots/beyondkeywords-shap-words-2.png", label: "Top SHAP words: Normal, Personality Disorder, Stress" },
+        { src: "screenshots/beyondkeywords-shap-words-3.png", label: "Top SHAP words: Anxiety, Bipolar, Depression" }
+      ]
     },
     fakenews: {
       title: "Fake News Detection", eyebrow: "GROUP PROJECT · IEEE PUBLISHED · 2025", meta: "SVM · Logistic Regression",
