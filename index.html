@@ -55,9 +55,16 @@
 
   /* ============ HERO ============ */
   .hero{
-    position:relative; min-height:min(92vh,820px); display:flex; align-items:center;
-    padding-block:130px 56px; overflow:hidden;
+    position:relative; min-height:min(74vh,660px); display:flex; align-items:center;
+    padding-block:120px 40px; overflow:hidden;
   }
+  .hero-avail{
+    display:inline-flex; align-items:center; gap:8px; margin-top:20px;
+    font-family:"IBM Plex Mono",monospace; font-size:.78rem; letter-spacing:.05em; font-weight:600;
+    color:var(--accent); background:rgba(199,125,168,.12); border:1px solid var(--accent-deep);
+    padding:7px 14px; border-radius:999px;
+  }
+  .hero-avail .dot-live{ width:7px; height:7px; border-radius:50%; background:var(--accent); flex-shrink:0; }
   .hero::before{
     content:""; position:absolute; inset:-15%; z-index:0; pointer-events:none;
     background:radial-gradient(circle at 78% 45%, var(--accent-deep) 0%, transparent 58%);
@@ -76,7 +83,7 @@
     .hero-inner{ max-width:100%; }
     .hero-rating{ justify-content:center; }
     .hero-actions{ justify-content:center; }
-    .hero-dots{ justify-content:center; }
+    .hero-avail{ margin-inline:auto; }
   }
   .hero-meta{ font-family:"IBM Plex Mono",monospace; font-size:.78rem; letter-spacing:.1em; text-transform:uppercase; color:var(--text-muted); }
   .hero-rating{ display:flex; align-items:center; gap:10px; margin-top:12px; font-size:.88rem; color:var(--text-muted); flex-wrap:wrap; }
@@ -96,12 +103,9 @@
   .btn.primary:hover{ background:#D690B7; }
   .btn.ghost{ background:rgba(140,140,155,.28); color:var(--text); backdrop-filter:blur(6px); }
   .btn.ghost:hover{ background:rgba(140,140,155,.4); }
-  .hero-dots{ display:flex; gap:6px; margin-top:40px; }
-  .hero-dots span{ width:22px; height:3px; border-radius:3px; background:rgba(255,255,255,.25); }
-  .hero-dots span.active{ background:var(--accent); }
-
   /* ============ SECTION HEAD ============ */
   .sec{ padding-block:34px; }
+  .sec:first-of-type{ padding-top:8px; }
   .sec-head{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px; margin-bottom:16px; }
   .sec-title{ display:flex; align-items:center; gap:10px; }
   .sec-title svg{ width:20px; height:20px; fill:var(--accent); }
@@ -128,12 +132,12 @@
   .sort-left{ display:flex; align-items:center; gap:10px; font-size:.82rem; color:var(--text-muted); }
   .sort-left .chip{ background:var(--surface); border:1px solid var(--border); border-radius:999px; padding:6px 14px; display:flex; align-items:center; gap:5px; }
   .sort-left .chip.on{ background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
-  .grade-meter{ display:flex; align-items:center; gap:10px; }
-  .grade-meter svg{ width:14px; height:14px; fill:var(--accent); }
-  .meter-track{ width:130px; height:4px; border-radius:4px; background:var(--border); position:relative; }
-  .meter-fill{ position:absolute; left:0; top:0; bottom:0; border-radius:4px; background:linear-gradient(90deg,var(--accent-2),var(--accent)); width:93%; }
-  .meter-dot{ position:absolute; top:50%; width:12px; height:12px; border-radius:50%; background:var(--text); transform:translate(-50%,-50%); left:93%; box-shadow:0 0 0 3px var(--bg); }
-  .grade-val{ font-family:"IBM Plex Mono",monospace; font-size:.82rem; color:var(--text); font-weight:600; }
+  .gpa-badge{
+    display:inline-flex; align-items:center; gap:7px; font-family:"IBM Plex Mono",monospace;
+    font-size:.82rem; font-weight:600; color:var(--text); background:var(--surface);
+    border:1px solid var(--border); padding:7px 14px; border-radius:999px;
+  }
+  .gpa-badge svg{ width:14px; height:14px; fill:var(--accent); }
 
   /* ============ ROW TRACK / CARDS ============ */
   .row-container{ position:relative; }
@@ -171,12 +175,9 @@
   }
   .poster-title{ font-weight:700; font-size:.9rem; line-height:1.25; }
   .poster-year{ font-size:.76rem; color:var(--text-faint); margin-top:-4px; }
-  .poster-stats{ display:flex; align-items:center; gap:10px; font-size:.74rem; color:var(--text-muted); flex-wrap:wrap; }
-  .poster-stats span{ display:flex; align-items:center; gap:4px; }
-  .poster-stats svg{ width:12px; height:12px; }
-  .poster-stats .heart svg{ fill:var(--accent); }
-  .poster-stats .eye svg{ fill:var(--text-faint); }
-  .poster-stats .star svg{ fill:#E8B84B; }
+  .poster-stats{ display:flex; align-items:center; gap:6px; font-size:.78rem; color:var(--text-muted); }
+  .poster-stats svg{ width:13px; height:13px; fill:var(--accent); flex-shrink:0; }
+  .poster-stats span{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 
   /* ============ FOOTER ============ */
   footer{ border-top:1px solid var(--border); margin-top:40px; padding-block:48px 28px; }
@@ -317,7 +318,7 @@
         <a class="btn primary" href="mailto:mansican908@gmail.com">▶ Hire Me</a>
         <a class="btn ghost" href="https://github.com/MansiPatil21" target="_blank" rel="noopener">+ View GitHub</a>
       </div>
-      <div class="hero-dots"><span class="active"></span><span></span><span></span></div>
+      <div class="hero-avail"><span class="dot-live"></span>Available for co-op — January 2027</div>
     </div>
     <div class="hero-portrait"><img src="assets/hero-portrait.png" alt="Mansi Patil"></div>
   </div>
@@ -353,9 +354,8 @@
           <div class="poster-title">corebank</div>
           <div class="poster-year">2026 · Java</div>
           <div class="poster-stats">
-            <span class="heart"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>0.5ms</span>
-            <span class="eye"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>11/10</span>
-            <span class="star"><svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>Saga</span>
+            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            <span>20 automated tests, 5 levels</span>
           </div>
         </div>
 
@@ -364,9 +364,8 @@
           <div class="poster-title">FundEd</div>
           <div class="poster-year">2026 · TypeScript</div>
           <div class="poster-stats">
-            <span class="heart"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>401</span>
-            <span class="eye"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>6 svc</span>
-            <span class="star"><svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>K8s</span>
+            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            <span>312 automated tests, 3 languages</span>
           </div>
         </div>
 
@@ -375,9 +374,8 @@
           <div class="poster-title">spindle</div>
           <div class="poster-year">2026 · Java, C++</div>
           <div class="poster-stats">
-            <span class="heart"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>3.4×</span>
-            <span class="eye"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>11s</span>
-            <span class="star"><svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>TCP</span>
+            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            <span>12 C++ tests, zero framework</span>
           </div>
         </div>
 
@@ -386,9 +384,8 @@
           <div class="poster-title">SmartCare (SAWS)</div>
           <div class="poster-year">2026 · AWS/GCP</div>
           <div class="poster-stats">
-            <span class="heart"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>6 mods</span>
-            <span class="eye"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>7 team</span>
-            <span class="star"><svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>Director</span>
+            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            <span>Led architecture for a 7-person team</span>
           </div>
         </div>
 
@@ -397,9 +394,8 @@
           <div class="poster-title">DriftWatch</div>
           <div class="poster-year">2026 · Python</div>
           <div class="poster-stats">
-            <span class="heart"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>9 fns</span>
-            <span class="eye"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>4 sched</span>
-            <span class="star"><svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>SNS</span>
+            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            <span>98.5% accuracy on the live classifier</span>
           </div>
         </div>
 
@@ -408,9 +404,8 @@
           <div class="poster-title">Collabry</div>
           <div class="poster-year">2026 · React 19</div>
           <div class="poster-stats">
-            <span class="heart"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>3 dash</span>
-            <span class="eye"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>Figma</span>
-            <span class="star"><svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>AI</span>
+            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            <span>Built the AI matchmaker + payments</span>
           </div>
         </div>
 
@@ -445,10 +440,9 @@
         <span class="chip">Language</span>
         <span class="chip">A–Z</span>
       </div>
-      <div class="grade-meter">
+      <div class="gpa-badge">
         <svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-        <div class="meter-track"><div class="meter-fill"></div><div class="meter-dot"></div></div>
-        <span class="grade-val">3.99 GPA</span>
+        3.99 GPA
       </div>
     </div>
 
@@ -461,8 +455,8 @@
           <div class="poster-title">Documantic</div>
           <div class="poster-year">2026 · React</div>
           <div class="poster-stats">
-            <span class="heart"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>~2min</span>
-            <span class="eye"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>Lambda</span>
+            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            <span>Generates docs in under 2 minutes</span>
           </div>
         </div>
 
@@ -471,8 +465,8 @@
           <div class="poster-title">Syllabify</div>
           <div class="poster-year">2026 · Terraform</div>
           <div class="poster-stats">
-            <span class="heart"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>1 cmd</span>
-            <span class="eye"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>AWS</span>
+            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            <span>Turns a syllabus PDF into a schedule</span>
           </div>
         </div>
 
@@ -481,8 +475,8 @@
           <div class="poster-title">FantasySailGP</div>
           <div class="poster-year">2026 · Python</div>
           <div class="poster-stats">
-            <span class="heart"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>Hackathon</span>
-            <span class="eye"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>sklearn</span>
+            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            <span>Built the ML scoring engine</span>
           </div>
         </div>
 
@@ -491,8 +485,8 @@
           <div class="poster-title">Beyond Keywords</div>
           <div class="poster-year">2026 · PyTorch</div>
           <div class="poster-stats">
-            <span class="heart"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>82%</span>
-            <span class="eye"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>SHAP</span>
+            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            <span>82% accuracy across 7 classes</span>
           </div>
         </div>
 
@@ -501,8 +495,8 @@
           <div class="poster-title">Fake News Detection</div>
           <div class="poster-year">2025 · IEEE</div>
           <div class="poster-stats">
-            <span class="heart"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>147 views</span>
-            <span class="eye"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>2 cites</span>
+            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            <span>147 IEEE Xplore full-text views</span>
           </div>
         </div>
 
@@ -562,7 +556,6 @@
         <ul>
           <li><a href="mailto:mansican908@gmail.com">Email</a></li>
           <li><a href="https://www.linkedin.com/in/mansipatil-cs/" target="_blank" rel="noopener">LinkedIn</a></li>
-          <li><a href="tel:+17824096811">(782) 409-6811</a></li>
         </ul>
       </div>
       <div class="foot-col">
