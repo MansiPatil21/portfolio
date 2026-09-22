@@ -465,7 +465,7 @@
         </div>
 
         <div class="poster-card" data-id="ecobridge" tabindex="0" role="button" aria-haspopup="dialog">
-          <div class="poster tile"><span class="letters">EB</span><span class="pname">EcoBridge</span></div>
+          <div class="poster"><img src="screenshots/ecobridge-simulator.png" alt="EcoBridge"><span class="live-badge">Video</span></div>
           <div class="poster-title">EcoBridge</div>
           <div class="poster-year">2026 · React</div>
           <div class="poster-stats">
@@ -779,12 +779,18 @@
     },
     ecobridge: {
       title: "EcoBridge", eyebrow: "HACKATHON · TEAM OF 5 · 2026", meta: "React · FastAPI · Leaflet",
-      media: { type: "tile", letters: "EB" },
-      summary: "EcoBridge (built as \"Chain Reaction\" at the Hack the Elements hackathon) simulates how a single climate disaster cascades across a region instead of staying where it started. Trigger a wildfire, flood, heatwave or drought in one of four connected Atlantic Canadian cities, and the simulator models what happens next: people are displaced, the influx strains water, air, land and waste systems in the cities they move to, and those secondary failures set off further crises downstream. The goal is to make the knock-on effects of a climate event visible rather than abstract.",
-      desc: "A React and FastAPI simulator built by a team of five over a hackathon weekend. My contribution was the front-end analysis and interaction layer, delivered as a single 1,768-line commit across 15 files: the Chain Analysis page that traces a disaster's downstream effects, the Leaflet crisis map, the disaster-trigger controls, the simulation input form, and the ecological-stress gauges, plus the two Zustand stores holding simulation and cityflow state. The repo on my account is a fork of the team's original, so the full commit history and every contributor's work stay visible.",
-      stats: [ ["1,768", "Lines in my commit"], ["15", "Files touched"], ["4", "Interconnected cities modelled"] ],
+      media: { type: "img", src: "screenshots/ecobridge-simulator.png" },
+      summary: "EcoBridge (built as \"Chain Reaction\" at the Hack the Elements hackathon) simulates how a single climate disaster cascades across a region instead of staying where it started. You pick a city on a live map of Atlantic Canada, trigger a flood, water shortage or contamination event, and set its severity, how much of the population it hits, and how long it lasts. The simulator then runs forward day by day: people are displaced, the cities they move to absorb the influx, and their water, air, land, waste and housing systems come under measurable strain. The point it makes is an asymmetry, stated right in the app: people are displaced in days, but the ecosystems they land in take 5 to 15 years to recover.",
+      desc: "A React and FastAPI simulator built by a team of five over a hackathon weekend. My contribution was the front-end analysis and interaction layer, delivered as a single 1,768-line commit across 15 files: the Chain Analysis page that traces a disaster's downstream effects (displacement corridor map, per-city ecological stress breakdown, and projected intervention requirements), the Leaflet crisis map with live city markers, the disaster-trigger controls, the simulation input form, and the ecological-stress gauges, plus the two Zustand stores holding simulation and cityflow state. The repo on my account is a fork of the team's original, so the full commit history and every contributor's work stay visible.",
+      stats: [ ["1,768", "Lines in my commit"], ["15", "Files touched"], ["5–15 yrs", "Modelled ecosystem recovery"] ],
       tech: ["React", "Vite", "FastAPI", "Zustand", "Leaflet", "Recharts", "Tailwind CSS", "Framer Motion"],
-      live: null, repo: "https://github.com/MansiPatil21/EcoBridge"
+      live: null, repo: "https://github.com/MansiPatil21/EcoBridge", video: "https://youtu.be/nenpI39o1qg",
+      gallery: [
+        { src: "screenshots/ecobridge-city-stress.png", label: "Live infrastructure + ecological stress" },
+        { src: "screenshots/ecobridge-chain-detected.png", label: "Chain reaction detected" },
+        { src: "screenshots/ecobridge-corridor.png", label: "Displacement corridor + cascade totals" },
+        { src: "screenshots/ecobridge-analysis.png", label: "Ecological analysis + interventions" }
+      ]
     },
     beyondkeywords: {
       title: "Beyond Keywords", eyebrow: "SOLO PROJECT · 2026", meta: "PyTorch · BERT · SHAP",
