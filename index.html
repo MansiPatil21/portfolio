@@ -29,8 +29,7 @@
   a:focus-visible, button:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; border-radius:3px; }
   @media (prefers-reduced-motion: reduce){ *{ animation-duration:.001ms !important; transition-duration:.001ms !important; } }
 
-  .wrap{ max-width:1200px; margin:0 auto; padding-inline:24px; width:100%; }
-  @media (max-width:640px){ .wrap{ padding-inline:16px; } }
+  .wrap{ width:100%; margin:0 auto; padding-inline:clamp(16px,3.5vw,64px); }
 
   /* ============ NAV ============ */
   .nav{
@@ -143,7 +142,7 @@
 
   /* ============ PROJECT GRID / CARDS ============ */
   .row-track{
-    display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
     gap:24px 16px; padding:8px 0 4px;
   }
   .poster-card{
