@@ -497,12 +497,12 @@
         </div>
 
         <div class="poster-card" data-id="fakenews" tabindex="0" role="button" aria-haspopup="dialog">
-          <div class="poster tile"><span class="letters">FN</span><span class="pname">Fake News Detection</span></div>
+          <div class="poster"><img src="screenshots/fakenews-ieee-page.png" alt="Fake News Detection, IEEE Xplore"></div>
           <div class="poster-title">Fake News Detection</div>
           <div class="poster-year">2025 · IEEE</div>
           <div class="poster-stats">
-            <span class="heart"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>Published</span>
-            <span class="eye"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>SVM</span>
+            <span class="heart"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>147 views</span>
+            <span class="eye"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>2 cites</span>
           </div>
         </div>
 
@@ -744,12 +744,12 @@
     },
     fakenews: {
       title: "Fake News Detection", eyebrow: "GROUP PROJECT · IEEE PUBLISHED · 2025", meta: "SVM · Logistic Regression",
-      media: { type: "tile", letters: "FN" },
-      summary: "A machine learning system that reads a news article and predicts whether it is likely to be fake, built to compare two classic algorithms, Support Vector Machines and Logistic Regression, and see which one handled the problem better. This was my undergraduate capstone project, and it went on to be presented at an international conference (IDICAIEI 2024) and formally published in IEEE Xplore and IJIRT.",
-      desc: "A classical machine-learning fake-news classifier comparing SVM and Logistic Regression, from an undergraduate capstone. Presented at the IDICAIEI 2024 conference and published in both IEEE Xplore and IJIRT under the title \"Advancing Fake News Detection: A Comparative Analysis of SVM and LR Models and Prospects for Dynamic Model Updating.\"",
-      stats: [ ["IEEE", "Xplore + IJIRT"], ["2024", "Presented at IDICAIEI"], ["SVM", "vs. Logistic Regression"] ],
+      media: { type: "img", src: "screenshots/fakenews-ieee-page.png" },
+      summary: "A machine learning system that reads a news article and predicts whether it is likely to be fake, built to compare two classic algorithms, Support Vector Machines and Logistic Regression, and see which one handled the problem better. This was my undergraduate capstone project with three co-authors, and it went on to be presented at an international conference (IDICAIEI 2024) and formally published in IEEE Xplore and IJIRT.",
+      desc: "A classical machine-learning fake-news classifier comparing SVM and Logistic Regression on a dataset of real news stories paired with their fake equivalents, using tokenization, stemming and feature engineering to turn raw text into model inputs. Co-authored with Maitreyee Jadhav, Preshika Giri and Yogita Hande. Presented at the IDICAIEI 2024 conference and published in both IEEE Xplore and IJIRT under the title \"Advancing Fake News Detection: A Comparative Analysis of SVM and LR Models and Prospects for Dynamic Model Updating.\" There's no separate app or repo demo for this one since the deliverable was the research paper itself, so the IEEE Xplore listing above is the primary artifact.",
+      stats: [ ["147", "IEEE Xplore full-text views"], ["2", "Citations in other papers"], ["4", "Co-authors"] ],
       tech: ["Python", "scikit-learn", "SVM", "Logistic Regression", "NLP"],
-      live: "https://ieeexplore.ieee.org/document/10842732", repo: "https://github.com/MansiPatil21/Fake-News-Detection", liveLabel: "Read Paper"
+      live: "https://ieeexplore.ieee.org/document/10842732", repo: "https://github.com/MansiPatil21/Fake-News-Detection", liveLabel: "Read on IEEE Xplore"
     }
   };
 
